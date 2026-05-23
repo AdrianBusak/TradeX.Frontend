@@ -1,14 +1,19 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
+import { HttpContext } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
-import { EMPTY } from 'rxjs';
-import { catchError, filter, switchMap } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { combineLatest, of } from 'rxjs';
+import { catchError, distinctUntilChanged, map, shareReplay, startWith, switchMap } from 'rxjs/operators';
 
-import { environment } from '../environments/environment';
+import { ApiService } from './core/api/api.service';
 import { ToastHostComponent } from './core/components/toast-host/toast-host.component';
+import { SUPPRESS_GLOBAL_ERROR_TOAST } from './core/interceptors/http-context.tokens';
+
+interface AccessState {
+  isLoading: boolean;
+  canEnter: boolean;
+}
 
 @Component({
   selector: 'app-root',
@@ -19,26 +24,42 @@ import { ToastHostComponent } from './core/components/toast-host/toast-host.comp
 })
 export class AppComponent {
   private auth = inject(AuthService);
-  private http = inject(HttpClient);
-  private destroyRef = inject(DestroyRef);
-  isLoading$ = this.auth.isLoading$;
-  isAuthenticated$ = this.auth.isAuthenticated$;
+  private api = inject(ApiService);
+  private readonly loadingState: AccessState = { isLoading: true, canEnter: false };
+  private readonly signedOutState: AccessState = { isLoading: false, canEnter: false };
+  private readonly allowedState: AccessState = { isLoading: false, canEnter: true };
+
   user$ = this.auth.user$;
 
-  constructor() {
-    this.auth.isAuthenticated$.pipe(
-      filter((isAuthenticated) => isAuthenticated),
-      switchMap(() =>
-        this.http.get(`${environment.apiBaseUrl}/v1/me`).pipe(
-          catchError((error: unknown) => {
-            console.error('Failed to sync authenticated user with backend.', error);
-            return EMPTY;
-          })
-        )
-      ),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe();
-  }
+  accessState$ = combineLatest([
+    this.auth.isLoading$,
+    this.auth.isAuthenticated$
+  ]).pipe(
+    distinctUntilChanged(([previousLoading, previousAuthenticated], [currentLoading, currentAuthenticated]) =>
+      previousLoading === currentLoading && previousAuthenticated === currentAuthenticated
+    ),
+    switchMap(([isAuthLoading, isAuthenticated]) => {
+      if (isAuthLoading) {
+        return of(this.loadingState);
+      }
+
+      if (!isAuthenticated) {
+        return of(this.signedOutState);
+      }
+
+      return this.api.get<unknown>('me', undefined, this.backendAccessContext()).pipe(
+        map(() => this.allowedState),
+        startWith(this.loadingState),
+        catchError((error: unknown) => {
+          console.error('Backend access check failed.', error);
+          this.logout();
+          return of(this.signedOutState);
+        })
+      );
+    }),
+    startWith(this.loadingState),
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
 
   login(): void {
     this.auth.loginWithRedirect();
@@ -46,5 +67,9 @@ export class AppComponent {
 
   logout(): void {
     this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
+  }
+
+  private backendAccessContext(): HttpContext {
+    return new HttpContext().set(SUPPRESS_GLOBAL_ERROR_TOAST, true);
   }
 }
