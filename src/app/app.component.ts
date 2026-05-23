@@ -8,11 +8,12 @@ import { catchError, filter, switchMap } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { environment } from '../environments/environment';
+import { ToastHostComponent } from './core/components/toast-host/toast-host.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe, NgIf],
+  imports: [RouterOutlet, AsyncPipe, NgIf, ToastHostComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

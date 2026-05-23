@@ -1,0 +1,38 @@
+{
+  "COMMON": {
+    "CLOSE": "Close",
+    "PAGINATOR": {
+      "ITEMS_PER_PAGE": "Items per page",
+      "NEXT_PAGE": "Next page",
+      "PREVIOUS_PAGE": "Previous page",
+      "FIRST_PAGE": "First page",
+      "LAST_PAGE": "Last page",
+      "OF": "of"
+    }
+  },
+  "ERRORS": {
+    "APP_ERROR": "Something went wrong. Please try again.",
+    "BAD_REQUEST": "The request is not valid.",
+    "CONFLICT": "The request conflicts with existing data.",
+    "FORBIDDEN": "You do not have permission to perform this action.",
+    "HTTP_401": "Your session expired. Please sign in again.",
+    "HTTP_403": "You do not have permission to perform this action.",
+    "HTTP_404": "The requested resource was not found.",
+    "HTTP_500": "The server could not complete the request.",
+    "NO_CONNECTION": "Unable to connect to the server.",
+    "NOT_FOUND": "The requested resource was not found.",
+    "UNAUTHORIZED": "You must be signed in to continue.",
+    "UNKNOWN": "An unexpected error occurred."
+  },
+  "ERROR_CODES": {
+    "ALREADY_OWNER": "The selected user is already the owner.",
+    "DUPLICATE_NAME": "A record with this name already exists.",
+    "FOLDER_DEPTH_LIMIT_EXCEEDED": "The folder depth limit has been reached.",
+    "INVALID_OIB": "The OIB is not valid.",
+    "INVALID_PARENT_FOLDER": "The selected parent folder is not valid.",
+    "LOCKED_BY_OTHER": "This item is currently locked by another user.",
+    "MISSING_REQUIRED_CUSTOM_FIELD_VALUES": "Required custom field values are missing.",
+    "NOT_ALLOWED": "This action is not allowed.",
+    "OIB_CHANGE_NOT_ALLOWED": "Changing the OIB is not allowed."
+  }
+}
