@@ -1,0 +1,13 @@
+<app-dialog-layout
+  [title]="data.title | translate"
+  [headerColor]="headerColor"
+  headerTextVariant="light"
+  [confirmLabel]="data.confirmText | translate"
+  [cancelLabel]="data.cancelText | translate"
+  [confirmColor]="confirmColor"
+  (confirmed)="onConfirm()"
+  (cancelled)="onCancel()">
+  
+  <p class="message" [innerHTML]="data.message"></p>
+
+</app-dialog-layout>

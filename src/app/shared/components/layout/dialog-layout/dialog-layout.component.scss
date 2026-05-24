@@ -1,0 +1,14 @@
+.dialog-layout-container {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-width: min(420px, calc(100vw - 32px));
+  max-height: 90vh;
+  color: var(--tx-text-primary);
+  background: var(--tx-bg-surface);
+}
+.dialog-header, .dialog-actions { display: flex; align-items: center; gap: var(--tx-space-3); padding: var(--tx-space-5); }
+.dialog-header { justify-content: space-between; border-bottom: 1px solid var(--tx-border); }
+.dialog-title { margin: 0; font-size: var(--tx-font-lg); }
+.close-button { color: inherit; }
+.dialog-content { min-height: 0; overflow: auto; padding: var(--tx-space-5); }
+.dialog-actions { justify-content: flex-end; border-top: 1px solid var(--tx-border); }

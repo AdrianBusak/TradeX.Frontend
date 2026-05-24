@@ -1,0 +1,125 @@
+<div class="data-grid">
+  <div class="data-grid-overlay" *ngIf="loading">
+    <mat-progress-spinner
+      mode="indeterminate"
+      diameter="40"
+      strokeWidth="4">
+    </mat-progress-spinner>
+  </div>
+
+  <div class="data-grid-content app-card" [class.data-grid-content--blurred]="loading">
+
+    <table
+      mat-table
+      [dataSource]="dataSource()"
+      matSort
+      (matSortChange)="onSortChange($event)"
+      class="data-grid-table"
+    >
+      <ng-container *ngFor="let col of columns()" [matColumnDef]="col.key">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header="{{ col.key }}"
+          start="asc"
+          [disabled]="!col.sortable"
+        >
+          {{ col.headerKey | translate }}
+        </th>
+
+        <td mat-cell *matCellDef="let row">
+          <ng-container [ngSwitch]="col.type">
+
+            <ng-container *ngSwitchCase="'action'">
+              <div class="action-buttons">
+                <button
+                  *ngFor="let action of getActions(col)"
+                  mat-icon-button
+                  class="action-button"
+                  [class.delete-button]="action === 'delete'"
+                  (click)="onRowAction(action, row)"
+                  [disabled]="isActionDisabled(col, row)"
+                  [matTooltip]="getActionLabel(action) | translate"
+                >
+                  <mat-icon>{{ getActionIcon(action) }}</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'badge'">
+              <span class="status-badge" [attr.data-status]="$any(row)[col.key]">
+                <ng-container *ngIf="col.translate; else plainBadgeText">
+                  {{ $any(row)[col.key] | translate }}
+                </ng-container>
+                <ng-template #plainBadgeText>
+                  {{ $any(row)[col.key] }}
+                </ng-template>
+              </span>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'toggle'">
+              <mat-slide-toggle
+                [checked]="($any(row))[col.key]"
+                (change)="onToggle(col.key, row, $any($event).checked)">
+              </mat-slide-toggle>
+            </ng-container>
+
+            <ng-container *ngSwitchDefault>
+              <ng-container [ngSwitch]="'' + $any(row)[col.key]">
+                <mat-icon *ngSwitchCase="'true'" class="status-icon status-icon--true">
+                  check
+                </mat-icon>
+
+                <mat-icon *ngSwitchCase="'false'" class="status-icon status-icon--false">
+                  close
+                </mat-icon>
+
+                <span *ngSwitchDefault>
+                  <ng-container *ngIf="col.translate; else plainText">
+                    {{ $any(row)[col.key] | translate }}
+                  </ng-container>
+                  <ng-template #plainText>
+                    {{ $any(row)[col.key] }}
+                  </ng-template>
+                </span>
+              </ng-container>
+            </ng-container>
+
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+      <tr 
+        mat-row 
+        *matRowDef="let row; columns: displayedColumns()"
+        [class.row-highlighted]="isRowHighlighted(row)"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell no-data-cell" [attr.colspan]="displayedColumns().length">
+          <div class="no-data-content">
+            <mat-icon class="no-data-icon">
+              {{ (isFiltered()) ? 'search_off' : 'folder_off' }}
+            </mat-icon>
+            <span class="no-data-text">
+              {{
+                (isFiltered()
+                  ? noResultsMessageKey()
+                  : emptyMessageKey()) | translate
+              }}
+            </span>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <mat-paginator
+      [length]="totalRecords()"
+      [pageIndex]="pageIndex()"
+      [pageSize]="pageSize()"
+      [pageSizeOptions]="pageSizeOptions()"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event)"
+    ></mat-paginator>
+  </div>
+</div>

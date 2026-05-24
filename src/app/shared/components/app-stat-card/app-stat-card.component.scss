@@ -1,0 +1,45 @@
+:host,
+.stat {
+  display: block;
+  height: 100%;
+}
+
+.stat-top,
+.stat-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stat-top {
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+  font-weight: 800;
+}
+
+mat-icon {
+  color: var(--tx-cyan);
+}
+
+strong {
+  display: block;
+  margin: 10px 0 8px;
+  color: var(--tx-text-primary);
+  font-size: 26px;
+  line-height: 1.1;
+}
+
+.stat-bottom {
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+}
+
+.trend {
+  color: #bfdbfe;
+  font-weight: 800;
+}
+
+.stat--positive .trend { color: #86efac; }
+.stat--negative .trend { color: #fca5a5; }
+.stat--warning .trend { color: #fcd34d; }

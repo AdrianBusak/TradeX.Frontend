@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  gap: var(--tx-space-3);
+  min-height: 220px;
+  padding: var(--tx-space-8);
+  color: var(--tx-text-secondary);
+  text-align: center;
+}
+
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  color: #bfdbfe;
+  background: var(--tx-brand-soft);
+  border: 1px solid rgba(37, 99, 235, 0.3);
+  border-radius: var(--tx-radius-lg);
+}
+
+h3,
+p {
+  margin: 0;
+}
+
+h3 {
+  color: var(--tx-text-primary);
+  font-size: var(--tx-font-lg);
+}
+
+p {
+  max-width: 420px;
+}

@@ -1,0 +1,14 @@
+.tabs-wrapper {
+  overflow: hidden;
+  color: var(--tx-text-primary);
+  background: var(--tx-bg-surface);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-lg);
+}
+::ng-deep .mat-mdc-tab-labels { padding: 0 var(--tx-space-3); border-bottom: 1px solid var(--tx-border); }
+::ng-deep .mat-mdc-tab .mdc-tab__text-label { color: var(--tx-text-secondary); }
+::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label,
+::ng-deep .mat-mdc-tab.mdc-tab--active mat-icon { color: #bfdbfe; }
+::ng-deep .mat-mdc-tab .mdc-tab__content { display: flex; align-items: center; gap: var(--tx-space-2); }
+::ng-deep .mat-mdc-tab mat-icon { margin: 0; width: 20px; height: 20px; font-size: 20px; }
+::ng-deep .mdc-tab-indicator__content--underline { border-color: var(--tx-brand) !important; }

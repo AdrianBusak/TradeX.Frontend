@@ -1,0 +1,32 @@
+:host, .add-edit-container, .layout-wrapper { display: block; min-height: 100%; }
+.add-edit-container { position: relative; }
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  background: rgba(7, 10, 18, 0.62);
+  backdrop-filter: blur(4px);
+}
+.layout-wrapper.blurred { filter: blur(2px); pointer-events: none; }
+.inner-layout { min-height: 0; }
+.white-card {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 420px;
+  overflow: hidden;
+  background: var(--tx-bg-surface);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-lg);
+}
+.scrollable-content { min-height: 0; overflow: auto; padding: var(--tx-space-6); }
+.actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--tx-space-3);
+  padding: var(--tx-space-4) var(--tx-space-6);
+  border-top: 1px solid var(--tx-border);
+}
+.standard-actions { display: flex; gap: var(--tx-space-3); }
+::ng-deep .mat-mdc-progress-spinner { --mdc-circular-progress-active-indicator-color: var(--tx-brand); }

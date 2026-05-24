@@ -1,0 +1,70 @@
+<div class="table-shell" [class.table-shell--compact]="density() === 'compact'">
+  @if (loading()) {
+    <div class="table-loading">
+      <app-loading-state />
+    </div>
+  }
+
+  @if (!loading() && rows().length === 0) {
+    <app-empty-state icon="table" [title]="emptyTitle()" [description]="emptyDescription()" />
+  } @else {
+    <div class="table-scroll tx-scrollbar">
+      <table>
+        <thead>
+          <tr>
+            @for (column of columns(); track column.key) {
+              <th [class.align-center]="column.align === 'center'" [class.align-right]="column.align === 'right'">
+                {{ column.label }}
+              </th>
+            }
+            @if (actions().length) {
+              <th class="actions-heading"></th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (row of rows(); track rowKey(row, $index)) {
+            <tr>
+              @for (column of columns(); track column.key) {
+                <td [class.align-center]="column.align === 'center'" [class.align-right]="column.align === 'right'" [attr.data-label]="column.label">
+                  @switch (column.type) {
+                    @case ('badge') {
+                      <app-badge [variant]="badgeVariant(row, column)" size="sm">
+                        {{ displayValue(row, column) }}
+                      </app-badge>
+                    }
+                    @case ('profitLoss') {
+                      <app-profit-loss-badge [value]="numericValue(row, column)" />
+                    }
+                    @case ('riskReward') {
+                      <app-risk-reward-badge [ratio]="numericValue(row, column)" />
+                    }
+                    @default {
+                      <span>{{ displayValue(row, column) }}</span>
+                    }
+                  }
+                </td>
+              }
+              @if (actions().length) {
+                <td class="row-actions" data-label="Actions">
+                  @for (action of actions(); track action.id) {
+                    <button
+                      type="button"
+                      [class.action-danger]="action.tone === 'danger'"
+                      [disabled]="isActionDisabled(action, row)"
+                      [attr.aria-label]="action.label"
+                      [title]="action.label"
+                      (click)="emitAction(action, row)"
+                    >
+                      <mat-icon aria-hidden="true">{{ action.icon }}</mat-icon>
+                    </button>
+                  }
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

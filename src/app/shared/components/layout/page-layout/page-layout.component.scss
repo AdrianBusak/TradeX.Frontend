@@ -1,0 +1,8 @@
+:host { display: block; }
+.page-container { width: min(100%, var(--tx-content-max)); margin: 0 auto; }
+.page-content { display: grid; gap: var(--tx-space-6); min-width: 0; }
+.page-header { display: flex; align-items: center; gap: var(--tx-space-3); flex-wrap: wrap; }
+.page-header mat-icon { color: var(--tx-cyan); }
+.page-header h1 { margin: 0; color: var(--tx-text-primary); font-size: var(--tx-font-xl); }
+.actions-container { display: flex; gap: var(--tx-space-2); margin-left: auto; flex-wrap: wrap; }
+@media (max-width: 720px) { .actions-container { width: 100%; margin-left: 0; } }

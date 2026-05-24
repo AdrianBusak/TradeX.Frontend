@@ -1,0 +1,30 @@
+<div class="form-field-group">
+  @if (label) {
+    <label [for]="id" class="field-label">
+      {{ label | translate }}
+      @if (required) {
+        <span class="required">*</span>
+      }
+    </label>
+  }
+  <input
+    [id]="id"
+    [name]="name"
+    type="datetime-local"
+    [value]="value"
+    [placeholder]="placeholder | translate"
+    [disabled]="isDisabled"
+    [min]="min"
+    [max]="max"
+    (input)="onInputChange($event)"
+    (blur)="onBlur()"
+    class="form-input"
+    [class.error]="errorMessage && isTouched"
+  />
+  @if (errorMessage && isTouched) {
+    <div class="field-hint error">{{ errorMessage | translate }}</div>
+  }
+  @if (hint && !errorMessage) {
+    <div class="field-hint">{{ hint | translate }}</div>
+  }
+</div>

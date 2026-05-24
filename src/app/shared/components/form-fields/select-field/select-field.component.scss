@@ -1,0 +1,24 @@
+:host { display: block; }
+.form-field-group { display: grid; gap: 8px; width: 100%; }
+.field-label { display: flex; gap: 4px; color: var(--tx-text-secondary); font-size: var(--tx-font-sm); font-weight: 800; }
+.required { color: var(--tx-danger); }
+.select-wrapper { position: relative; }
+.spinner-wrapper { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.form-select {
+  width: 100%;
+  height: 42px;
+  padding: 0 13px;
+  color: var(--tx-text-primary);
+  background: var(--tx-bg-surface-2);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-md);
+  outline: 0;
+}
+.form-select:focus { border-color: var(--tx-brand); box-shadow: 0 0 0 3px var(--tx-brand-ring); }
+.form-select.error { border-color: var(--tx-danger); box-shadow: 0 0 0 3px var(--tx-danger-soft); }
+.field-hint { color: var(--tx-text-muted); font-size: var(--tx-font-sm); }
+.field-hint.error { color: #fca5a5; }
+::ng-deep .select-field-panel { background: var(--tx-bg-surface-2); border: 1px solid var(--tx-border); }
+::ng-deep .mat-mdc-select-trigger { height: 42px; display: flex; align-items: center; }
+::ng-deep .mat-mdc-select-value, ::ng-deep .mat-mdc-select-arrow { color: var(--tx-text-primary); }
+::ng-deep .mat-mdc-progress-spinner { --mdc-circular-progress-active-indicator-color: var(--tx-brand); }

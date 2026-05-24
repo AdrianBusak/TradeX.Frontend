@@ -1,0 +1,17 @@
+<app-card padding="md" class="stat" [class.stat--positive]="tone() === 'positive'" [class.stat--negative]="tone() === 'negative'" [class.stat--warning]="tone() === 'warning'">
+  <div class="stat-top">
+    <span>{{ label() }}</span>
+    @if (icon()) {
+      <mat-icon aria-hidden="true">{{ icon() }}</mat-icon>
+    }
+  </div>
+  <strong>{{ value() }}</strong>
+  <div class="stat-bottom">
+    @if (trend()) {
+      <span class="trend">{{ trend() }}</span>
+    }
+    @if (helper()) {
+      <span>{{ helper() }}</span>
+    }
+  </div>
+</app-card>

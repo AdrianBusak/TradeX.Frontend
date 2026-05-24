@@ -1,0 +1,59 @@
+:host {
+  display: block;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field-label {
+  color: var(--tx-text-secondary);
+  font-size: var(--tx-font-sm);
+  font-weight: 800;
+}
+
+.required {
+  color: var(--tx-danger);
+}
+
+textarea {
+  width: 100%;
+  min-height: 112px;
+  resize: vertical;
+  padding: 12px 13px;
+  color: var(--tx-text-primary);
+  background: var(--tx-bg-surface-2);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-md);
+  outline: 0;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+textarea:focus {
+  border-color: var(--tx-brand);
+  box-shadow: 0 0 0 3px var(--tx-brand-ring);
+}
+
+textarea::placeholder {
+  color: var(--tx-text-muted);
+}
+
+textarea:disabled {
+  cursor: not-allowed;
+  color: var(--tx-text-muted);
+}
+
+.field--invalid textarea {
+  border-color: var(--tx-danger);
+  box-shadow: 0 0 0 3px var(--tx-danger-soft);
+}
+
+.field-message {
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+}
+
+.field-message--error {
+  color: #fca5a5;
+}

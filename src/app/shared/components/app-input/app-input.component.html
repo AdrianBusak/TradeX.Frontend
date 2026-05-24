@@ -1,0 +1,44 @@
+<label
+  class="field"
+  [class.field--sm]="size() === 'sm'"
+  [class.field--lg]="size() === 'lg'"
+  [class.field--invalid]="error() && touched"
+>
+  @if (label()) {
+    <span class="field-label">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="required">*</span>
+      }
+    </span>
+  }
+
+  <span class="control">
+    @if (prefixIcon()) {
+      <mat-icon class="control-icon" aria-hidden="true">{{ prefixIcon() }}</mat-icon>
+    }
+    <input
+      [id]="id()"
+      [name]="name()"
+      [type]="type()"
+      [value]="value"
+      [placeholder]="placeholder() | translate"
+      [disabled]="isDisabled || disabled()"
+      [readOnly]="readOnly()"
+      [autocomplete]="autocomplete()"
+      [attr.aria-invalid]="!!(error() && touched)"
+      [attr.aria-required]="required()"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+    />
+    @if (suffixIcon()) {
+      <mat-icon class="control-icon" aria-hidden="true">{{ suffixIcon() }}</mat-icon>
+    }
+  </span>
+
+  @if (error() && touched) {
+    <span class="field-message field-message--error">{{ error() | translate }}</span>
+  } @else if (hint()) {
+    <span class="field-message">{{ hint() | translate }}</span>
+  }
+</label>

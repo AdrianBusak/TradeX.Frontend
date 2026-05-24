@@ -1,0 +1,47 @@
+<label
+  class="field"
+  [class.field--sm]="size() === 'sm'"
+  [class.field--lg]="size() === 'lg'"
+  [class.field--invalid]="error() && touched"
+>
+  @if (label()) {
+    <span class="field-label">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="required">*</span>
+      }
+    </span>
+  }
+
+  <span class="control">
+    @if (prefixIcon()) {
+      <mat-icon class="control-icon" aria-hidden="true">{{ prefixIcon() }}</mat-icon>
+    }
+    <select
+      [id]="id()"
+      [name]="name()"
+      [value]="selectedKey"
+      [disabled]="isDisabled || disabled()"
+      [attr.aria-invalid]="!!(error() && touched)"
+      [attr.aria-required]="required()"
+      (change)="onSelection($event)"
+      (blur)="onBlur()"
+    >
+      <option value="" [disabled]="!nullable()">
+        {{ placeholder() | translate }}
+      </option>
+      @for (option of options(); track option.value) {
+        <option [value]="optionKey($index)" [disabled]="option.disabled">
+          {{ option.label | translate }}
+        </option>
+      }
+    </select>
+    <mat-icon class="select-chevron" aria-hidden="true">expand_more</mat-icon>
+  </span>
+
+  @if (error() && touched) {
+    <span class="field-message field-message--error">{{ error() | translate }}</span>
+  } @else if (hint()) {
+    <span class="field-message">{{ hint() | translate }}</span>
+  }
+</label>

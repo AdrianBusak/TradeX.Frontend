@@ -1,0 +1,18 @@
+<div class="search-wrapper">
+  <input
+    type="text"
+    class="search-input"
+    [placeholder]="placeholder() | translate"
+    [value]="currentSearchValue()"
+    (input)="onSearch($any($event.target).value)"
+  />
+  <button
+    *ngIf="currentSearchValue()"
+    class="search-action-btn"
+    (click)="clearSearch()"
+    [attr.aria-label]="'COMMON.CLEAR' | translate"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+  <mat-icon *ngIf="!currentSearchValue()" class="search-icon">search</mat-icon>
+</div>

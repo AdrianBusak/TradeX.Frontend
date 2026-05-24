@@ -1,0 +1,19 @@
+<header class="page-header">
+  <div class="title-area">
+    @if (eyebrow()) {
+      <span class="eyebrow">{{ eyebrow() | translate }}</span>
+    }
+    <div class="title-row">
+      @if (icon()) {
+        <span class="title-icon"><mat-icon aria-hidden="true">{{ icon() }}</mat-icon></span>
+      }
+      <h1>{{ title() | translate }}</h1>
+    </div>
+    @if (subtitle()) {
+      <p>{{ subtitle() | translate }}</p>
+    }
+  </div>
+  <div class="actions">
+    <ng-content select="[page-actions]"></ng-content>
+  </div>
+</header>

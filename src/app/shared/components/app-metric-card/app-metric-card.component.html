@@ -1,0 +1,12 @@
+<div class="metric" [class.metric--positive]="tone() === 'positive'" [class.metric--negative]="tone() === 'negative'" [class.metric--brand]="tone() === 'brand'">
+  @if (icon()) {
+    <span class="metric-icon"><mat-icon aria-hidden="true">{{ icon() }}</mat-icon></span>
+  }
+  <div>
+    <span>{{ label() }}</span>
+    <strong>{{ value() }}</strong>
+    @if (description()) {
+      <small>{{ description() }}</small>
+    }
+  </div>
+</div>

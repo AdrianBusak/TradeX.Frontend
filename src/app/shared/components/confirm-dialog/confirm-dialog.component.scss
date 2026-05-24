@@ -1,0 +1,10 @@
+.message {
+  margin: 0;
+  color: var(--tx-text-secondary);
+  font-size: var(--tx-font-base);
+  line-height: 1.7;
+}
+.message strong {
+  color: var(--tx-text-primary);
+  font-weight: 800;
+}

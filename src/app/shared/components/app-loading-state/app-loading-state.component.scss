@@ -1,0 +1,24 @@
+:host {
+  display: block;
+}
+
+.loading-state {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tx-space-3);
+  color: var(--tx-text-secondary);
+  font-weight: 700;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--tx-border-strong);
+  border-top-color: var(--tx-brand);
+  border-radius: 999px;
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

@@ -1,0 +1,19 @@
+<section
+  class="app-card"
+  [class.app-card--muted]="variant() === 'muted'"
+  [class.app-card--outlined]="variant() === 'outlined'"
+  [class.app-card--interactive]="interactive()"
+  [class.app-card--loading]="loading()"
+  [class.app-card--pad-none]="padding() === 'none'"
+  [class.app-card--pad-sm]="padding() === 'sm'"
+  [class.app-card--pad-md]="padding() === 'md'"
+  [class.app-card--pad-lg]="padding() === 'lg'"
+>
+  @if (loading()) {
+    <div class="card-loader" aria-hidden="true"></div>
+  }
+
+  <ng-content select="[card-header]"></ng-content>
+  <ng-content></ng-content>
+  <ng-content select="[card-footer]"></ng-content>
+</section>

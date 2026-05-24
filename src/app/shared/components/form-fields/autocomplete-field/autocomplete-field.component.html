@@ -1,0 +1,99 @@
+<div class="form-field-group" [ngClass]="'size-' + size">
+  @if (label) {
+    <label [for]="id" class="field-label">
+      {{ label | translate }}
+      @if (required) {
+        <span class="required">*</span>
+      }
+    </label>
+  }
+
+  <div class="autocomplete-wrapper">
+    <input
+      #inputEl
+      matInput
+      [id]="id"
+      [formControl]="inputControl"
+      [matAutocomplete]="auto"
+      [placeholder]="placeholder | translate"
+      (focus)="onInputFocus()"
+      (blur)="onBlur()"
+      class="form-input"
+      [class.has-end-adornment]="hasEndAdornment"
+      [class.error]="errorMessage && isTouched"
+      autocomplete="off"
+    />
+    <div class="end-adornment" *ngIf="hasEndAdornment">
+      @if (loading) {
+        <div class="spinner-wrapper">
+          <mat-spinner diameter="20"></mat-spinner>
+        </div>
+      } @else {
+        @if (value && !inputDisabled) {
+          <button
+            type="button"
+            class="clear-button"
+            (click)="clearValue()"
+            tabindex="-1"
+            aria-label="Clear selection">
+            <mat-icon>close</mat-icon>
+          </button>
+        } @else if (loader && !inputDisabled) {
+          <button
+            type="button"
+            class="dropdown-button"
+            (mousedown)="onDropdownClick($event)"
+            tabindex="-1"
+            aria-label="Toggle dropdown">
+            <mat-icon>expand_more</mat-icon>
+          </button>
+        }
+      }
+    </div>
+  </div>
+
+  <mat-autocomplete #auto="matAutocomplete" [autoActiveFirstOption]="true" [displayWith]="displayWith" (optionSelected)="onOptionSelected($event)">
+    @let filteredOptions = filteredOptions$ | async;
+    @if (filteredOptions) {
+      @for (option of filteredOptions; track option.id) {
+        <mat-option [value]="option" [class.selected-option]="option.id === value">
+          <span class="option-content">
+            {{ option.display }}
+            @if (option.id === value && showSelectedOnTop) {
+              <mat-icon class="selected-icon">check_circle</mat-icon>
+            }
+          </span>
+        </mat-option>
+      }
+      @if (hasMore) {
+        <div class="load-more-container">
+          <button
+            type="button"
+            class="load-more-button"
+            (mousedown)="$event.preventDefault()"
+            (click)="onLoadMoreClick($event)">
+            {{ 'GLOBAL.ACTIONS.LOAD_MORE' | translate }}
+          </button>
+        </div>
+      }
+      @if (filteredOptions.length === 0) {
+        @if (inputControl.value) {
+          <mat-option disabled>
+            <span>{{ 'ERRORS.NO_RESULTS' | translate }}</span>
+          </mat-option>
+        } @else if (!loading) {
+          <mat-option disabled>
+            <span>{{ 'COMMON.NO_DATA' | translate }}</span>
+          </mat-option>
+        }
+      }
+    }
+  </mat-autocomplete>
+
+  @if (errorMessage && isTouched) {
+    <div class="field-hint error">{{ errorMessage | translate }}</div>
+  }
+  @if (hint && !errorMessage) {
+    <div class="field-hint">{{ hint | translate }}</div>
+  }
+</div>

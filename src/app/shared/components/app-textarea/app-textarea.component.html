@@ -1,0 +1,29 @@
+<label class="field" [class.field--invalid]="error() && touched">
+  @if (label()) {
+    <span class="field-label">
+      {{ label() | translate }}
+      @if (required()) {
+        <span class="required">*</span>
+      }
+    </span>
+  }
+
+  <textarea
+    [id]="id()"
+    [name]="name()"
+    [rows]="rows()"
+    [attr.maxlength]="maxLength() ?? null"
+    [value]="value"
+    [placeholder]="placeholder() | translate"
+    [disabled]="isDisabled || disabled()"
+    [attr.aria-invalid]="!!(error() && touched)"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+  ></textarea>
+
+  @if (error() && touched) {
+    <span class="field-message field-message--error">{{ error() | translate }}</span>
+  } @else if (hint()) {
+    <span class="field-message">{{ hint() | translate }}</span>
+  }
+</label>

@@ -1,7 +1,21 @@
 {
   "COMMON": {
     "CLOSE": "Close",
+    "CLEAR": "Clear",
     "LOADING": "Loading...",
+    "SEARCH": "Search",
+    "START_DATE": "Start date",
+    "END_DATE": "End date",
+    "NO_DATA": "No data",
+    "NO_RESULTS": "No results",
+    "ACTIONS": {
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete",
+      "EDIT": "Edit",
+      "VIEW": "View",
+      "LOAD_MORE": "Load more"
+    },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Items per page",
       "NEXT_PAGE": "Next page",
@@ -43,13 +57,15 @@
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
-    "STOCK": "Stock",
-    "FAVOURITES": "Favourites",
-    "WALLET": "Wallet",
-    "COMMUNITY": "Community",
-    "PROFILE": "Profile",
-    "CONTACT": "Contact Us",
+    "TRADES": "Trades",
+    "JOURNAL": "Journal",
+    "STRATEGIES": "Strategies",
+    "RISK": "Risk",
+    "ANALYTICS": "Analytics",
+    "ML_PREDICTION": "ML Prediction",
+    "SETTINGS": "Settings",
     "LOGOUT": "Logout",
+    "WORKSPACE": "Live workspace",
     "COLLAPSE": "Collapse sidebar",
     "EXPAND": "Expand sidebar",
     "ARIA_MAIN": "Main navigation",
@@ -57,18 +73,18 @@
     "ARIA_HOME": "TradeX home"
   },
   "TOPBAR": {
-    "SEARCH_PLACEHOLDER": "Search stocks, assets, news...",
+    "WORKSPACE": "TradeX",
+    "SEARCH_PLACEHOLDER": "Search trades, tickers, tags...",
     "SEARCH_LABEL": "Search TradeX",
     "MESSAGES": "Messages",
     "NOTIFICATIONS": "Notifications",
-    "OPEN_MENU": "Open navigation menu"
+    "OPEN_MENU": "Open navigation menu",
+    "USER_MENU": "User menu"
   },
   "DASHBOARD": {
+    "EYEBROW": "Trading journal",
     "TITLE": "Dashboard",
-    "SUBTITLE": "Your portfolio overview will appear here.",
-    "EQUITY": "Equity",
-    "OPEN_ORDERS": "Open Orders",
-    "PNL_TODAY": "P&L Today"
+    "SUBTITLE": "Track performance, risk and trade quality from one focused workspace."
   },
   "LANG": {
     "EN": "English",

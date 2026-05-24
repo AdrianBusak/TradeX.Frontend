@@ -1,38 +1,68 @@
-<header class="topbar" role="banner">
+<header class="topbar">
+  <div class="topbar-left">
+    <button
+      class="icon-btn mobile-menu-btn"
+      type="button"
+      (click)="sidebar.toggleMobile()"
+      [attr.aria-label]="'TOPBAR.OPEN_MENU' | translate"
+    >
+      <mat-icon aria-hidden="true">menu</mat-icon>
+    </button>
 
-  <button
-    class="icon-btn mobile-menu-btn"
-    type="button"
-    (click)="sidebar.toggleMobile()"
-    [attr.aria-label]="'TOPBAR.OPEN_MENU' | translate"
-  >
-    <mat-icon aria-hidden="true">menu</mat-icon>
-  </button>
-
-  <div class="topbar-search">
-    <label for="global-search" class="sr-only">{{ 'TOPBAR.SEARCH_LABEL' | translate }}</label>
-    <div class="search-wrapper">
-      <mat-icon class="search-icon" aria-hidden="true">search</mat-icon>
-      <input
-        id="global-search"
-        class="search-input"
-        type="search"
-        [placeholder]="'TOPBAR.SEARCH_PLACEHOLDER' | translate"
-        autocomplete="off"
-      />
+    <div class="page-title">
+      <span>{{ 'TOPBAR.WORKSPACE' | translate }}</span>
+      <strong>{{ titleKey() | translate }}</strong>
     </div>
   </div>
 
-  <div class="topbar-actions">
-    <button class="icon-btn" type="button" [attr.aria-label]="'TOPBAR.MESSAGES' | translate">
-      <mat-icon aria-hidden="true">mail</mat-icon>
-    </button>
+  <div class="topbar-search">
+    <label for="global-search" class="sr-only">{{ 'TOPBAR.SEARCH_LABEL' | translate }}</label>
+    <mat-icon aria-hidden="true">search</mat-icon>
+    <input
+      id="global-search"
+      type="search"
+      [placeholder]="'TOPBAR.SEARCH_PLACEHOLDER' | translate"
+      autocomplete="off"
+    />
+  </div>
 
-    <button class="icon-btn" type="button" [attr.aria-label]="'TOPBAR.NOTIFICATIONS' | translate">
+  <div class="topbar-actions">
+    <button class="icon-btn hide-small" type="button" [attr.aria-label]="'TOPBAR.NOTIFICATIONS' | translate">
       <mat-icon aria-hidden="true">notifications</mat-icon>
     </button>
 
     <app-lang-switcher />
-  </div>
 
+    @if (user$ | async; as user) {
+      <div class="user-menu" (click)="$event.stopPropagation()">
+        <button
+          type="button"
+          class="user-trigger"
+          (click)="toggleUserMenu($event)"
+          [attr.aria-expanded]="userMenuOpen"
+          [attr.aria-label]="'TOPBAR.USER_MENU' | translate"
+        >
+          @if (user.picture) {
+            <img [src]="user.picture" [alt]="user.name || user.email || 'User'" />
+          } @else {
+            <span>{{ initials(user) }}</span>
+          }
+          <mat-icon aria-hidden="true">expand_more</mat-icon>
+        </button>
+
+        @if (userMenuOpen) {
+          <div class="user-dropdown">
+            <div class="user-summary">
+              <strong>{{ user.name || 'TradeX user' }}</strong>
+              <span>{{ user.email }}</span>
+            </div>
+            <button type="button" (click)="logout()">
+              <mat-icon aria-hidden="true">logout</mat-icon>
+              {{ 'NAV.LOGOUT' | translate }}
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </div>
 </header>

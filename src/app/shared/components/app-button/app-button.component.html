@@ -1,0 +1,27 @@
+<button
+  class="app-button"
+  [class.app-button--secondary]="variant() === 'secondary'"
+  [class.app-button--ghost]="variant() === 'ghost'"
+  [class.app-button--danger]="variant() === 'danger'"
+  [class.app-button--warning]="variant() === 'warning'"
+  [class.app-button--success]="variant() === 'success'"
+  [class.app-button--sm]="size() === 'sm'"
+  [class.app-button--lg]="size() === 'lg'"
+  [class.app-button--full]="fullWidth()"
+  [attr.type]="type()"
+  [attr.aria-label]="ariaLabel()"
+  [disabled]="disabled() || loading()"
+  (click)="onClick($event)"
+>
+  @if (loading()) {
+    <span class="spinner" aria-hidden="true"></span>
+  } @else if (icon() && iconPosition() === 'start') {
+    <mat-icon aria-hidden="true">{{ icon() }}</mat-icon>
+  }
+
+  <span class="button-label"><ng-content></ng-content></span>
+
+  @if (!loading() && icon() && iconPosition() === 'end') {
+    <mat-icon aria-hidden="true">{{ icon() }}</mat-icon>
+  }
+</button>

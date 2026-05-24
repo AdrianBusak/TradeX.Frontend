@@ -1,0 +1,13 @@
+<span
+  class="badge"
+  [class.badge--brand]="variant() === 'brand'"
+  [class.badge--success]="variant() === 'success'"
+  [class.badge--danger]="variant() === 'danger'"
+  [class.badge--warning]="variant() === 'warning'"
+  [class.badge--sm]="size() === 'sm'"
+>
+  @if (icon()) {
+    <mat-icon aria-hidden="true">{{ icon() }}</mat-icon>
+  }
+  <ng-content></ng-content>
+</span>

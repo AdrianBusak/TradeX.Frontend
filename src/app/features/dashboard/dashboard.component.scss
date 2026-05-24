@@ -1,54 +1,173 @@
-.dashboard-placeholder {
-  max-width: 900px;
+:host {
+  display: block;
 }
 
-.page-title {
-  margin: 0 0 var(--space-2);
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--color-text-primary);
-}
-
-.page-subtitle {
-  margin: 0 0 var(--space-6);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-base);
-}
-
-.metric-grid {
+.dashboard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
+  gap: var(--tx-space-6);
 }
 
-.metric-card {
+.header-actions {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-5);
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-top: 3px solid var(--color-accent);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-card);
+  flex-wrap: wrap;
+  gap: var(--tx-space-2);
 }
 
-.metric-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--tx-space-4);
 }
 
-.metric-value {
-  font-size: var(--font-size-xl);
-  font-weight: 700;
-  color: var(--color-text-muted);
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
+  gap: var(--tx-space-4);
+  align-items: start;
 }
 
-@media (max-width: 640px) {
-  .metric-grid {
+.equity-card,
+.table-card {
+  grid-column: span 1;
+}
+
+.table-card {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--tx-space-4);
+  margin-bottom: var(--tx-space-5);
+}
+
+.table-header {
+  padding: var(--tx-space-5) var(--tx-space-5) 0;
+}
+
+.card-header span {
+  display: block;
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+  font-weight: 900;
+}
+
+.card-header h2 {
+  margin: 2px 0 0;
+  color: var(--tx-text-primary);
+  font-size: var(--tx-font-lg);
+}
+
+.equity-chart {
+  display: flex;
+  align-items: end;
+  gap: 10px;
+  height: 260px;
+  padding: var(--tx-space-5);
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-lg);
+}
+
+.equity-chart span {
+  flex: 1;
+  min-width: 12px;
+  background: linear-gradient(180deg, var(--tx-cyan), var(--tx-brand));
+  border-radius: 999px 999px 4px 4px;
+  opacity: 0.9;
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--tx-space-3);
+  margin-top: var(--tx-space-4);
+}
+
+.risk-meter {
+  height: 12px;
+  overflow: hidden;
+  background: var(--tx-bg-surface-3);
+  border: 1px solid var(--tx-border);
+  border-radius: 999px;
+}
+
+.risk-meter-fill {
+  width: 42%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--tx-brand), var(--tx-cyan));
+  border-radius: inherit;
+}
+
+.risk-list,
+.strategy-list {
+  display: grid;
+  gap: var(--tx-space-3);
+  margin-top: var(--tx-space-5);
+}
+
+.risk-list > div,
+.strategy-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--tx-space-4);
+  padding: var(--tx-space-3);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-md);
+}
+
+.risk-list span,
+.strategy-item span {
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+}
+
+.strategy-item strong {
+  display: block;
+  color: var(--tx-text-primary);
+  margin-bottom: 2px;
+}
+
+.journal-card p {
+  margin: 0;
+  color: var(--tx-text-secondary);
+  line-height: 1.7;
+}
+
+.journal-actions {
+  margin-top: var(--tx-space-5);
+}
+
+@media (max-width: 1180px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .stats-grid,
+  .metric-row {
+    grid-template-columns: 1fr;
+  }
+
+  .equity-chart {
+    height: 190px;
+    gap: 6px;
+    padding: var(--tx-space-4);
+  }
+
+  .card-header,
+  .strategy-item,
+  .risk-list > div {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

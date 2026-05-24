@@ -1,0 +1,7 @@
+<span
+  class="rr-badge"
+  [class.rr-badge--strong]="state() === 'strong'"
+  [class.rr-badge--weak]="state() === 'weak'"
+>
+  {{ ratio().toFixed(1) }}R
+</span>

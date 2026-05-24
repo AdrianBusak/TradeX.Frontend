@@ -1,0 +1,28 @@
+<div class="dialog-layout-container">
+  <div class="dialog-header" [style.background-color]="headerColor()" [ngClass]="'header-' + headerTextVariant()">
+    <h2 class="dialog-title">{{ title() }}</h2>
+    <button mat-icon-button (click)="onClose()" class="close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="dialog-content">
+    <ng-content></ng-content>
+  </mat-dialog-content>
+
+  @if (showDialogActions()) {
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <app-button 
+            [variant]="'secondary'" 
+            (action)="onClose()" >
+      {{ cancelLabel() }}
+    </app-button>
+    <app-button 
+            [variant]="confirmColor()" 
+            (action)="onConfirm()" 
+            [disabled]="confirmDisabled()">
+      {{ confirmLabel() }}
+    </app-button>
+  </mat-dialog-actions>
+  }
+</div>

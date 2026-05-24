@@ -1,0 +1,41 @@
+<div class="add-edit-container">
+  @if (loading()) {
+    <div class="loading-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+  }
+
+  <div class="layout-wrapper" [class.blurred]="loading()">
+    <app-page-layout [title]="title()">
+      <button header-start mat-icon-button (click)="back.emit()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+
+      <div class="inner-layout">
+        <div class="white-card">
+          <div class="scrollable-content">
+            <ng-content></ng-content>
+          </div>
+
+          <div class="actions-bar">
+            <ng-content select="[actions]">
+            </ng-content>
+            
+            @if (!saveHidden()) {
+              <div class="standard-actions">
+                <app-button 
+                  variant="primary" 
+                  [icon]="'save'"
+                  [disabled]="saveDisabled()" 
+                  [loading]="isSaving()"
+                  (click)="save.emit()">
+                  {{ 'GLOBAL.ACTIONS.SAVE' | translate }}
+                </app-button>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </app-page-layout>
+  </div>
+</div>

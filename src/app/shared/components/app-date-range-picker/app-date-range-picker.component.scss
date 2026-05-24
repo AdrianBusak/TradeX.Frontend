@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.date-range {
+  display: grid;
+  gap: 8px;
+}
+
+.field-label,
+label span {
+  color: var(--tx-text-secondary);
+  font-size: var(--tx-font-sm);
+  font-weight: 800;
+}
+
+.range-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--tx-space-3);
+}
+
+label {
+  display: grid;
+  gap: 8px;
+}
+
+input {
+  min-height: 42px;
+  padding: 0 13px;
+  color: var(--tx-text-primary);
+  color-scheme: dark;
+  background: var(--tx-bg-surface-2);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-md);
+  outline: 0;
+}
+
+input:focus {
+  border-color: var(--tx-brand);
+  box-shadow: 0 0 0 3px var(--tx-brand-ring);
+}
+
+.date-range--invalid input {
+  border-color: var(--tx-danger);
+}
+
+.field-message {
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+}
+
+.field-message--error {
+  color: #fca5a5;
+}
+
+@media (max-width: 640px) {
+  .range-controls {
+    grid-template-columns: 1fr;
+  }
+}

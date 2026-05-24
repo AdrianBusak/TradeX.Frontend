@@ -1,19 +1,138 @@
-<div class="dashboard-placeholder">
-  <h1 class="page-title">{{ 'DASHBOARD.TITLE' | translate }}</h1>
-  <p class="page-subtitle">{{ 'DASHBOARD.SUBTITLE' | translate }}</p>
+<div class="dashboard tx-page">
+  <app-page-header
+    [eyebrow]="'DASHBOARD.EYEBROW'"
+    [title]="'DASHBOARD.TITLE'"
+    [subtitle]="'DASHBOARD.SUBTITLE'"
+    icon="space_dashboard"
+  >
+    <div page-actions class="header-actions">
+      <app-button variant="secondary" icon="calendar_month">This month</app-button>
+      <app-button icon="add">Log trade</app-button>
+    </div>
+  </app-page-header>
 
-  <div class="metric-grid">
-    <div class="metric-card">
-      <span class="metric-label">{{ 'DASHBOARD.EQUITY' | translate }}</span>
-      <span class="metric-value">—</span>
-    </div>
-    <div class="metric-card">
-      <span class="metric-label">{{ 'DASHBOARD.OPEN_ORDERS' | translate }}</span>
-      <span class="metric-value">—</span>
-    </div>
-    <div class="metric-card">
-      <span class="metric-label">{{ 'DASHBOARD.PNL_TODAY' | translate }}</span>
-      <span class="metric-value">—</span>
-    </div>
-  </div>
+  <section class="stats-grid">
+    @for (stat of statCards; track stat.label) {
+      <app-stat-card
+        [label]="stat.label"
+        [value]="stat.value"
+        [helper]="stat.helper"
+        [trend]="stat.trend"
+        [tone]="stat.tone"
+        [icon]="stat.icon"
+      />
+    }
+  </section>
+
+  <section class="dashboard-grid">
+    <app-card class="equity-card" padding="lg">
+      <div card-header class="card-header">
+        <div>
+          <span>Equity curve</span>
+          <h2>Performance momentum</h2>
+        </div>
+        <app-profit-loss-badge [value]="18420" />
+      </div>
+
+      <div class="equity-chart" aria-label="Equity curve preview">
+        <span style="height: 42%"></span>
+        <span style="height: 54%"></span>
+        <span style="height: 49%"></span>
+        <span style="height: 62%"></span>
+        <span style="height: 58%"></span>
+        <span style="height: 76%"></span>
+        <span style="height: 71%"></span>
+        <span style="height: 88%"></span>
+        <span style="height: 82%"></span>
+        <span style="height: 94%"></span>
+      </div>
+
+      <div class="metric-row">
+        <app-metric-card label="Best day" value="$4,280" description="Mar 18" icon="bolt" tone="positive" />
+        <app-metric-card label="Avg winner" value="$920" description="2.3R average" icon="north_east" tone="positive" />
+        <app-metric-card label="Avg loser" value="$410" description="0.8R average" icon="south_east" tone="negative" />
+      </div>
+    </app-card>
+
+    <app-card class="risk-card" padding="lg">
+      <div card-header class="card-header">
+        <div>
+          <span>Risk control</span>
+          <h2>Today</h2>
+        </div>
+        <app-badge variant="success">Inside limits</app-badge>
+      </div>
+
+      <div class="risk-meter">
+        <div class="risk-meter-fill"></div>
+      </div>
+
+      <div class="risk-list">
+        @for (rule of riskRules; track rule.label) {
+          <div>
+            <span>{{ rule.label }}</span>
+            <app-badge [variant]="rule.tone === 'positive' ? 'success' : rule.tone === 'warning' ? 'warning' : 'brand'">
+              {{ rule.value }}
+            </app-badge>
+          </div>
+        }
+      </div>
+    </app-card>
+
+    <app-card class="table-card" padding="none">
+      <div card-header class="card-header table-header">
+        <div>
+          <span>Recent trades</span>
+          <h2>Execution review</h2>
+        </div>
+        <app-button variant="ghost" size="sm" icon="arrow_forward" iconPosition="end">Open trades</app-button>
+      </div>
+      <app-table
+        [columns]="tradeColumns"
+        [rows]="tradeRows"
+        [actions]="tableActions"
+        density="compact"
+      />
+    </app-card>
+
+    <app-card class="strategy-card" padding="lg">
+      <div card-header class="card-header">
+        <div>
+          <span>Strategy edge</span>
+          <h2>Top playbooks</h2>
+        </div>
+      </div>
+
+      <div class="strategy-list">
+        @for (strategy of strategies; track strategy.name) {
+          <div class="strategy-item">
+            <div>
+              <strong>{{ strategy.name }}</strong>
+              <span>{{ strategy.trades }} trades - {{ strategy.winRate }} win rate</span>
+            </div>
+            <app-profit-loss-badge [value]="strategy.pnl" />
+          </div>
+        }
+      </div>
+    </app-card>
+
+    <app-card class="journal-card" padding="lg">
+      <div card-header class="card-header">
+        <div>
+          <span>Journal insight</span>
+          <h2>Review focus</h2>
+        </div>
+        <app-risk-reward-badge [ratio]="2.1" />
+      </div>
+
+      <p>
+        Your strongest trades came after waiting for confirmation near VWAP.
+        Losses clustered when entries were taken inside the first five minutes.
+      </p>
+
+      <div class="journal-actions">
+        <app-button variant="secondary" icon="edit_note">Write review</app-button>
+      </div>
+    </app-card>
+  </section>
 </div>

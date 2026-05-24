@@ -1,0 +1,41 @@
+:host {
+  display: block;
+}
+
+.metric {
+  display: flex;
+  gap: var(--tx-space-3);
+  padding: var(--tx-space-4);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-md);
+}
+
+.metric-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--tx-text-secondary);
+  background: var(--tx-neutral-soft);
+  border-radius: var(--tx-radius-md);
+  flex: 0 0 auto;
+}
+
+span,
+small {
+  display: block;
+  color: var(--tx-text-muted);
+  font-size: var(--tx-font-sm);
+}
+
+strong {
+  display: block;
+  margin: 2px 0;
+  color: var(--tx-text-primary);
+  font-size: var(--tx-font-lg);
+}
+
+.metric--positive .metric-icon { color: #86efac; background: var(--tx-success-soft); }
+.metric--negative .metric-icon { color: #fca5a5; background: var(--tx-danger-soft); }
+.metric--brand .metric-icon { color: #bfdbfe; background: var(--tx-brand-soft); }

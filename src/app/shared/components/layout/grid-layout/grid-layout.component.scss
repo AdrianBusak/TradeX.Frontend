@@ -1,0 +1,4 @@
+:host { display: block; height: 100%; overflow: hidden; }
+.grid-layout-container { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: var(--tx-space-4); height: 100%; }
+.filters-container { display: flex; gap: var(--tx-space-3); align-items: center; flex-wrap: wrap; padding: var(--tx-space-4); }
+.grid-content { min-height: 0; overflow: hidden; display: flex; flex-direction: column; }
