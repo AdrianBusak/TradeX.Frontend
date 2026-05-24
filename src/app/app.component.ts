@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { HttpContext } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, of } from 'rxjs';
 import { catchError, distinctUntilChanged, map, shareReplay, startWith, switchMap } from 'rxjs/operators';
 
@@ -18,35 +19,26 @@ interface AccessState {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, AsyncPipe, NgIf, ToastHostComponent],
+  imports: [RouterOutlet, AsyncPipe, TranslatePipe, ToastHostComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   private auth = inject(AuthService);
   private api = inject(ApiService);
+
   private readonly loadingState: AccessState = { isLoading: true, canEnter: false };
   private readonly signedOutState: AccessState = { isLoading: false, canEnter: false };
   private readonly allowedState: AccessState = { isLoading: false, canEnter: true };
 
-  user$ = this.auth.user$;
-
-  accessState$ = combineLatest([
+  readonly accessState$ = combineLatest([
     this.auth.isLoading$,
     this.auth.isAuthenticated$
   ]).pipe(
-    distinctUntilChanged(([previousLoading, previousAuthenticated], [currentLoading, currentAuthenticated]) =>
-      previousLoading === currentLoading && previousAuthenticated === currentAuthenticated
-    ),
+    distinctUntilChanged(([pl, pa], [cl, ca]) => pl === cl && pa === ca),
     switchMap(([isAuthLoading, isAuthenticated]) => {
-      if (isAuthLoading) {
-        return of(this.loadingState);
-      }
-
-      if (!isAuthenticated) {
-        return of(this.signedOutState);
-      }
-
+      if (isAuthLoading) return of(this.loadingState);
+      if (!isAuthenticated) return of(this.signedOutState);
       return this.api.get<unknown>('me', undefined, this.backendAccessContext()).pipe(
         map(() => this.allowedState),
         startWith(this.loadingState),

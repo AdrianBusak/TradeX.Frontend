@@ -1,9 +1,11 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { APP_INITIALIZER, ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { authHttpInterceptorFn, provideAuth0 } from '@auth0/auth0-angular';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatIconRegistry } from '@angular/material/icon';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
@@ -13,10 +15,19 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([authHttpInterceptorFn, errorInterceptor])),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (iconRegistry: MatIconRegistry) => () => {
+        iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+      },
+      deps: [MatIconRegistry],
+      multi: true
+    },
     provideTranslateService({
       fallbackLang: 'en',
-      lang: 'en',
+      lang: localStorage.getItem('tradex-lang') ?? 'en',
       loader: provideTranslateHttpLoader({
         prefix: '/assets/i18n/',
         suffix: '.json'

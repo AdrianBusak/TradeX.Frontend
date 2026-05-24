@@ -1,121 +1,30 @@
-<div class="app-shell">
-  <ng-container *ngIf="accessState$ | async as accessState">
-    <ng-container *ngIf="accessState.isLoading; else content">
-      <section class="loading-screen" aria-live="polite">
+@if (accessState$ | async; as state) {
+  @if (state.isLoading) {
+    <div class="loading-screen" aria-live="polite">
+      <div class="loading-inner">
         <div class="spinner" aria-hidden="true"></div>
-        <p>Loading TradeX...</p>
-      </section>
-    </ng-container>
-
-    <ng-template #content>
-      <header class="topbar">
-        <div class="brand">
-          <span class="brand-mark" aria-hidden="true">TX</span>
-          <span class="brand-name">TradeX</span>
+        <p class="loading-text">{{ 'AUTH.LOADING' | translate }}</p>
+      </div>
+    </div>
+  } @else if (state.canEnter) {
+    <router-outlet />
+  } @else {
+    <div class="login-screen">
+      <div class="login-card">
+        <div class="login-logo">
+          <svg viewBox="0 0 24 24" width="36" height="36" fill="none" aria-hidden="true">
+            <path d="M12 2L22 12L12 22L2 12Z" fill="var(--color-accent)" />
+            <path d="M12 6L18 12L12 18L6 12Z" fill="var(--color-bg-surface)" />
+            <path d="M12 9L15 12L12 15L9 12Z" fill="var(--color-accent)" />
+          </svg>
+          <span class="login-brand">TradeX</span>
         </div>
-
-        <ng-container *ngIf="accessState.canEnter">
-          <div *ngIf="user$ | async as user" class="user-info">
-            <img
-              *ngIf="user.picture; else avatarFallback"
-              [src]="user.picture"
-              [alt]="user.name || 'User avatar'"
-              width="40"
-              height="40"
-            />
-            <ng-template #avatarFallback>
-              <span class="avatar-fallback" aria-hidden="true">T</span>
-            </ng-template>
-
-            <div class="user-copy">
-              <span class="user-name">{{ user.name || user.email || 'Signed in' }}</span>
-              <span class="user-status">Authenticated</span>
-            </div>
-
-            <button class="secondary-button" type="button" (click)="logout()">Logout</button>
-          </div>
-        </ng-container>
-      </header>
-
-      <main class="main-surface">
-        <ng-container *ngIf="accessState.canEnter; else loggedOut">
-          <section class="workspace">
-            <div class="workspace-header">
-              <p class="eyebrow">Live workspace</p>
-              <h1>Portfolio Command Center</h1>
-              <p class="lead">Your account is connected and ready to sync with the TradeX API.</p>
-            </div>
-
-            <div class="metric-grid" aria-label="Portfolio overview">
-              <article class="metric-card accent-green">
-                <span class="metric-label">Equity</span>
-                <strong>$24,820</strong>
-                <span class="metric-change">+3.8% today</span>
-              </article>
-
-              <article class="metric-card accent-amber">
-                <span class="metric-label">Open Orders</span>
-                <strong>7</strong>
-                <span class="metric-change">2 pending fills</span>
-              </article>
-
-              <article class="metric-card accent-teal">
-                <span class="metric-label">Risk</span>
-                <strong>Low</strong>
-                <span class="metric-change">Limits healthy</span>
-              </article>
-            </div>
-          </section>
-        </ng-container>
-
-        <ng-template #loggedOut>
-          <section class="login-screen">
-            <div class="market-panel" aria-hidden="true">
-              <div class="ticker-row">
-                <span>BTC +2.4%</span>
-                <span>ETH +1.1%</span>
-                <span>SPY -0.3%</span>
-              </div>
-
-              <div class="chart-visual">
-                <span class="bar bar-1"></span>
-                <span class="bar bar-2"></span>
-                <span class="bar bar-3"></span>
-                <span class="bar bar-4"></span>
-                <span class="bar bar-5"></span>
-                <span class="bar bar-6"></span>
-                <span class="bar bar-7"></span>
-                <span class="bar bar-8"></span>
-                <span class="bar bar-9"></span>
-                <span class="bar bar-10"></span>
-                <span class="bar bar-11"></span>
-                <span class="bar bar-12"></span>
-              </div>
-
-              <div class="market-summary">
-                <span>API</span>
-                <strong>Connected</strong>
-              </div>
-            </div>
-
-            <div class="login-panel">
-              <p class="eyebrow">Secure trading workspace</p>
-              <h1>TradeX</h1>
-              <p class="lead">Sign in to connect your Auth0 session with the TradeX backend.</p>
-
-              <button class="primary-button" type="button" (click)="login()">Login</button>
-
-              <div class="trust-row" aria-label="Security status">
-                <span>Auth0 protected</span>
-                <span>Bearer token API</span>
-              </div>
-            </div>
-          </section>
-        </ng-template>
-      </main>
-    </ng-template>
-  </ng-container>
-
-  <router-outlet />
-  <app-toast-host />
-</div>
+        <p class="login-subtitle">{{ 'AUTH.LOGIN_SUBTITLE' | translate }}</p>
+        <button class="login-btn" type="button" (click)="login()">
+          {{ 'AUTH.LOGIN_BTN' | translate }}
+        </button>
+      </div>
+    </div>
+  }
+}
+<app-toast-host />
