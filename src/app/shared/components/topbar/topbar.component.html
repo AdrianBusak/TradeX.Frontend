@@ -1,0 +1,38 @@
+<header class="topbar" role="banner">
+
+  <button
+    class="icon-btn mobile-menu-btn"
+    type="button"
+    (click)="sidebar.toggleMobile()"
+    [attr.aria-label]="'TOPBAR.OPEN_MENU' | translate"
+  >
+    <mat-icon aria-hidden="true">menu</mat-icon>
+  </button>
+
+  <div class="topbar-search">
+    <label for="global-search" class="sr-only">{{ 'TOPBAR.SEARCH_LABEL' | translate }}</label>
+    <div class="search-wrapper">
+      <mat-icon class="search-icon" aria-hidden="true">search</mat-icon>
+      <input
+        id="global-search"
+        class="search-input"
+        type="search"
+        [placeholder]="'TOPBAR.SEARCH_PLACEHOLDER' | translate"
+        autocomplete="off"
+      />
+    </div>
+  </div>
+
+  <div class="topbar-actions">
+    <button class="icon-btn" type="button" [attr.aria-label]="'TOPBAR.MESSAGES' | translate">
+      <mat-icon aria-hidden="true">mail</mat-icon>
+    </button>
+
+    <button class="icon-btn" type="button" [attr.aria-label]="'TOPBAR.NOTIFICATIONS' | translate">
+      <mat-icon aria-hidden="true">notifications</mat-icon>
+    </button>
+
+    <app-lang-switcher />
+  </div>
+
+</header>
