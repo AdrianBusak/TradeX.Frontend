@@ -1,0 +1,38 @@
+<div class="lang-switcher" (click)="$event.stopPropagation()">
+  <button
+    class="lang-btn"
+    type="button"
+    (click)="toggle()"
+    [attr.aria-label]="'LANG.SWITCH_LANGUAGE' | translate"
+    [attr.aria-expanded]="open"
+  >
+    <span class="lang-code">{{ currentLang }}</span>
+    <svg
+      class="lang-chevron"
+      [class.open]="open"
+      viewBox="0 0 24 24" width="14" height="14" fill="none"
+      stroke="currentColor" stroke-width="2"
+      stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  </button>
+
+  @if (open) {
+    <ul class="lang-dropdown" role="listbox" [attr.aria-label]="'LANG.SWITCH_LANGUAGE' | translate">
+      @for (lang of langs; track lang.code) {
+        <li role="option" [attr.aria-selected]="currentLang === lang.label">
+          <button
+            class="lang-option"
+            [class.active]="currentLang === lang.label"
+            type="button"
+            (click)="select(lang.code)"
+          >
+            {{ 'LANG.' + lang.code.toUpperCase() | translate }}
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>
