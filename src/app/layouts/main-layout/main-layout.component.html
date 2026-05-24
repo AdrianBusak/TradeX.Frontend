@@ -1,0 +1,19 @@
+<div class="layout-shell">
+  <app-sidebar class="layout-sidebar" />
+
+  @if (sidebar.mobileOpen()) {
+    <div
+      class="layout-backdrop"
+      (click)="sidebar.closeMobile()"
+      aria-hidden="true"
+    ></div>
+  }
+
+  <div class="layout-body">
+    <app-topbar class="layout-topbar" />
+
+    <main class="layout-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

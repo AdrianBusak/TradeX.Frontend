@@ -1,0 +1,116 @@
+<div class="sidebar">
+
+  <!-- Header: collapse toggle + brand -->
+  <div class="sidebar-header">
+    <!-- Desktop: collapse/expand toggle -->
+    <button
+      class="collapse-btn hide-mobile"
+      type="button"
+      (click)="sidebar.toggleCollapse()"
+      [attr.aria-label]="(sidebar.collapsed() ? 'NAV.EXPAND' : 'NAV.COLLAPSE') | translate"
+      [attr.aria-expanded]="!sidebar.collapsed()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Mobile: close drawer -->
+    <button
+      class="collapse-btn show-mobile"
+      type="button"
+      (click)="sidebar.closeMobile()"
+      [attr.aria-label]="'NAV.COLLAPSE' | translate"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <a class="sidebar-brand" [routerLink]="['/dashboard']" [attr.aria-label]="'NAV.ARIA_HOME' | translate">
+      <svg class="brand-logo" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+        <path d="M12 2L22 12L12 22L2 12Z" fill="var(--color-accent)" />
+        <path d="M12 6L18 12L12 18L6 12Z" fill="var(--color-bg-sidebar)" />
+        <path d="M12 9L15 12L12 15L9 12Z" fill="var(--color-accent)" />
+      </svg>
+      <span class="brand-name">TradeX</span>
+    </a>
+  </div>
+
+  <div class="sidebar-divider"></div>
+
+  <!-- User profile -->
+  @if (user$ | async; as user) {
+    <div class="sidebar-user">
+      @if (user.picture) {
+        <img
+          class="sidebar-avatar"
+          [src]="user.picture"
+          [alt]="user.name || 'User avatar'"
+          width="56"
+          height="56"
+        />
+      } @else {
+        <span class="sidebar-avatar sidebar-avatar--fallback" aria-hidden="true">
+          {{ (user.name || user.email || 'U').charAt(0).toUpperCase() }}
+        </span>
+      }
+      <span class="sidebar-username">{{ user.name || user.email }}</span>
+    </div>
+  }
+
+  <div class="sidebar-divider"></div>
+
+  <!-- Main navigation -->
+  <nav [attr.aria-label]="'NAV.ARIA_MAIN' | translate">
+    <ul class="nav-list" role="list">
+      @for (item of mainNav; track item.route) {
+        <li>
+          <a
+            class="nav-item"
+            [routerLink]="item.route"
+            routerLinkActive="nav-item--active"
+            [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+            [title]="sidebar.collapsed() ? (item.labelKey | translate) : ''"
+          >
+            <mat-icon class="nav-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+            <span class="nav-label">{{ item.labelKey | translate }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <!-- Spacer -->
+  <div class="nav-spacer" aria-hidden="true"></div>
+
+  <div class="sidebar-divider"></div>
+
+  <!-- Bottom navigation -->
+  <nav [attr.aria-label]="'NAV.ARIA_ACCOUNT' | translate">
+    <ul class="nav-list" role="list">
+      @for (item of bottomNav; track item.route) {
+        <li>
+          <a
+            class="nav-item"
+            [routerLink]="item.route"
+            routerLinkActive="nav-item--active"
+            [title]="sidebar.collapsed() ? (item.labelKey | translate) : ''"
+          >
+            <mat-icon class="nav-icon" aria-hidden="true">{{ item.icon }}</mat-icon>
+            <span class="nav-label">{{ item.labelKey | translate }}</span>
+          </a>
+        </li>
+      }
+
+      <li>
+        <button
+          class="nav-item nav-item--logout"
+          type="button"
+          (click)="logout()"
+          [title]="sidebar.collapsed() ? ('NAV.LOGOUT' | translate) : ''"
+        >
+          <mat-icon class="nav-icon" aria-hidden="true">logout</mat-icon>
+          <span class="nav-label">{{ 'NAV.LOGOUT' | translate }}</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+
+</div>
