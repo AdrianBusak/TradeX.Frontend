@@ -1,6 +1,7 @@
 {
   "COMMON": {
     "CLOSE": "Close",
+    "LOADING": "Loading...",
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Items per page",
       "NEXT_PAGE": "Next page",
@@ -34,5 +35,44 @@
     "MISSING_REQUIRED_CUSTOM_FIELD_VALUES": "Required custom field values are missing.",
     "NOT_ALLOWED": "This action is not allowed.",
     "OIB_CHANGE_NOT_ALLOWED": "Changing the OIB is not allowed."
+  },
+  "AUTH": {
+    "LOADING": "Loading TradeX...",
+    "LOGIN_SUBTITLE": "Sign in to access your trading workspace.",
+    "LOGIN_BTN": "Login"
+  },
+  "NAV": {
+    "DASHBOARD": "Dashboard",
+    "STOCK": "Stock",
+    "FAVOURITES": "Favourites",
+    "WALLET": "Wallet",
+    "COMMUNITY": "Community",
+    "PROFILE": "Profile",
+    "CONTACT": "Contact Us",
+    "LOGOUT": "Logout",
+    "COLLAPSE": "Collapse sidebar",
+    "EXPAND": "Expand sidebar",
+    "ARIA_MAIN": "Main navigation",
+    "ARIA_ACCOUNT": "Account navigation",
+    "ARIA_HOME": "TradeX home"
+  },
+  "TOPBAR": {
+    "SEARCH_PLACEHOLDER": "Search stocks, assets, news...",
+    "SEARCH_LABEL": "Search TradeX",
+    "MESSAGES": "Messages",
+    "NOTIFICATIONS": "Notifications",
+    "OPEN_MENU": "Open navigation menu"
+  },
+  "DASHBOARD": {
+    "TITLE": "Dashboard",
+    "SUBTITLE": "Your portfolio overview will appear here.",
+    "EQUITY": "Equity",
+    "OPEN_ORDERS": "Open Orders",
+    "PNL_TODAY": "P&L Today"
+  },
+  "LANG": {
+    "EN": "English",
+    "HR": "Croatian",
+    "SWITCH_LANGUAGE": "Switch language"
   }
 }

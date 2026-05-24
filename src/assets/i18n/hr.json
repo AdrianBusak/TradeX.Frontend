@@ -1,0 +1,78 @@
+{
+  "COMMON": {
+    "CLOSE": "Zatvori",
+    "LOADING": "Učitavanje...",
+    "PAGINATOR": {
+      "ITEMS_PER_PAGE": "Stavki po stranici",
+      "NEXT_PAGE": "Sljedeća stranica",
+      "PREVIOUS_PAGE": "Prethodna stranica",
+      "FIRST_PAGE": "Prva stranica",
+      "LAST_PAGE": "Zadnja stranica",
+      "OF": "od"
+    }
+  },
+  "ERRORS": {
+    "APP_ERROR": "Nešto je pošlo po krivu. Pokušajte ponovo.",
+    "BAD_REQUEST": "Zahtjev nije ispravan.",
+    "CONFLICT": "Zahtjev je u sukobu s postojećim podacima.",
+    "FORBIDDEN": "Nemate ovlast za izvršavanje ove radnje.",
+    "HTTP_401": "Vaša sesija je istekla. Molimo prijavite se ponovo.",
+    "HTTP_403": "Nemate ovlast za izvršavanje ove radnje.",
+    "HTTP_404": "Traženi resurs nije pronađen.",
+    "HTTP_500": "Poslužitelj nije mogao obraditi zahtjev.",
+    "NO_CONNECTION": "Nije moguće spojiti se na poslužitelj.",
+    "NOT_FOUND": "Traženi resurs nije pronađen.",
+    "UNAUTHORIZED": "Morate biti prijavljeni za nastavak.",
+    "UNKNOWN": "Došlo je do neočekivane greške."
+  },
+  "ERROR_CODES": {
+    "ALREADY_OWNER": "Odabrani korisnik je već vlasnik.",
+    "DUPLICATE_NAME": "Zapis s ovim imenom već postoji.",
+    "FOLDER_DEPTH_LIMIT_EXCEEDED": "Dostignut je maksimalni broj razina mapa.",
+    "INVALID_OIB": "OIB nije ispravan.",
+    "INVALID_PARENT_FOLDER": "Odabrana nadređena mapa nije ispravna.",
+    "LOCKED_BY_OTHER": "Ovaj element je trenutno zaključan od strane drugog korisnika.",
+    "MISSING_REQUIRED_CUSTOM_FIELD_VALUES": "Nedostaju vrijednosti obaveznih prilagođenih polja.",
+    "NOT_ALLOWED": "Ova radnja nije dozvoljena.",
+    "OIB_CHANGE_NOT_ALLOWED": "Promjena OIB-a nije dozvoljena."
+  },
+  "AUTH": {
+    "LOADING": "Učitavanje TradeX-a...",
+    "LOGIN_SUBTITLE": "Prijavite se za pristup svom trading radnom prostoru.",
+    "LOGIN_BTN": "Prijava"
+  },
+  "NAV": {
+    "DASHBOARD": "Nadzorna ploča",
+    "STOCK": "Dionice",
+    "FAVOURITES": "Favoriti",
+    "WALLET": "Novčanik",
+    "COMMUNITY": "Zajednica",
+    "PROFILE": "Profil",
+    "CONTACT": "Kontakt",
+    "LOGOUT": "Odjava",
+    "COLLAPSE": "Sakrij bočnu traku",
+    "EXPAND": "Prikaži bočnu traku",
+    "ARIA_MAIN": "Glavna navigacija",
+    "ARIA_ACCOUNT": "Navigacija računa",
+    "ARIA_HOME": "TradeX početna"
+  },
+  "TOPBAR": {
+    "SEARCH_PLACEHOLDER": "Pretraži dionice, imovinu, vijesti...",
+    "SEARCH_LABEL": "Pretraži TradeX",
+    "MESSAGES": "Poruke",
+    "NOTIFICATIONS": "Obavijesti",
+    "OPEN_MENU": "Otvori izbornik navigacije"
+  },
+  "DASHBOARD": {
+    "TITLE": "Nadzorna ploča",
+    "SUBTITLE": "Ovdje će se prikazati pregled vašeg portfelja.",
+    "EQUITY": "Kapital",
+    "OPEN_ORDERS": "Otvoreni nalozi",
+    "PNL_TODAY": "P&D Danas"
+  },
+  "LANG": {
+    "EN": "Engleski",
+    "HR": "Hrvatski",
+    "SWITCH_LANGUAGE": "Promijeni jezik"
+  }
+}
