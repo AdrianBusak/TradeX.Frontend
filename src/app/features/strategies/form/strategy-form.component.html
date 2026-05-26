@@ -1,0 +1,78 @@
+<app-add-edit-page-layout
+  [title]="(isEditMode ? 'STRATEGIES.EDIT_TITLE' : 'STRATEGIES.CREATE_TITLE') | translate"
+  [loading]="isLoading()"
+  [isSaving]="isSaving()"
+  [saveDisabled]="isSaving()"
+  (back)="onBack()"
+  (save)="onSave()">
+
+  <form [formGroup]="form" class="strategy-form">
+
+    <div class="form-grid">
+      <app-input
+        formControlName="name"
+        [label]="'STRATEGIES.FIELDS.NAME' | translate"
+        [required]="true"
+        [error]="fieldError('name')" />
+
+      <app-select
+        formControlName="marketType"
+        [label]="'STRATEGIES.FIELDS.MARKET_TYPE' | translate"
+        [options]="marketTypeOptions"
+        [required]="true"
+        [error]="fieldError('marketType')" />
+
+      <div class="color-field">
+        <app-input
+          formControlName="color"
+          [label]="'STRATEGIES.FIELDS.COLOR' | translate"
+          [hint]="'STRATEGIES.FIELDS.COLOR_HINT' | translate"
+          [error]="fieldError('color')" />
+        @if (colorValue()) {
+          <span class="color-swatch" [style.background-color]="colorValue()"></span>
+        }
+      </div>
+    </div>
+
+    <app-textarea
+      formControlName="description"
+      [label]="'STRATEGIES.FIELDS.DESCRIPTION' | translate"
+      [rows]="3" />
+
+    @if (isEditMode) {
+      <div class="rules-section">
+        <div class="rules-header">
+          <h3 class="rules-title">
+            {{ 'STRATEGIES.RULES.TITLE' | translate }}
+            @if (rules().length > 0) {
+              <span class="rules-count">({{ rules().length }})</span>
+            }
+          </h3>
+          <app-button
+            variant="secondary"
+            icon="add"
+            size="sm"
+            (pressed)="onAddRule()">
+            {{ 'STRATEGIES.RULES.ADD_BTN' | translate }}
+          </app-button>
+        </div>
+
+        @if (isLoadingRules()) {
+          <app-loading-state />
+        } @else if (rules().length === 0) {
+          <app-empty-state
+            icon="rule"
+            [title]="'STRATEGIES.RULES.EMPTY' | translate" />
+        } @else {
+          <app-table
+            [columns]="ruleColumns"
+            [rows]="displayRules()"
+            [actions]="ruleActions"
+            density="compact"
+            (rowAction)="onRuleAction($event)" />
+        }
+      </div>
+    }
+
+  </form>
+</app-add-edit-page-layout>

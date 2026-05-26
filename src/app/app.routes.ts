@@ -70,8 +70,24 @@ export const routes: Routes = [
       },
       {
         path: 'strategies',
-        data: { titleKey: 'NAV.STRATEGIES', title: 'Strategies', subtitle: 'Track setup quality and strategy performance.', icon: 'schema' },
-        loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)
+        data: { titleKey: 'NAV.STRATEGIES', icon: 'schema' },
+        loadComponent: () =>
+          import('./features/strategies/list/strategies-list.component')
+            .then(m => m.StrategiesListComponent)
+      },
+      {
+        path: 'strategies/create',
+        data: { titleKey: 'STRATEGIES.CREATE_TITLE' },
+        loadComponent: () =>
+          import('./features/strategies/form/strategy-form.component')
+            .then(m => m.StrategyFormComponent)
+      },
+      {
+        path: 'strategies/:id/edit',
+        data: { titleKey: 'STRATEGIES.EDIT_TITLE' },
+        loadComponent: () =>
+          import('./features/strategies/form/strategy-form.component')
+            .then(m => m.StrategyFormComponent)
       },
       {
         path: 'risk',
