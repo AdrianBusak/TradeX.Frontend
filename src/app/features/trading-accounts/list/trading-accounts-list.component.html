@@ -1,0 +1,28 @@
+<app-page-layout
+  [title]="'TRADING_ACCOUNTS.TITLE' | translate"
+  icon="account_balance">
+
+  <div actions class="list-actions">
+    <app-search-field (searchChange)="onSearchChange($event)" />
+    <app-button icon="add" variant="primary" (pressed)="onCreate()">
+      {{ 'TRADING_ACCOUNTS.CREATE_BTN' | translate }}
+    </app-button>
+  </div>
+
+  <app-data-grid
+    id="trading-accounts"
+    [columns]="columns"
+    [dataSource]="displayRows()"
+    [totalRecords]="totalRecords()"
+    [pageIndex]="pageIndex()"
+    [pageSize]="pageSize()"
+    [loading]="isLoading()"
+    [isFiltered]="!!searchValue()"
+    [mobileVisibleColumns]="mobileColumns"
+    emptyMessageKey="TRADING_ACCOUNTS.EMPTY"
+    noResultsMessageKey="COMMON.NO_RESULTS"
+    (pageChange)="onPageChange($event)"
+    (sortChange)="onSortChange($event)"
+    (rowAction)="onRowAction($event)"
+  />
+</app-page-layout>

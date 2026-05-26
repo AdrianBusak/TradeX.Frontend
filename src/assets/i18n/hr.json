@@ -1,5 +1,8 @@
 {
   "COMMON": {
+    "COLUMNS": {
+      "ACTIONS": "Akcije"
+    },
     "CLOSE": "Zatvori",
     "CLEAR": "Ocisti",
     "LOADING": "Ucitavanje...",
@@ -14,7 +17,10 @@
       "DELETE": "Obrisi",
       "EDIT": "Uredi",
       "VIEW": "Pregled",
-      "LOAD_MORE": "Ucitaj vise"
+      "LOAD_MORE": "Ucitaj vise",
+      "RESTORE": "Obnovi",
+      "DEACTIVATE": "Deaktiviraj",
+      "HARD_DELETE": "Trajno obriši"
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Stavki po stranici",
@@ -37,7 +43,10 @@
     "NO_CONNECTION": "Nije moguce spojiti se na posluzitelj.",
     "NOT_FOUND": "Trazeni resurs nije pronaden.",
     "UNAUTHORIZED": "Morate biti prijavljeni za nastavak.",
-    "UNKNOWN": "Doslo je do neocekivane greske."
+    "UNKNOWN": "Doslo je do neocekivane greske.",
+    "REQUIRED": "Ovo polje je obavezno.",
+    "MAX_LENGTH": "Maksimalno {{max}} znakova.",
+    "MIN_VALUE": "Vrijednost mora biti 0 ili vise."
   },
   "ERROR_CODES": {
     "ALREADY_OWNER": "Odabrani korisnik je vec vlasnik.",
@@ -55,8 +64,14 @@
     "LOGIN_SUBTITLE": "Prijavite se za pristup trading radnom prostoru.",
     "LOGIN_BTN": "Prijava"
   },
+  "GLOBAL": {
+    "ACTIONS": {
+      "SAVE": "Spremi"
+    }
+  },
   "NAV": {
     "DASHBOARD": "Dashboard",
+    "TRADING_ACCOUNTS": "Racuni",
     "TRADES": "Trades",
     "JOURNAL": "Journal",
     "STRATEGIES": "Strategije",
@@ -90,5 +105,59 @@
     "EN": "Engleski",
     "HR": "Hrvatski",
     "SWITCH_LANGUAGE": "Promijeni jezik"
+  },
+  "TRADING_ACCOUNTS": {
+    "TITLE": "Trading racuni",
+    "SUBTITLE": "Upravljajte trading racunima i pratite performanse.",
+    "CREATE_TITLE": "Novi racun",
+    "EDIT_TITLE": "Uredi racun",
+    "CREATE_BTN": "Novi racun",
+    "CREATE_SUCCESS": "Trading racun je kreiran.",
+    "UPDATE_SUCCESS": "Trading racun je azuriran.",
+    "DELETE_SUCCESS": "Racun je deaktiviran.",
+    "RESTORE_SUCCESS": "Racun je obnovljen.",
+    "EMPTY": "Nema trading racuna",
+    "COLUMNS": {
+      "NAME": "Naziv",
+      "ACCOUNT_TYPE": "Tip",
+      "BROKER": "Broker",
+      "CURRENCY": "Valuta",
+      "CURRENT_BALANCE": "Stanje",
+      "STATUS": "Aktivan"
+    },
+    "FIELDS": {
+      "NAME": "Naziv racuna",
+      "ACCOUNT_TYPE": "Tip racuna",
+      "BROKER": "Broker",
+      "CURRENCY": "Valuta (3-slovni kod)",
+      "CURRENCY_HINT": "npr. USD, EUR, GBP",
+      "INITIAL_BALANCE": "Pocetni saldo",
+      "CURRENT_BALANCE": "Trenutni saldo",
+      "SET_CURRENT_BALANCE": "Postavi drugaciji trenutni saldo",
+      "CURRENT_BALANCE_HINT": "Ako nije postavljeno, trenutni saldo jednak je pocetnom saldu."
+    },
+    "ACCOUNT_TYPES": {
+      "PERSONAL": "Osobni",
+      "DEMO": "Demo",
+      "PROP_CHALLENGE": "Prop Challenge",
+      "PROP_FUNDED": "Prop Funded",
+      "BROKER_LIVE": "Broker Live"
+    },
+    "ERRORS": {
+      "CURRENCY_LENGTH": "Kod valute mora imati tocno 3 znaka."
+    },
+    "HARD_DELETE_SUCCESS": "Trading racun je trajno obrisan.",
+    "CONFIRM_DELETE": {
+      "TITLE": "Deaktiviraj racun",
+      "MESSAGE": "Ovo ce deaktivirati trading racun. Mozete ga obnoviti kasnije.",
+      "CONFIRM": "Deaktiviraj",
+      "CANCEL": "Odustani"
+    },
+    "CONFIRM_HARD_DELETE": {
+      "TITLE": "Trajno obriši racun",
+      "MESSAGE": "Ova radnja se ne moze ponistiti. Svi podaci vezani za ovaj racun bit ce trajno obrisani.",
+      "CONFIRM": "Trajno obriši",
+      "CANCEL": "Odustani"
+    }
   }
 }

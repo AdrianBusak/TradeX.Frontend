@@ -1,5 +1,8 @@
 {
   "COMMON": {
+    "COLUMNS": {
+      "ACTIONS": "Actions"
+    },
     "CLOSE": "Close",
     "CLEAR": "Clear",
     "LOADING": "Loading...",
@@ -14,7 +17,10 @@
       "DELETE": "Delete",
       "EDIT": "Edit",
       "VIEW": "View",
-      "LOAD_MORE": "Load more"
+      "LOAD_MORE": "Load more",
+      "RESTORE": "Restore",
+      "DEACTIVATE": "Deactivate",
+      "HARD_DELETE": "Delete permanently"
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Items per page",
@@ -37,7 +43,10 @@
     "NO_CONNECTION": "Unable to connect to the server.",
     "NOT_FOUND": "The requested resource was not found.",
     "UNAUTHORIZED": "You must be signed in to continue.",
-    "UNKNOWN": "An unexpected error occurred."
+    "UNKNOWN": "An unexpected error occurred.",
+    "REQUIRED": "This field is required.",
+    "MAX_LENGTH": "Maximum {{max}} characters allowed.",
+    "MIN_VALUE": "Value must be 0 or greater."
   },
   "ERROR_CODES": {
     "ALREADY_OWNER": "The selected user is already the owner.",
@@ -55,8 +64,14 @@
     "LOGIN_SUBTITLE": "Sign in to access your trading workspace.",
     "LOGIN_BTN": "Login"
   },
+  "GLOBAL": {
+    "ACTIONS": {
+      "SAVE": "Save"
+    }
+  },
   "NAV": {
     "DASHBOARD": "Dashboard",
+    "TRADING_ACCOUNTS": "Accounts",
     "TRADES": "Trades",
     "JOURNAL": "Journal",
     "STRATEGIES": "Strategies",
@@ -90,5 +105,59 @@
     "EN": "English",
     "HR": "Croatian",
     "SWITCH_LANGUAGE": "Switch language"
+  },
+  "TRADING_ACCOUNTS": {
+    "TITLE": "Trading Accounts",
+    "SUBTITLE": "Manage your trading accounts and track performance.",
+    "CREATE_TITLE": "Create Account",
+    "EDIT_TITLE": "Edit Account",
+    "CREATE_BTN": "New Account",
+    "CREATE_SUCCESS": "Trading account created.",
+    "UPDATE_SUCCESS": "Trading account updated.",
+    "DELETE_SUCCESS": "Account deactivated.",
+    "RESTORE_SUCCESS": "Account restored.",
+    "EMPTY": "No trading accounts yet",
+    "COLUMNS": {
+      "NAME": "Name",
+      "ACCOUNT_TYPE": "Type",
+      "BROKER": "Broker",
+      "CURRENCY": "Currency",
+      "CURRENT_BALANCE": "Balance",
+      "STATUS": "Active"
+    },
+    "FIELDS": {
+      "NAME": "Account name",
+      "ACCOUNT_TYPE": "Account type",
+      "BROKER": "Broker",
+      "CURRENCY": "Currency (3-letter code)",
+      "CURRENCY_HINT": "e.g. USD, EUR, GBP",
+      "INITIAL_BALANCE": "Initial balance",
+      "CURRENT_BALANCE": "Current balance",
+      "SET_CURRENT_BALANCE": "Set a different current balance",
+      "CURRENT_BALANCE_HINT": "If not set, current balance defaults to initial balance."
+    },
+    "ACCOUNT_TYPES": {
+      "PERSONAL": "Personal",
+      "DEMO": "Demo",
+      "PROP_CHALLENGE": "Prop Challenge",
+      "PROP_FUNDED": "Prop Funded",
+      "BROKER_LIVE": "Broker Live"
+    },
+    "ERRORS": {
+      "CURRENCY_LENGTH": "Currency code must be exactly 3 characters."
+    },
+    "HARD_DELETE_SUCCESS": "Trading account permanently deleted.",
+    "CONFIRM_DELETE": {
+      "TITLE": "Deactivate account",
+      "MESSAGE": "This will deactivate the trading account. You can restore it later.",
+      "CONFIRM": "Deactivate",
+      "CANCEL": "Cancel"
+    },
+    "CONFIRM_HARD_DELETE": {
+      "TITLE": "Permanently delete account",
+      "MESSAGE": "This action cannot be undone. All data associated with this account will be permanently removed.",
+      "CONFIRM": "Delete permanently",
+      "CANCEL": "Cancel"
+    }
   }
 }

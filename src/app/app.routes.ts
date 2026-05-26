@@ -20,6 +20,27 @@ export const routes: Routes = [
             .then(m => m.DashboardComponent)
       },
       {
+        path: 'trading-accounts',
+        data: { titleKey: 'NAV.TRADING_ACCOUNTS', icon: 'account_balance' },
+        loadComponent: () =>
+          import('./features/trading-accounts/list/trading-accounts-list.component')
+            .then(m => m.TradingAccountsListComponent)
+      },
+      {
+        path: 'trading-accounts/create',
+        data: { titleKey: 'TRADING_ACCOUNTS.CREATE_TITLE' },
+        loadComponent: () =>
+          import('./features/trading-accounts/form/trading-account-form.component')
+            .then(m => m.TradingAccountFormComponent)
+      },
+      {
+        path: 'trading-accounts/:id/edit',
+        data: { titleKey: 'TRADING_ACCOUNTS.EDIT_TITLE' },
+        loadComponent: () =>
+          import('./features/trading-accounts/form/trading-account-form.component')
+            .then(m => m.TradingAccountFormComponent)
+      },
+      {
         path: 'trades',
         data: {
           titleKey: 'NAV.TRADES',

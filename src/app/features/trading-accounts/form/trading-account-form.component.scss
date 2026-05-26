@@ -1,0 +1,26 @@
+.account-form {
+  padding: var(--tx-space-6);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--tx-space-5);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.balance-toggle {
+  margin-top: var(--tx-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--tx-space-2);
+}
+
+.balance-hint {
+  margin: 0;
+  font-size: var(--tx-font-sm);
+  color: var(--tx-text-muted);
+}

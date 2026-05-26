@@ -1,0 +1,71 @@
+<app-add-edit-page-layout
+  [title]="(isEditMode ? 'TRADING_ACCOUNTS.EDIT_TITLE' : 'TRADING_ACCOUNTS.CREATE_TITLE') | translate"
+  [loading]="isLoading()"
+  [isSaving]="isSaving()"
+  [saveDisabled]="isSaving()"
+  (back)="onBack()"
+  (save)="onSave()">
+
+  <form [formGroup]="form" class="account-form">
+
+    <div class="form-grid">
+      <app-input
+        formControlName="name"
+        [label]="'TRADING_ACCOUNTS.FIELDS.NAME' | translate"
+        [required]="true"
+        [error]="fieldError('name')" />
+
+      <app-select
+        formControlName="accountType"
+        [label]="'TRADING_ACCOUNTS.FIELDS.ACCOUNT_TYPE' | translate"
+        [options]="accountTypeOptions"
+        [required]="true"
+        [error]="fieldError('accountType')" />
+
+      <app-input
+        formControlName="broker"
+        [label]="'TRADING_ACCOUNTS.FIELDS.BROKER' | translate"
+        [required]="true"
+        [error]="fieldError('broker')" />
+
+      <app-input
+        formControlName="currency"
+        [label]="'TRADING_ACCOUNTS.FIELDS.CURRENCY' | translate"
+        [hint]="'TRADING_ACCOUNTS.FIELDS.CURRENCY_HINT' | translate"
+        [required]="true"
+        [error]="fieldError('currency')" />
+
+      <app-input
+        formControlName="initialBalance"
+        type="number"
+        [label]="'TRADING_ACCOUNTS.FIELDS.INITIAL_BALANCE' | translate"
+        [required]="true"
+        [error]="fieldError('initialBalance')" />
+
+      @if (showCurrentBalance()) {
+        <app-input
+          formControlName="currentBalance"
+          type="number"
+          [label]="'TRADING_ACCOUNTS.FIELDS.CURRENT_BALANCE' | translate"
+          [required]="isEditMode"
+          [error]="fieldError('currentBalance')" />
+      }
+    </div>
+
+    @if (!isEditMode) {
+      <div class="balance-toggle">
+        <mat-slide-toggle
+          [checked]="showCurrentBalance()"
+          (change)="onToggleCurrentBalance()">
+          {{ 'TRADING_ACCOUNTS.FIELDS.SET_CURRENT_BALANCE' | translate }}
+        </mat-slide-toggle>
+        @if (!showCurrentBalance()) {
+          <p class="balance-hint">
+            {{ 'TRADING_ACCOUNTS.FIELDS.CURRENT_BALANCE_HINT' | translate }}
+          </p>
+        }
+      </div>
+    }
+
+  </form>
+</app-add-edit-page-layout>
