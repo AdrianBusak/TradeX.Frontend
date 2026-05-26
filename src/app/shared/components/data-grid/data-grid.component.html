@@ -31,19 +31,9 @@
           <ng-container [ngSwitch]="col.type">
 
             <ng-container *ngSwitchCase="'action'">
-              <div class="action-buttons">
-                <button
-                  *ngFor="let action of getActions(col)"
-                  mat-icon-button
-                  class="action-button"
-                  [class.delete-button]="action === 'delete'"
-                  (click)="onRowAction(action, row)"
-                  [disabled]="isActionDisabled(col, row)"
-                  [matTooltip]="getActionLabel(action) | translate"
-                >
-                  <mat-icon>{{ getActionIcon(action) }}</mat-icon>
-                </button>
-              </div>
+              <app-grid-row-actions
+                [actions]="getActions(col, row)"
+                (actionClick)="onRowAction($event, row)" />
             </ng-container>
 
             <ng-container *ngSwitchCase="'badge'">

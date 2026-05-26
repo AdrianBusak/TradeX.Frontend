@@ -23,6 +23,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { GridRowActionsComponent } from '../grid-row-actions/grid-row-actions.component';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -37,9 +38,10 @@ export interface ColumnConfig {
   translate?: boolean;
   disableWhenField?: string;
   actions?: GridAction[];
+  actionsResolver?: (row: Record<string, unknown>) => GridAction[];
 }
 
-export type GridAction = 'view' | 'edit' | 'delete' | 'duplicate' | 'archive';
+export type GridAction = 'view' | 'edit' | 'delete' | 'deactivate' | 'hard-delete' | 'duplicate' | 'archive' | 'restore';
 
 export interface RowActionEvent<T> {
   action: string;
@@ -70,6 +72,7 @@ interface GridState {
     MatProgressSpinnerModule,
     MatTooltipModule,
     TranslateModule,
+    GridRowActionsComponent,
   ],
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss'],
@@ -239,7 +242,10 @@ export class DataGridComponent<T extends { id?: number | string }>
     this.rowAction.emit({ action, row });
   }
 
-  getActions(column: ColumnConfig): GridAction[] {
+  getActions(column: ColumnConfig, row?: T): GridAction[] {
+    if (column.actionsResolver && row) {
+      return column.actionsResolver(row as Record<string, unknown>);
+    }
     return column.actions?.length ? column.actions : ['edit'];
   }
 
@@ -249,11 +255,14 @@ export class DataGridComponent<T extends { id?: number | string }>
 
   getActionIcon(action: GridAction): string {
     switch (action) {
-      case 'view': return 'visibility';
-      case 'delete': return 'delete';
-      case 'duplicate': return 'content_copy';
-      case 'archive': return 'archive';
-      default: return 'edit';
+      case 'view':        return 'visibility';
+      case 'delete':      return 'delete';
+      case 'deactivate':  return 'toggle_off';
+      case 'hard-delete': return 'delete_forever';
+      case 'restore':     return 'restore';
+      case 'duplicate':   return 'content_copy';
+      case 'archive':     return 'archive';
+      default:            return 'edit';
     }
   }
 

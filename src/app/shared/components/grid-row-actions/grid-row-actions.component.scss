@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tx-space-1);
+}
+
+.action-btn {
+  color: var(--tx-text-muted);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--tx-text-primary);
+  }
+
+  &--danger {
+    &:hover {
+      color: var(--tx-danger);
+    }
+  }
+
+  &--warning {
+    &:hover {
+      color: var(--tx-warning);
+    }
+  }
+
+  &--success {
+    &:hover {
+      color: var(--tx-success);
+    }
+  }
+}

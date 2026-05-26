@@ -1,0 +1,14 @@
+<div class="row-actions">
+  @for (action of actions(); track action) {
+    <button
+      mat-icon-button
+      class="action-btn"
+      [class.action-btn--danger]="isDanger(action)"
+      [class.action-btn--warning]="isWarning(action)"
+      [class.action-btn--success]="isSuccess(action)"
+      [matTooltip]="getLabel(action) | translate"
+      (click)="actionClick.emit(action)">
+      <mat-icon>{{ getIcon(action) }}</mat-icon>
+    </button>
+  }
+</div>

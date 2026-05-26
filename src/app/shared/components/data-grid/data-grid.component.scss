@@ -52,6 +52,7 @@
   border-bottom: 1px solid var(--tx-border-subtle);
   font-size: var(--tx-font-sm);
   font-weight: 650;
+  vertical-align: middle;
 }
 
 .mat-mdc-row:hover .mat-mdc-cell {
@@ -64,10 +65,85 @@
   border-top: 1px solid var(--tx-border);
 }
 
+::ng-deep .mat-mdc-paginator {
+  .mat-mdc-paginator-container {
+    min-height: 40px;
+    padding: 0 var(--tx-space-3);
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  .mat-mdc-paginator-page-size-label,
+  .mat-mdc-paginator-range-label {
+    font-size: var(--tx-font-sm);
+    color: var(--tx-text-muted);
+    margin: 0 var(--tx-space-2);
+    white-space: nowrap;
+  }
+
+  // Ukloni bijeli outlined okvir oko page-size dropdowna
+  .mat-mdc-paginator-page-size-select {
+    width: 56px;
+    margin: 0;
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: var(--tx-border) !important;
+    }
+
+    .mat-mdc-select-trigger {
+      height: 28px;
+      padding: 0 var(--tx-space-2);
+      font-size: var(--tx-font-sm);
+      color: var(--tx-text-secondary);
+      display: flex;
+      align-items: center;
+    }
+
+    .mdc-text-field {
+      height: 28px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // Navigacijski gumbi
+  .mat-mdc-icon-button {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tx-text-muted);
+
+    &:hover:not([disabled]) {
+      color: var(--tx-text-primary);
+    }
+
+    &[disabled] {
+      opacity: 0.35;
+    }
+
+    .mat-mdc-button-touch-target {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
+
+.mat-column-actions {
+  text-align: center;
+  vertical-align: middle;
+  width: 1px;
+}
+
 .action-buttons {
   display: flex;
   gap: 6px;
   align-items: center;
+  justify-content: center;
 }
 
 .action-button {
@@ -133,4 +209,20 @@
 
 ::ng-deep .mat-mdc-progress-spinner {
   --mdc-circular-progress-active-indicator-color: var(--tx-brand);
+}
+
+::ng-deep .mat-column-actions {
+  .mat-mdc-icon-button {
+    width: 32px;
+    height: 32px;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    .mat-mdc-button-touch-target {
+      width: 32px;
+      height: 32px;
+    }
+  }
 }
