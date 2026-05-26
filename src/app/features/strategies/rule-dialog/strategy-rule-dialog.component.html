@@ -1,0 +1,50 @@
+<app-dialog-layout
+  [title]="(isEditMode ? 'STRATEGIES.RULES.DIALOG_EDIT_TITLE' : 'STRATEGIES.RULES.DIALOG_CREATE_TITLE') | translate"
+  [confirmLabel]="'GLOBAL.ACTIONS.SAVE' | translate"
+  [cancelLabel]="'COMMON.ACTIONS.CANCEL' | translate"
+  [confirmDisabled]="isSaving()"
+  (confirmed)="onConfirm()"
+  (cancelled)="onCancel()">
+
+  <form [formGroup]="form" class="rule-form">
+    <app-input
+      formControlName="title"
+      [label]="'STRATEGIES.RULES.FIELDS.TITLE' | translate"
+      [required]="true"
+      [error]="fieldError('title')" />
+
+    <app-textarea
+      formControlName="description"
+      [label]="'STRATEGIES.RULES.FIELDS.DESCRIPTION' | translate"
+      [rows]="3" />
+
+    <div class="form-row">
+      <app-select
+        formControlName="category"
+        [label]="'STRATEGIES.RULES.FIELDS.CATEGORY' | translate"
+        [options]="categoryOptions"
+        [required]="true"
+        [error]="fieldError('category')" />
+
+      <app-select
+        formControlName="importance"
+        [label]="'STRATEGIES.RULES.FIELDS.IMPORTANCE' | translate"
+        [options]="importanceOptions"
+        [required]="true"
+        [error]="fieldError('importance')" />
+    </div>
+
+    <app-input
+      formControlName="order"
+      type="number"
+      [label]="'STRATEGIES.RULES.FIELDS.ORDER' | translate"
+      [required]="true"
+      [error]="fieldError('order')" />
+
+    <div class="toggle-row">
+      <mat-slide-toggle formControlName="isRequired">
+        {{ 'STRATEGIES.RULES.FIELDS.IS_REQUIRED' | translate }}
+      </mat-slide-toggle>
+    </div>
+  </form>
+</app-dialog-layout>

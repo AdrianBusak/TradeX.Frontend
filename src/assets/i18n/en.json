@@ -106,6 +106,103 @@
     "HR": "Croatian",
     "SWITCH_LANGUAGE": "Switch language"
   },
+  "STRATEGIES": {
+    "TITLE": "Strategies",
+    "SUBTITLE": "Manage trading strategies and their rules.",
+    "CREATE_TITLE": "Create Strategy",
+    "EDIT_TITLE": "Edit Strategy",
+    "CREATE_BTN": "New Strategy",
+    "CREATE_SUCCESS": "Strategy created.",
+    "UPDATE_SUCCESS": "Strategy updated.",
+    "DELETE_SUCCESS": "Strategy deactivated.",
+    "RESTORE_SUCCESS": "Strategy restored.",
+    "HARD_DELETE_SUCCESS": "Strategy permanently deleted.",
+    "EMPTY": "No strategies yet",
+    "COLUMNS": {
+      "NAME": "Name",
+      "MARKET_TYPE": "Market",
+      "COLOR": "Color",
+      "STATUS": "Active"
+    },
+    "FIELDS": {
+      "NAME": "Strategy name",
+      "DESCRIPTION": "Description",
+      "MARKET_TYPE": "Market type",
+      "COLOR": "Color",
+      "COLOR_HINT": "Optional hex color, e.g. #22C55E"
+    },
+    "MARKET_TYPES": {
+      "FOREX": "Forex",
+      "CRYPTO": "Crypto",
+      "INDICES": "Indices",
+      "STOCKS": "Stocks",
+      "METALS": "Metals",
+      "FUTURES": "Futures"
+    },
+    "ERRORS": {
+      "HEX_COLOR": "Must be a valid hex color, e.g. #22C55E"
+    },
+    "CONFIRM_DELETE": {
+      "TITLE": "Deactivate strategy",
+      "MESSAGE": "This will deactivate the strategy. You can restore it later.",
+      "CONFIRM": "Deactivate"
+    },
+    "CONFIRM_HARD_DELETE": {
+      "TITLE": "Permanently delete strategy",
+      "MESSAGE": "This action cannot be undone. The strategy and all its rules will be permanently removed.",
+      "CONFIRM": "Delete permanently"
+    },
+    "RULES": {
+      "TITLE": "Rules",
+      "EMPTY": "No rules defined yet",
+      "ADD_BTN": "Add Rule",
+      "DIALOG_CREATE_TITLE": "Add Rule",
+      "DIALOG_EDIT_TITLE": "Edit Rule",
+      "CREATE_SUCCESS": "Rule created.",
+      "UPDATE_SUCCESS": "Rule updated.",
+      "DELETE_SUCCESS": "Rule deactivated.",
+      "HARD_DELETE_SUCCESS": "Rule permanently deleted.",
+      "COLUMNS": {
+        "TITLE": "Title",
+        "CATEGORY": "Category",
+        "IMPORTANCE": "Importance",
+        "REQUIRED": "Required"
+      },
+      "FIELDS": {
+        "TITLE": "Title",
+        "DESCRIPTION": "Description",
+        "ORDER": "Order",
+        "CATEGORY": "Category",
+        "IMPORTANCE": "Importance",
+        "IS_REQUIRED": "Required rule"
+      },
+      "CATEGORIES": {
+        "GENERAL": "General",
+        "MARKET_STRUCTURE": "Market Structure",
+        "ENTRY": "Entry",
+        "RISK_MANAGEMENT": "Risk Management",
+        "EXIT": "Exit",
+        "PSYCHOLOGY": "Psychology",
+        "NEWS": "News"
+      },
+      "IMPORTANCES": {
+        "LOW": "Low",
+        "MEDIUM": "Medium",
+        "HIGH": "High",
+        "CRITICAL": "Critical"
+      },
+      "CONFIRM_DELETE": {
+        "TITLE": "Deactivate rule",
+        "MESSAGE": "This will deactivate the rule. You can restore it later.",
+        "CONFIRM": "Deactivate"
+      },
+      "CONFIRM_HARD_DELETE": {
+        "TITLE": "Permanently delete rule",
+        "MESSAGE": "This action cannot be undone.",
+        "CONFIRM": "Delete permanently"
+      }
+    }
+  },
   "TRADING_ACCOUNTS": {
     "TITLE": "Trading Accounts",
     "SUBTITLE": "Manage your trading accounts and track performance.",

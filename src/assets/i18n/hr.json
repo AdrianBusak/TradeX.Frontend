@@ -106,6 +106,103 @@
     "HR": "Hrvatski",
     "SWITCH_LANGUAGE": "Promijeni jezik"
   },
+  "STRATEGIES": {
+    "TITLE": "Strategije",
+    "SUBTITLE": "Upravljajte trading strategijama i njihovim pravilima.",
+    "CREATE_TITLE": "Nova strategija",
+    "EDIT_TITLE": "Uredi strategiju",
+    "CREATE_BTN": "Nova strategija",
+    "CREATE_SUCCESS": "Strategija je kreirana.",
+    "UPDATE_SUCCESS": "Strategija je azurirana.",
+    "DELETE_SUCCESS": "Strategija je deaktivirana.",
+    "RESTORE_SUCCESS": "Strategija je obnovljena.",
+    "HARD_DELETE_SUCCESS": "Strategija je trajno obrisana.",
+    "EMPTY": "Nema strategija",
+    "COLUMNS": {
+      "NAME": "Naziv",
+      "MARKET_TYPE": "Trziste",
+      "COLOR": "Boja",
+      "STATUS": "Aktivna"
+    },
+    "FIELDS": {
+      "NAME": "Naziv strategije",
+      "DESCRIPTION": "Opis",
+      "MARKET_TYPE": "Tip trzista",
+      "COLOR": "Boja",
+      "COLOR_HINT": "Opcionalna hex boja, npr. #22C55E"
+    },
+    "MARKET_TYPES": {
+      "FOREX": "Forex",
+      "CRYPTO": "Kripto",
+      "INDICES": "Indeksi",
+      "STOCKS": "Dionice",
+      "METALS": "Metali",
+      "FUTURES": "Futures"
+    },
+    "ERRORS": {
+      "HEX_COLOR": "Mora biti ispravna hex boja, npr. #22C55E"
+    },
+    "CONFIRM_DELETE": {
+      "TITLE": "Deaktiviraj strategiju",
+      "MESSAGE": "Ovo ce deaktivirati strategiju. Mozete je obnoviti kasnije.",
+      "CONFIRM": "Deaktiviraj"
+    },
+    "CONFIRM_HARD_DELETE": {
+      "TITLE": "Trajno obrisi strategiju",
+      "MESSAGE": "Ova radnja se ne moze ponistiti. Strategija i sva njezina pravila bit ce trajno obrisana.",
+      "CONFIRM": "Trajno obrisi"
+    },
+    "RULES": {
+      "TITLE": "Pravila",
+      "EMPTY": "Nema definiranih pravila",
+      "ADD_BTN": "Dodaj pravilo",
+      "DIALOG_CREATE_TITLE": "Dodaj pravilo",
+      "DIALOG_EDIT_TITLE": "Uredi pravilo",
+      "CREATE_SUCCESS": "Pravilo je kreirano.",
+      "UPDATE_SUCCESS": "Pravilo je azurirano.",
+      "DELETE_SUCCESS": "Pravilo je deaktivirano.",
+      "HARD_DELETE_SUCCESS": "Pravilo je trajno obrisano.",
+      "COLUMNS": {
+        "TITLE": "Naziv",
+        "CATEGORY": "Kategorija",
+        "IMPORTANCE": "Vaznost",
+        "REQUIRED": "Obavezno"
+      },
+      "FIELDS": {
+        "TITLE": "Naziv",
+        "DESCRIPTION": "Opis",
+        "ORDER": "Redoslijed",
+        "CATEGORY": "Kategorija",
+        "IMPORTANCE": "Vaznost",
+        "IS_REQUIRED": "Obavezno pravilo"
+      },
+      "CATEGORIES": {
+        "GENERAL": "Opce",
+        "MARKET_STRUCTURE": "Struktura trzista",
+        "ENTRY": "Ulaz",
+        "RISK_MANAGEMENT": "Upravljanje rizikom",
+        "EXIT": "Izlaz",
+        "PSYCHOLOGY": "Psihologija",
+        "NEWS": "Vijesti"
+      },
+      "IMPORTANCES": {
+        "LOW": "Niska",
+        "MEDIUM": "Srednja",
+        "HIGH": "Visoka",
+        "CRITICAL": "Kriticna"
+      },
+      "CONFIRM_DELETE": {
+        "TITLE": "Deaktiviraj pravilo",
+        "MESSAGE": "Ovo ce deaktivirati pravilo. Mozete ga obnoviti kasnije.",
+        "CONFIRM": "Deaktiviraj"
+      },
+      "CONFIRM_HARD_DELETE": {
+        "TITLE": "Trajno obrisi pravilo",
+        "MESSAGE": "Ova radnja se ne moze ponistiti.",
+        "CONFIRM": "Trajno obrisi"
+      }
+    }
+  },
   "TRADING_ACCOUNTS": {
     "TITLE": "Trading racuni",
     "SUBTITLE": "Upravljajte trading racunima i pratite performanse.",
