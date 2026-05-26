@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -19,6 +19,8 @@ export type AppFieldSize = 'sm' | 'md' | 'lg';
   }]
 })
 export class AppInputComponent implements ControlValueAccessor {
+  private readonly cdr = inject(ChangeDetectorRef);
+
   readonly label = input('');
   readonly placeholder = input('');
   readonly hint = input('');
@@ -43,6 +45,7 @@ export class AppInputComponent implements ControlValueAccessor {
 
   writeValue(value: string | number | null): void {
     this.value = value == null ? '' : String(value);
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: (value: string) => void): void {

@@ -25,6 +25,7 @@ export class SidebarComponent {
 
   readonly navItems: NavItem[] = [
     { labelKey: 'NAV.DASHBOARD', route: '/dashboard', icon: 'space_dashboard' },
+    { labelKey: 'NAV.TRADING_ACCOUNTS', route: '/trading-accounts', icon: 'account_balance' },
     { labelKey: 'NAV.TRADES', route: '/trades', icon: 'candlestick_chart' },
     { labelKey: 'NAV.JOURNAL', route: '/journal', icon: 'edit_note' },
     { labelKey: 'NAV.STRATEGIES', route: '/strategies', icon: 'schema' },

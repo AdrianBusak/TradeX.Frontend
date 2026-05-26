@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -26,6 +26,8 @@ export interface AppSelectOption {
   }]
 })
 export class AppSelectComponent implements ControlValueAccessor {
+  private readonly cdr = inject(ChangeDetectorRef);
+
   readonly label = input('');
   readonly placeholder = input('');
   readonly hint = input('');
@@ -50,6 +52,7 @@ export class AppSelectComponent implements ControlValueAccessor {
   writeValue(value: AppSelectValue): void {
     this.value = value;
     this.selectedKey = this.keyForValue(value);
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: (value: AppSelectValue) => void): void {
