@@ -1,0 +1,24 @@
+<app-dialog-layout
+  [title]="'TRADING_INSTRUMENTS.DIALOG_TITLE' | translate"
+  [confirmLabel]="'GLOBAL.ACTIONS.SAVE' | translate"
+  [cancelLabel]="'COMMON.ACTIONS.CANCEL' | translate"
+  [confirmDisabled]="isSaving()"
+  (confirmed)="onConfirm()"
+  (cancelled)="onCancel()">
+
+  <form [formGroup]="form" class="instrument-form">
+    <app-input
+      formControlName="symbol"
+      [label]="'TRADING_INSTRUMENTS.FIELDS.SYMBOL' | translate"
+      [required]="true"
+      [error]="fieldError('symbol')" />
+
+    <app-select
+      formControlName="marketType"
+      [label]="'TRADING_INSTRUMENTS.FIELDS.MARKET_TYPE' | translate"
+      [options]="marketTypeOptions"
+      [required]="true"
+      [error]="fieldError('marketType')" />
+  </form>
+
+</app-dialog-layout>

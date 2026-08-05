@@ -1,0 +1,26 @@
+<app-page-layout
+  [title]="'TRADES.TITLE' | translate"
+  icon="candlestick_chart">
+
+  <div actions class="list-actions">
+    <app-button icon="add" variant="primary" (pressed)="onCreate()">
+      {{ 'TRADES.CREATE_BTN' | translate }}
+    </app-button>
+  </div>
+
+  <app-data-grid
+    id="trades"
+    [columns]="columns"
+    [dataSource]="displayRows()"
+    [totalRecords]="totalRecords()"
+    [pageIndex]="pageIndex()"
+    [pageSize]="pageSize()"
+    [loading]="isLoading()"
+    [mobileVisibleColumns]="mobileColumns"
+    emptyMessageKey="TRADES.EMPTY"
+    noResultsMessageKey="COMMON.NO_RESULTS"
+    (pageChange)="onPageChange($event)"
+    (sortChange)="onSortChange($event)"
+    (rowAction)="onRowAction($event)"
+  />
+</app-page-layout>

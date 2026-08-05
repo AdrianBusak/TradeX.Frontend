@@ -22,6 +22,7 @@ export class DateFieldComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() required = false;
   @Input() errorMessage = '';
+  @Input() showError = false;
   @Input() hint = '';
   @Input() id = '';
   @Input() name = '';

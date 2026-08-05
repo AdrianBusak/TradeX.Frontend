@@ -19,9 +19,9 @@
     (input)="onInputChange($event)"
     (blur)="onBlur()"
     class="form-input"
-    [class.error]="errorMessage && isTouched"
+    [class.error]="errorMessage && (isTouched || showError)"
   />
-  @if (errorMessage && isTouched) {
+  @if (errorMessage && (isTouched || showError)) {
     <div class="field-hint error">{{ errorMessage | translate }}</div>
   }
   @if (hint && !errorMessage) {

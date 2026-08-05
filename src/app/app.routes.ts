@@ -42,17 +42,24 @@ export const routes: Routes = [
       },
       {
         path: 'trades',
-        data: {
-          titleKey: 'NAV.TRADES',
-          title: 'Trades',
-          subtitle: 'Review executions, tags, setups and outcomes.',
-          icon: 'candlestick_chart',
-          emptyTitle: 'No trades imported yet',
-          emptyDescription: 'Trade import and manual entry screens can now use the new form, table and badge system.'
-        },
+        data: { titleKey: 'NAV.TRADES', icon: 'candlestick_chart' },
         loadComponent: () =>
-          import('./features/placeholder/placeholder-page.component')
-            .then(m => m.PlaceholderPageComponent)
+          import('./features/trades/list/trades-list.component')
+            .then(m => m.TradesListComponent)
+      },
+      {
+        path: 'trades/create',
+        data: { titleKey: 'TRADES.CREATE_TITLE' },
+        loadComponent: () =>
+          import('./features/trades/form/trade-form.component')
+            .then(m => m.TradeFormComponent)
+      },
+      {
+        path: 'trades/:id/edit',
+        data: { titleKey: 'TRADES.EDIT_TITLE' },
+        loadComponent: () =>
+          import('./features/trades/form/trade-form.component')
+            .then(m => m.TradeFormComponent)
       },
       {
         path: 'journal',

@@ -203,6 +203,100 @@
       }
     }
   },
+  "TRADES": {
+    "TITLE": "Tradovi",
+    "SUBTITLE": "Pratite i pregledajte svoje trade setupe i izvrsenja.",
+    "CREATE_TITLE": "Novi trade",
+    "EDIT_TITLE": "Uredi trade",
+    "CREATE_BTN": "Novi trade",
+    "CREATE_SUCCESS": "Trade je kreiran.",
+    "UPDATE_SUCCESS": "Trade je azuriran.",
+    "DELETE_SUCCESS": "Trade je deaktiviran.",
+    "RESTORE_SUCCESS": "Trade je obnovljen.",
+    "HARD_DELETE_SUCCESS": "Trade je trajno obrisan.",
+    "EMPTY": "Nema tradova",
+    "ACCOUNTS_EMPTY": "Nema dostupnih trading racuna.",
+    "COLUMNS": {
+      "SYMBOL": "Symbol",
+      "DIRECTION": "Smjer",
+      "SESSION": "Sesija",
+      "STATUS": "Status",
+      "STRATEGY": "Strategija",
+      "MARKET_TYPE": "Tip trzista",
+      "ACCOUNTS": "Racuni",
+      "TRADE_DATE": "Datum tradea",
+      "PNL": "P&L",
+      "R_MULTIPLE": "R rezultat",
+      "ACTIVE": "Aktivan"
+    },
+    "SECTIONS": {
+      "SETUP": "Postavke",
+      "DETAILS": "Detalji tradea",
+      "RESULT": "Rezultat"
+    },
+    "FIELDS": {
+      "TRADING_INSTRUMENT": "Instrument",
+      "TRADING_ACCOUNTS": "Trading racuni",
+      "STRATEGY": "Strategija",
+      "DIRECTION": "Smjer",
+      "SESSION": "Sesija",
+      "STATUS": "Status",
+      "TRADE_DATE": "Datum tradea",
+      "ENTRY_PRICE": "Cijena ulaza",
+      "EXIT_PRICE": "Cijena izlaza",
+      "STOP_LOSS": "Stop loss",
+      "TAKE_PROFIT": "Take profit",
+      "LOT_SIZE": "Velicina lota",
+      "RISK_AMOUNT": "Iznos rizika",
+      "PNL": "P&L",
+      "R_MULTIPLE": "R rezultat",
+      "NOTES": "Biljeske"
+    },
+    "DIRECTIONS": {
+      "LONG": "Long",
+      "SHORT": "Short"
+    },
+    "STATUSES": {
+      "PLANNED": "Planirano",
+      "OPEN": "Otvoreno",
+      "CLOSED": "Zatvoreno",
+      "CANCELLED": "Otkazano",
+      "BREAK_EVEN": "Break Even"
+    },
+    "SESSIONS": {
+      "ASIA": "Azija",
+      "LONDON": "London",
+      "NEW_YORK": "New York",
+      "LONDON_NEW_YORK_OVERLAP": "London/NY Preklapanje",
+      "OTHER": "Ostalo"
+    },
+    "VALIDATION": {
+      "POSITIVE_VALUE": "Vrijednost mora biti veca od 0.",
+      "LONG_STOP_LOSS": "Za long trade stop loss treba biti ispod cijene ulaza.",
+      "LONG_TAKE_PROFIT": "Za long trade take profit treba biti iznad cijene ulaza.",
+      "SHORT_STOP_LOSS": "Za short trade stop loss treba biti iznad cijene ulaza.",
+      "SHORT_TAKE_PROFIT": "Za short trade take profit treba biti ispod cijene ulaza."
+    },
+    "CONFIRM_DELETE": {
+      "TITLE": "Deaktiviraj trade",
+      "MESSAGE": "Ovo ce deaktivirati trade. Mozete ga obnoviti kasnije.",
+      "CONFIRM": "Deaktiviraj"
+    },
+    "CONFIRM_HARD_DELETE": {
+      "TITLE": "Trajno obrisi trade",
+      "MESSAGE": "Ova radnja se ne moze ponistiti.",
+      "CONFIRM": "Trajno obrisi"
+    }
+  },
+  "TRADING_INSTRUMENTS": {
+    "CREATE_BTN": "Novi instrument",
+    "DIALOG_TITLE": "Novi instrument",
+    "CREATE_SUCCESS": "Instrument je kreiran.",
+    "FIELDS": {
+      "SYMBOL": "Symbol",
+      "MARKET_TYPE": "Tip trzista"
+    }
+  },
   "TRADING_ACCOUNTS": {
     "TITLE": "Trading racuni",
     "SUBTITLE": "Upravljajte trading racunima i pratite performanse.",

@@ -203,6 +203,100 @@
       }
     }
   },
+  "TRADES": {
+    "TITLE": "Trades",
+    "SUBTITLE": "Track and review your trade setups and executions.",
+    "CREATE_TITLE": "New Trade",
+    "EDIT_TITLE": "Edit Trade",
+    "CREATE_BTN": "New Trade",
+    "CREATE_SUCCESS": "Trade created.",
+    "UPDATE_SUCCESS": "Trade updated.",
+    "DELETE_SUCCESS": "Trade deactivated.",
+    "RESTORE_SUCCESS": "Trade restored.",
+    "HARD_DELETE_SUCCESS": "Trade permanently deleted.",
+    "EMPTY": "No trades yet",
+    "ACCOUNTS_EMPTY": "No trading accounts available.",
+    "COLUMNS": {
+      "SYMBOL": "Symbol",
+      "DIRECTION": "Direction",
+      "SESSION": "Session",
+      "STATUS": "Status",
+      "STRATEGY": "Strategy",
+      "MARKET_TYPE": "Market Type",
+      "ACCOUNTS": "Accounts",
+      "TRADE_DATE": "Trade date",
+      "PNL": "P&L",
+      "R_MULTIPLE": "R result",
+      "ACTIVE": "Active"
+    },
+    "SECTIONS": {
+      "SETUP": "Setup",
+      "DETAILS": "Trade details",
+      "RESULT": "Result"
+    },
+    "FIELDS": {
+      "TRADING_INSTRUMENT": "Instrument",
+      "TRADING_ACCOUNTS": "Trading accounts",
+      "STRATEGY": "Strategy",
+      "DIRECTION": "Direction",
+      "SESSION": "Session",
+      "STATUS": "Status",
+      "TRADE_DATE": "Trade date",
+      "ENTRY_PRICE": "Entry price",
+      "EXIT_PRICE": "Exit price",
+      "STOP_LOSS": "Stop loss",
+      "TAKE_PROFIT": "Take profit",
+      "LOT_SIZE": "Lot size",
+      "RISK_AMOUNT": "Risk amount",
+      "PNL": "P&L",
+      "R_MULTIPLE": "R result",
+      "NOTES": "Notes"
+    },
+    "DIRECTIONS": {
+      "LONG": "Long",
+      "SHORT": "Short"
+    },
+    "STATUSES": {
+      "PLANNED": "Planned",
+      "OPEN": "Open",
+      "CLOSED": "Closed",
+      "CANCELLED": "Cancelled",
+      "BREAK_EVEN": "Break Even"
+    },
+    "SESSIONS": {
+      "ASIA": "Asia",
+      "LONDON": "London",
+      "NEW_YORK": "New York",
+      "LONDON_NEW_YORK_OVERLAP": "London/NY Overlap",
+      "OTHER": "Other"
+    },
+    "VALIDATION": {
+      "POSITIVE_VALUE": "Value must be greater than 0.",
+      "LONG_STOP_LOSS": "For a long trade, stop loss should be below the entry price.",
+      "LONG_TAKE_PROFIT": "For a long trade, take profit should be above the entry price.",
+      "SHORT_STOP_LOSS": "For a short trade, stop loss should be above the entry price.",
+      "SHORT_TAKE_PROFIT": "For a short trade, take profit should be below the entry price."
+    },
+    "CONFIRM_DELETE": {
+      "TITLE": "Deactivate trade",
+      "MESSAGE": "This will deactivate the trade. You can restore it later.",
+      "CONFIRM": "Deactivate"
+    },
+    "CONFIRM_HARD_DELETE": {
+      "TITLE": "Permanently delete trade",
+      "MESSAGE": "This action cannot be undone.",
+      "CONFIRM": "Delete permanently"
+    }
+  },
+  "TRADING_INSTRUMENTS": {
+    "CREATE_BTN": "New Instrument",
+    "DIALOG_TITLE": "New Instrument",
+    "CREATE_SUCCESS": "Instrument created.",
+    "FIELDS": {
+      "SYMBOL": "Symbol",
+      "MARKET_TYPE": "Market type"
+    }
+  },
   "TRADING_ACCOUNTS": {
     "TITLE": "Trading Accounts",
     "SUBTITLE": "Manage your trading accounts and track performance.",

@@ -1,0 +1,122 @@
+<app-add-edit-page-layout
+  [title]="(isEditMode ? 'TRADES.EDIT_TITLE' : 'TRADES.CREATE_TITLE') | translate"
+  [loading]="isLoading()"
+  [isSaving]="isSaving()"
+  [saveDisabled]="isSaving()"
+  (back)="onBack()"
+  (save)="onSave()">
+
+  <form [formGroup]="form" class="trade-form">
+    <div class="form-section">
+      <span class="section-label">{{ 'TRADES.SECTIONS.SETUP' | translate }}</span>
+
+      <div class="instrument-row">
+        <app-select
+          formControlName="tradingInstrumentId"
+          [label]="'TRADES.FIELDS.TRADING_INSTRUMENT' | translate"
+          [options]="instrumentOptions()"
+          [required]="true"
+          [error]="fieldError('tradingInstrumentId')" />
+        <app-button
+          variant="secondary"
+          icon="add"
+          size="sm"
+          class="new-instrument-btn"
+          (pressed)="onCreateInstrument()">
+          {{ 'TRADING_INSTRUMENTS.CREATE_BTN' | translate }}
+        </app-button>
+      </div>
+
+      <div class="form-grid">
+        <app-select
+          formControlName="strategyId"
+          [label]="'TRADES.FIELDS.STRATEGY' | translate"
+          [options]="strategyOptions()"
+          [required]="true"
+          [error]="fieldError('strategyId')" />
+
+        <app-select
+          formControlName="direction"
+          [label]="'TRADES.FIELDS.DIRECTION' | translate"
+          [options]="directionOptions"
+          [required]="true"
+          [error]="fieldError('direction')" />
+
+        <app-select
+          formControlName="session"
+          [label]="'TRADES.FIELDS.SESSION' | translate"
+          [options]="sessionOptions"
+          [nullable]="true" />
+
+        <app-select
+          formControlName="status"
+          [label]="'TRADES.FIELDS.STATUS' | translate"
+          [options]="statusOptions"
+          [required]="true"
+          [error]="fieldError('status')" />
+
+        <app-date-field
+          formControlName="tradeDate"
+          [label]="'TRADES.FIELDS.TRADE_DATE' | translate"
+          [required]="true"
+          [showError]="submitted"
+          [errorMessage]="fieldError('tradeDate')" />
+      </div>
+
+      <div class="accounts-section">
+        <span class="field-label">{{ 'TRADES.FIELDS.TRADING_ACCOUNTS' | translate }}</span>
+        @if (accountOptions().length === 0) {
+          <span class="accounts-empty">{{ 'TRADES.ACCOUNTS_EMPTY' | translate }}</span>
+        } @else {
+          <div class="accounts-list">
+            @for (account of accountOptions(); track account.id) {
+              <label class="account-option">
+                <input
+                  type="checkbox"
+                  [checked]="isAccountSelected(account.id)"
+                  (change)="onAccountToggle(account.id, $event)" />
+                <span>{{ account.label }}</span>
+              </label>
+            }
+          </div>
+        }
+        @if (fieldError('tradingAccountIds')) {
+          <span class="accounts-error">{{ fieldError('tradingAccountIds') }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="form-section">
+      <span class="section-label">{{ 'TRADES.SECTIONS.DETAILS' | translate }}</span>
+      <div class="form-row">
+        <app-input formControlName="entryPrice" type="number" [label]="'TRADES.FIELDS.ENTRY_PRICE' | translate" [error]="fieldError('entryPrice')" />
+        <app-input formControlName="stopLoss" type="number" [label]="'TRADES.FIELDS.STOP_LOSS' | translate" [error]="fieldError('stopLoss')" />
+        <app-input formControlName="takeProfit" type="number" [label]="'TRADES.FIELDS.TAKE_PROFIT' | translate" [error]="fieldError('takeProfit')" />
+        <app-input formControlName="exitPrice" type="number" [label]="'TRADES.FIELDS.EXIT_PRICE' | translate" [error]="fieldError('exitPrice')" />
+        <app-input formControlName="lotSize" type="number" [label]="'TRADES.FIELDS.LOT_SIZE' | translate" [error]="fieldError('lotSize')" />
+      </div>
+      @if (priceWarningKey()) {
+        <span class="trade-warning">{{ priceWarningKey() | translate }}</span>
+      }
+    </div>
+
+    <div class="form-section">
+      <span class="section-label">{{ 'TRADES.SECTIONS.RESULT' | translate }}</span>
+      <div class="form-row">
+        <app-input formControlName="riskAmount" type="number" [label]="'TRADES.FIELDS.RISK_AMOUNT' | translate" [error]="fieldError('riskAmount')" />
+        <app-input formControlName="pnl" type="number" [label]="'TRADES.FIELDS.PNL' | translate" />
+        <div class="r-multiple-preview">
+          <span class="field-label">{{ 'TRADES.FIELDS.R_MULTIPLE' | translate }}</span>
+          <span>{{ rMultiplePreview() }}</span>
+        </div>
+      </div>
+
+      <app-textarea
+        formControlName="notes"
+        [label]="'TRADES.FIELDS.NOTES' | translate"
+        [rows]="3"
+        [maxLength]="4000"
+        [error]="fieldError('notes')" />
+    </div>
+  </form>
+</app-add-edit-page-layout>
