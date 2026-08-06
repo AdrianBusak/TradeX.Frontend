@@ -1,22 +1,32 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
+import { TranslatePipe } from '@ngx-translate/core';
+
 import {
   AppBadgeComponent,
   AppButtonComponent,
   AppCardComponent,
+  AppEmptyStateComponent,
+  AppLoadingStateComponent,
   AppMetricCardComponent,
   AppPageHeaderComponent,
   AppProfitLossBadgeComponent,
   AppRiskRewardBadgeComponent,
   AppStatCardComponent,
   AppTableAction,
+  AppTableActionEvent,
   AppTableColumn,
   AppTableComponent
 } from '../../shared/components';
+import { DashboardPeriod, DashboardRecentTrade, DashboardSummary } from './models/dashboard-summary.model';
+import { DashboardService } from './services/dashboard.service';
 
 interface TradeRow extends Record<string, unknown> {
-  id: number;
+  id: string;
   symbol: string;
-  setup: string;
+  strategy: string;
   side: string;
   pnl: number;
   rr: number;
@@ -24,62 +34,115 @@ interface TradeRow extends Record<string, unknown> {
   session: string;
 }
 
+const EMPTY_SUMMARY: DashboardSummary = {
+  totalTrades: 0, totalPnl: 0, totalR: 0, winRate: 0, averageR: 0,
+  averageWin: 0, averageLoss: 0, bestStrategy: null, bestSession: null,
+  rCurve: [], recentTrades: [], topStrategies: [], insights: []
+};
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    AppBadgeComponent,
-    AppButtonComponent,
-    AppCardComponent,
-    AppMetricCardComponent,
-    AppPageHeaderComponent,
-    AppProfitLossBadgeComponent,
-    AppRiskRewardBadgeComponent,
-    AppStatCardComponent,
+    TranslatePipe, AppBadgeComponent, AppButtonComponent, AppCardComponent, AppEmptyStateComponent,
+    AppLoadingStateComponent, AppMetricCardComponent, AppPageHeaderComponent,
+    AppProfitLossBadgeComponent, AppRiskRewardBadgeComponent, AppStatCardComponent,
     AppTableComponent
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent {
-  readonly statCards = [
-    { label: 'Net P/L', value: '$18,420', helper: 'Last 30 days', trend: '+12.4%', tone: 'positive' as const, icon: 'trending_up' },
-    { label: 'Win Rate', value: '62.8%', helper: '42 closed trades', trend: '+4.1%', tone: 'positive' as const, icon: 'target' },
-    { label: 'Avg R:R', value: '2.1R', helper: 'Best setup: Breakout', trend: '+0.3R', tone: 'neutral' as const, icon: 'balance' },
-    { label: 'Max Drawdown', value: '4.7%', helper: 'Risk limit 7%', trend: '-1.2%', tone: 'warning' as const, icon: 'waterfall_chart' }
-  ];
+  private readonly dashboardService = inject(DashboardService);
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
+
+  readonly period = signal<DashboardPeriod>('ThisMonth');
+  readonly summary = signal<DashboardSummary>(EMPTY_SUMMARY);
+  readonly isLoading = signal(false);
+  readonly hasData = computed(() => this.summary().totalTrades > 0);
+  readonly periodLabelKey = computed(() => `DASHBOARD.PERIODS.${this.period().toUpperCase()}`);
+
+  readonly statCards = computed(() => {
+    const summary = this.summary();
+    return [
+      { label: 'DASHBOARD.STATS.NET_PNL', value: this.formatCurrency(summary.totalPnl), helper: 'DASHBOARD.STATS.PERIOD_TOTAL', trend: this.formatSigned(summary.totalPnl), tone: summary.totalPnl >= 0 ? 'positive' as const : 'negative' as const, icon: 'trending_up' },
+      { label: 'DASHBOARD.STATS.WIN_RATE', value: this.formatPercent(summary.winRate), helper: this.tradeCountLabel(summary.totalTrades), trend: '', tone: 'positive' as const, icon: 'target' },
+      { label: 'DASHBOARD.STATS.AVG_R', value: this.formatR(summary.averageR), helper: 'DASHBOARD.STATS.AVG_R_HELPER', trend: '', tone: 'neutral' as const, icon: 'balance' },
+      { label: 'DASHBOARD.STATS.TOTAL_R', value: this.formatR(summary.totalR), helper: 'DASHBOARD.STATS.TOTAL_R_HELPER', trend: this.formatSigned(summary.totalR), tone: summary.totalR >= 0 ? 'positive' as const : 'negative' as const, icon: 'insights' }
+    ];
+  });
 
   readonly tradeColumns: AppTableColumn<TradeRow>[] = [
-    { key: 'symbol', label: 'Symbol' },
-    { key: 'setup', label: 'Setup' },
+    { key: 'symbol', label: 'Symbol' }, { key: 'strategy', label: 'Strategy' },
     { key: 'side', label: 'Side', type: 'badge', badgeVariant: row => row.side === 'Long' ? 'success' : 'brand' },
     { key: 'pnl', label: 'P/L', type: 'profitLoss', align: 'right' },
     { key: 'rr', label: 'R:R', type: 'riskReward', align: 'center' },
-    { key: 'status', label: 'Status', type: 'badge', badgeVariant: row => row.status === 'Reviewed' ? 'success' : 'warning' },
+    { key: 'status', label: 'Status', type: 'badge', badgeVariant: row => row.status === 'Closed' ? 'success' : 'warning' },
     { key: 'session', label: 'Session' }
   ];
+  readonly tableActions: AppTableAction<TradeRow>[] = [{ id: 'edit', label: 'Edit trade', icon: 'edit' }];
+  readonly tradeRows = computed<TradeRow[]>(() => this.summary().recentTrades.map(trade => this.toTradeRow(trade)));
+  readonly rCurveBars = computed(() => {
+    const values = this.summary().rCurve.map(point => point.value);
+    const maximum = Math.max(...values.map(Math.abs), 1);
+    return this.summary().rCurve.map(point => ({ ...point, height: `${Math.max(8, Math.round(Math.abs(point.value) / maximum * 100))}%`, negative: point.value < 0 }));
+  });
 
-  readonly tradeRows: TradeRow[] = [
-    { id: 1, symbol: 'NQ', setup: 'Opening range breakout', side: 'Long', pnl: 1840, rr: 2.8, status: 'Reviewed', session: 'New York' },
-    { id: 2, symbol: 'ES', setup: 'VWAP reclaim', side: 'Short', pnl: -520, rr: 0.7, status: 'Needs note', session: 'New York' },
-    { id: 3, symbol: 'AAPL', setup: 'Trend pullback', side: 'Long', pnl: 960, rr: 1.9, status: 'Reviewed', session: 'US Open' },
-    { id: 4, symbol: 'EURUSD', setup: 'Liquidity sweep', side: 'Short', pnl: 430, rr: 1.4, status: 'Reviewed', session: 'London' }
-  ];
+  constructor() { this.load(); }
 
-  readonly tableActions: AppTableAction<TradeRow>[] = [
-    { id: 'view', label: 'View trade', icon: 'visibility' },
-    { id: 'edit', label: 'Edit trade', icon: 'edit' }
-  ];
+  cyclePeriod(): void {
+    const periods: DashboardPeriod[] = ['ThisMonth', 'LastMonth', 'AllTime'];
+    this.period.set(periods[(periods.indexOf(this.period()) + 1) % periods.length]);
+    this.load();
+  }
 
-  readonly strategies = [
-    { name: 'Opening Range Breakout', trades: 14, pnl: 8200, winRate: '71%' },
-    { name: 'VWAP Reclaim', trades: 11, pnl: 3950, winRate: '64%' },
-    { name: 'Liquidity Sweep', trades: 9, pnl: 2280, winRate: '56%' }
-  ];
+  onLogTrade(): void { this.router.navigate(['/trades/create']); }
+  onOpenTrades(): void { this.router.navigate(['/trades']); }
+  onRowAction(event: AppTableActionEvent<TradeRow>): void { this.router.navigate(['/trades', event.row.id, 'edit']); }
 
-  readonly riskRules = [
-    { label: 'Daily loss limit', value: '42% used', tone: 'brand' as const },
-    { label: 'Trades over plan risk', value: '1 trade', tone: 'warning' as const },
-    { label: 'Rule compliance', value: '93%', tone: 'positive' as const }
-  ];
+  private load(): void {
+    this.isLoading.set(true);
+    this.dashboardService.getTradingSummary({ period: this.period() }).pipe(
+      finalize(() => this.isLoading.set(false)),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: summary => this.summary.set(this.normalizeSummary(summary)),
+      error: () => this.summary.set(EMPTY_SUMMARY)
+    });
+  }
+
+  private normalizeSummary(summary: Partial<DashboardSummary> | null | undefined): DashboardSummary {
+    if (!summary) return EMPTY_SUMMARY;
+    return {
+      totalTrades: summary.totalTrades ?? 0,
+      totalPnl: summary.totalPnl ?? 0,
+      totalR: summary.totalR ?? 0,
+      winRate: summary.winRate ?? 0,
+      averageR: summary.averageR ?? 0,
+      averageWin: summary.averageWin ?? 0,
+      averageLoss: summary.averageLoss ?? 0,
+      bestStrategy: summary.bestStrategy ?? null,
+      bestSession: summary.bestSession ?? null,
+      rCurve: summary.rCurve ?? [],
+      recentTrades: summary.recentTrades ?? [],
+      topStrategies: summary.topStrategies ?? [],
+      insights: summary.insights ?? []
+    };
+  }
+
+  private toTradeRow(trade: DashboardRecentTrade): TradeRow {
+    return { id: trade.id, symbol: trade.symbol, strategy: trade.strategyName, side: trade.direction, pnl: trade.pnl ?? 0, rr: trade.rMultiple ?? 0, status: trade.status, session: trade.session };
+  }
+  formatCurrency(value: number | null | undefined): string {
+    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(value ?? 0);
+  }
+  formatPercent(value: number | null | undefined): string { return `${(value ?? 0).toFixed(1)}%`; }
+  formatR(value: number | null | undefined): string { return `${(value ?? 0).toFixed(2)}R`; }
+  private formatSigned(value: number | null | undefined): string {
+    const v = value ?? 0;
+    return `${v > 0 ? '+' : ''}${v.toFixed(2)}`;
+  }
+  private tradeCountLabel(count: number): string { return `${count} trade${count === 1 ? '' : 's'}`; }
 }

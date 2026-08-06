@@ -99,7 +99,23 @@
   "DASHBOARD": {
     "EYEBROW": "Trading journal",
     "TITLE": "Dashboard",
-    "SUBTITLE": "Track performance, risk and trade quality from one focused workspace."
+    "SUBTITLE": "Track performance, risk and trade quality from one focused workspace.",
+    "LOG_TRADE": "Log trade",
+    "PERIODS": { "THISMONTH": "This month", "LASTMONTH": "Last month", "ALLTIME": "All time" },
+    "STATS": {
+      "NET_PNL": "Net P/L", "WIN_RATE": "Win rate", "AVG_R": "Average R", "TOTAL_R": "Total R",
+      "PERIOD_TOTAL": "Selected period", "AVG_R_HELPER": "Per trade with R result", "TOTAL_R_HELPER": "Selected period"
+    },
+    "R_CURVE": { "EYEBROW": "R curve", "TITLE": "Performance momentum", "EMPTY": "No R results are available for this period." },
+    "METRICS": { "AVG_WIN": "Average winner", "AVG_LOSS": "Average loser", "BEST_SESSION": "Best session" },
+    "PERFORMANCE": {
+      "EYEBROW": "Performance", "TITLE": "Period overview", "PROFITABLE": "Profitable", "UNPROFITABLE": "Unprofitable",
+      "WIN_RATE": "Win rate", "BEST_STRATEGY": "Best strategy", "BEST_SESSION": "Best session"
+    },
+    "RECENT": { "EYEBROW": "Recent trades", "TITLE": "Execution review", "OPEN_TRADES": "Open trades", "EMPTY": "No trades in this period" },
+    "STRATEGIES": { "EYEBROW": "Strategy edge", "TITLE": "Top playbooks", "TRADES": "trades", "WIN_RATE": "win rate", "EMPTY": "No strategy data is available for this period." },
+    "INSIGHTS": { "EYEBROW": "Journal insight", "TITLE": "Review focus", "EMPTY": "No insights are available for this period." }
+    ,"EMPTY": { "TITLE": "Your trading story starts here", "DESCRIPTION": "Log your first completed trade to unlock performance metrics, R curve, strategy insights and execution reviews.", "CTA": "Log your first trade", "PREVIEW_TITLE": "Your performance, at a glance", "PREVIEW_CHART": "R curve", "PREVIEW_TABLE": "Recent trades", "METRICS": { "1": "Win rate", "2": "Average R", "3": "Net P/L" } }
   },
   "LANG": {
     "EN": "English",

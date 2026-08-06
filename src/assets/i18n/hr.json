@@ -99,7 +99,23 @@
   "DASHBOARD": {
     "EYEBROW": "Trading journal",
     "TITLE": "Dashboard",
-    "SUBTITLE": "Prati performanse, rizik i kvalitetu tradeova iz jednog fokusa."
+    "SUBTITLE": "Prati performanse, rizik i kvalitetu tradeova iz jednog fokusa.",
+    "LOG_TRADE": "Dodaj trade",
+    "PERIODS": { "THISMONTH": "Ovaj mjesec", "LASTMONTH": "Prosli mjesec", "ALLTIME": "Sve vrijeme" },
+    "STATS": {
+      "NET_PNL": "Net P/L", "WIN_RATE": "Stopa uspjesnosti", "AVG_R": "Prosjecni R", "TOTAL_R": "Ukupni R",
+      "PERIOD_TOTAL": "Odabrano razdoblje", "AVG_R_HELPER": "Po tradeu s R rezultatom", "TOTAL_R_HELPER": "Odabrano razdoblje"
+    },
+    "R_CURVE": { "EYEBROW": "R krivulja", "TITLE": "Momentum performansi", "EMPTY": "Nema R rezultata za odabrano razdoblje." },
+    "METRICS": { "AVG_WIN": "Prosjecni dobitak", "AVG_LOSS": "Prosjecni gubitak", "BEST_SESSION": "Najbolja sesija" },
+    "PERFORMANCE": {
+      "EYEBROW": "Performanse", "TITLE": "Pregled razdoblja", "PROFITABLE": "Profitabilno", "UNPROFITABLE": "Neprofitabilno",
+      "WIN_RATE": "Stopa uspjesnosti", "BEST_STRATEGY": "Najbolja strategija", "BEST_SESSION": "Najbolja sesija"
+    },
+    "RECENT": { "EYEBROW": "Zadnji tradeovi", "TITLE": "Pregled izvrsenja", "OPEN_TRADES": "Otvori tradeove", "EMPTY": "Nema tradeova u ovom razdoblju" },
+    "STRATEGIES": { "EYEBROW": "Prednost strategije", "TITLE": "Najbolji playbookovi", "TRADES": "tradeova", "WIN_RATE": "stopa uspjesnosti", "EMPTY": "Nema podataka o strategijama za odabrano razdoblje." },
+    "INSIGHTS": { "EYEBROW": "Uvid iz journala", "TITLE": "Fokus pregleda", "EMPTY": "Nema uvida za odabrano razdoblje." }
+    ,"EMPTY": { "TITLE": "Tvoja trading prica pocinje ovdje", "DESCRIPTION": "Unesi prvi zavrseni trade kako bi otkljucao metrike performansi, R krivulju, uvide o strategijama i preglede izvrsenja.", "CTA": "Unesi prvi trade", "PREVIEW_TITLE": "Tvoje performanse na prvi pogled", "PREVIEW_CHART": "R krivulja", "PREVIEW_TABLE": "Zadnji tradeovi", "METRICS": { "1": "Stopa uspjesnosti", "2": "Prosjecni R", "3": "Net P/L" } }
   },
   "LANG": {
     "EN": "Engleski",
