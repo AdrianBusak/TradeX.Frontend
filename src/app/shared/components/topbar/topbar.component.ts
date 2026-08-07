@@ -4,10 +4,12 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { filter, startWith } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LangSwitcherComponent } from '../lang-switcher/lang-switcher.component';
 import { SidebarService } from '../../../core/services/sidebar.service';
+import { LotCalculatorDialogComponent, LotCalculatorDialogData } from '../../../features/trades/lot-calculator-dialog/lot-calculator-dialog.component';
 
 interface AuthUser {
   name?: string | null;
@@ -27,6 +29,7 @@ export class TopbarComponent {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly dialog = inject(MatDialog);
 
   readonly sidebar = inject(SidebarService);
   readonly user$ = this.auth.user$;
@@ -54,6 +57,16 @@ export class TopbarComponent {
 
   logout(): void {
     this.auth.logout({ logoutParams: { returnTo: window.location.origin } });
+  }
+
+  openLotCalculator(): void {
+    const data: LotCalculatorDialogData = {
+      tradingAccountId: null,
+      tradingInstrumentId: null,
+      entryPrice: null,
+      stopLossPrice: null,
+    };
+    this.dialog.open(LotCalculatorDialogComponent, { data, width: '720px', maxWidth: '95vw' });
   }
 
   initials(user: AuthUser | null | undefined): string {

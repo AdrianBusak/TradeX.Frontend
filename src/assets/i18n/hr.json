@@ -93,6 +93,7 @@
     "SEARCH_LABEL": "Pretrazi TradeX",
     "MESSAGES": "Poruke",
     "NOTIFICATIONS": "Obavijesti",
+    "LOT_CALCULATOR": "Lot kalkulator",
     "OPEN_MENU": "Otvori navigaciju",
     "USER_MENU": "Korisnicki meni"
   },
@@ -302,6 +303,45 @@
       "TITLE": "Trajno obrisi trade",
       "MESSAGE": "Ova radnja se ne moze ponistiti.",
       "CONFIRM": "Trajno obrisi"
+    }
+  },
+  "LOT_CALCULATOR": {
+    "TITLE": "Lot kalkulator",
+    "CALCULATE_LOT": "Izracunaj lot",
+    "CALCULATE": "Izracunaj",
+    "USE_LOT": "Primijeni lot",
+    "COPIED": "Lot size {{lot}} kopiran u clipboard",
+    "SECTIONS": {
+      "ACCOUNT": "Racun",
+      "INSTRUMENT": "Instrument",
+      "RISK": "Rizik",
+      "STOP_LOSS": "Stop loss",
+      "RESULT": "Rezultat"
+    },
+    "FIELDS": {
+      "TRADING_ACCOUNT": "Trading racun",
+      "ACCOUNT_CURRENCY": "Valuta racuna",
+      "ACCOUNT_BALANCE": "Stanje racuna",
+      "INSTRUMENT": "Instrument",
+      "SYMBOL": "Symbol",
+      "MARKET_TYPE": "Tip trzista",
+      "RISK_PERCENT": "Rizik %",
+      "ENTRY_PRICE": "Cijena ulaza",
+      "STOP_LOSS_PRICE": "Stop loss cijena",
+      "STOP_LOSS_PIPS": "Stop loss pips"
+    },
+    "RESULTS": {
+      "SUGGESTED_LOT": "Predlozeni lot",
+      "ROUNDED_LOT": "Zaokruzeni lot",
+      "RISK_AMOUNT": "Iznos rizika",
+      "ESTIMATED_LOSS": "Procijenjeni gubitak",
+      "PIP_VALUE": "Pip vrijednost po lotu",
+      "STOP_LOSS_PIPS": "Stop loss pips"
+    },
+    "STOP_LOSS_HINT": "Unesite stop loss pips ili obje cijene: ulaznu i stop loss.",
+    "ERRORS": {
+      "CURRENCY_LENGTH": "Kod valute mora imati tocno 3 znaka.",
+      "COMPLETE_INPUTS": "Unesite racun, instrument, rizik i stop loss podatke prije izracuna."
     }
   },
   "TRADING_INSTRUMENTS": {

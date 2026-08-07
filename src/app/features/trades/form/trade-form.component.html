@@ -93,7 +93,12 @@
         <app-input formControlName="stopLoss" type="number" [label]="'TRADES.FIELDS.STOP_LOSS' | translate" [error]="fieldError('stopLoss')" />
         <app-input formControlName="takeProfit" type="number" [label]="'TRADES.FIELDS.TAKE_PROFIT' | translate" [error]="fieldError('takeProfit')" />
         <app-input formControlName="exitPrice" type="number" [label]="'TRADES.FIELDS.EXIT_PRICE' | translate" [error]="fieldError('exitPrice')" />
-        <app-input formControlName="lotSize" type="number" [label]="'TRADES.FIELDS.LOT_SIZE' | translate" [error]="fieldError('lotSize')" />
+        <div class="lot-size-field">
+          <app-input formControlName="lotSize" type="number" [label]="'TRADES.FIELDS.LOT_SIZE' | translate" [error]="fieldError('lotSize')" />
+          <app-button variant="secondary" size="sm" icon="calculate" (pressed)="onCalculateLot()">
+            {{ 'LOT_CALCULATOR.CALCULATE_LOT' | translate }}
+          </app-button>
+        </div>
       </div>
       @if (priceWarningKey()) {
         <span class="trade-warning">{{ priceWarningKey() | translate }}</span>

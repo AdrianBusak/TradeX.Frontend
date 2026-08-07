@@ -27,8 +27,14 @@
   </div>
 
   <div class="topbar-actions">
-    <button class="icon-btn hide-small" type="button" [attr.aria-label]="'TOPBAR.NOTIFICATIONS' | translate">
-      <mat-icon aria-hidden="true">notifications</mat-icon>
+    <button
+      class="icon-btn hide-small"
+      type="button"
+      (click)="openLotCalculator()"
+      [attr.aria-label]="'TOPBAR.LOT_CALCULATOR' | translate"
+      [title]="'TOPBAR.LOT_CALCULATOR' | translate"
+    >
+      <mat-icon aria-hidden="true">calculate</mat-icon>
     </button>
 
     <app-lang-switcher />

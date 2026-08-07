@@ -39,6 +39,8 @@ import {
 import {
   TradingInstrumentDialogComponent,
 } from '../instrument-dialog/trading-instrument-dialog.component';
+import { LotCalculatorDialogComponent, LotCalculatorDialogData } from '../lot-calculator-dialog/lot-calculator-dialog.component';
+import { CalculateLotResponse } from '../models/lot-calculator.model';
 
 @Component({
   selector: 'app-trade-form',
@@ -171,6 +173,26 @@ export class TradeFormComponent implements OnInit {
       .afterClosed()
       .subscribe((createdId: string | null) => {
         if (createdId) this.loadInstrumentLookup(createdId);
+      });
+  }
+
+  onCalculateLot(): void {
+    const value = this.form.getRawValue();
+    const data: LotCalculatorDialogData = {
+      tradingAccountId: value.tradingAccountIds?.[0] ?? null,
+      tradingInstrumentId: value.tradingInstrumentId,
+      entryPrice: this.coerceNumber(value.entryPrice),
+      stopLossPrice: this.coerceNumber(value.stopLoss),
+    };
+
+    this.dialog.open(LotCalculatorDialogComponent, { data, width: '720px', maxWidth: '95vw' })
+      .afterClosed()
+      .subscribe((response: CalculateLotResponse | null) => {
+        if (!response) return;
+        this.form.patchValue({
+          lotSize: response.roundedLotSize,
+          riskAmount: response.riskAmount,
+        });
       });
   }
 

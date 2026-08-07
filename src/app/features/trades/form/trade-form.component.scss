@@ -52,6 +52,15 @@
     gap: 12px;
   }
 
+  .lot-size-field {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+
+    app-input { flex: 1; }
+    app-button { flex-shrink: 0; margin-bottom: 2px; }
+  }
+
   .section-label {
     font-size: 0.8125rem;
     font-weight: 600;

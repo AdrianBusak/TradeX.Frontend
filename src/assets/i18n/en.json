@@ -93,6 +93,7 @@
     "SEARCH_LABEL": "Search TradeX",
     "MESSAGES": "Messages",
     "NOTIFICATIONS": "Notifications",
+    "LOT_CALCULATOR": "Lot calculator",
     "OPEN_MENU": "Open navigation menu",
     "USER_MENU": "User menu"
   },
@@ -302,6 +303,45 @@
       "TITLE": "Permanently delete trade",
       "MESSAGE": "This action cannot be undone.",
       "CONFIRM": "Delete permanently"
+    }
+  },
+  "LOT_CALCULATOR": {
+    "TITLE": "Lot Calculator",
+    "CALCULATE_LOT": "Calculate lot",
+    "CALCULATE": "Calculate",
+    "USE_LOT": "Use this lot",
+    "COPIED": "Lot size {{lot}} copied to clipboard",
+    "SECTIONS": {
+      "ACCOUNT": "Account",
+      "INSTRUMENT": "Instrument",
+      "RISK": "Risk",
+      "STOP_LOSS": "Stop loss",
+      "RESULT": "Result"
+    },
+    "FIELDS": {
+      "TRADING_ACCOUNT": "Trading account",
+      "ACCOUNT_CURRENCY": "Account currency",
+      "ACCOUNT_BALANCE": "Account balance",
+      "INSTRUMENT": "Instrument",
+      "SYMBOL": "Symbol",
+      "MARKET_TYPE": "Market type",
+      "RISK_PERCENT": "Risk %",
+      "ENTRY_PRICE": "Entry price",
+      "STOP_LOSS_PRICE": "Stop loss price",
+      "STOP_LOSS_PIPS": "Stop loss pips"
+    },
+    "RESULTS": {
+      "SUGGESTED_LOT": "Suggested lot",
+      "ROUNDED_LOT": "Rounded lot",
+      "RISK_AMOUNT": "Risk amount",
+      "ESTIMATED_LOSS": "Estimated loss",
+      "PIP_VALUE": "Pip value per lot",
+      "STOP_LOSS_PIPS": "Stop loss pips"
+    },
+    "STOP_LOSS_HINT": "Enter stop loss pips, or enter both entry and stop loss prices.",
+    "ERRORS": {
+      "CURRENCY_LENGTH": "Currency code must be exactly 3 characters.",
+      "COMPLETE_INPUTS": "Provide an account, instrument, risk and stop loss details before calculating."
     }
   },
   "TRADING_INSTRUMENTS": {
