@@ -2,16 +2,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  ElementRef,
+  HostListener,
   OnInit,
+  computed,
+  effect,
   inject,
   signal,
+  viewChild,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { finalize } from 'rxjs';
+import { catchError, concatMap, finalize, from, map, of } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 
 import { ToastService } from '../../../core/services/toast.service';
 import { QueryBuilder } from '../../../core/utils/query-builder';
@@ -35,12 +41,23 @@ import {
   TradeStatus,
   TradingSession,
   UpdateTradeRequest,
+  TradeImage,
 } from '../models/trade.model';
 import {
   TradingInstrumentDialogComponent,
 } from '../instrument-dialog/trading-instrument-dialog.component';
 import { LotCalculatorDialogComponent, LotCalculatorDialogData } from '../lot-calculator-dialog/lot-calculator-dialog.component';
 import { CalculateLotResponse } from '../models/lot-calculator.model';
+
+type TradeImageUploadStatus = 'PENDING' | 'UPLOADING' | 'ERROR';
+
+interface TradeImageUploadItem {
+  id: string;
+  fileName: string;
+  uploadStatus: TradeImageUploadStatus;
+  file: File;
+  error?: string;
+}
 
 @Component({
   selector: 'app-trade-form',
@@ -55,6 +72,7 @@ import { CalculateLotResponse } from '../models/lot-calculator.model';
     AppTextareaComponent,
     AppButtonComponent,
     DateFieldComponent,
+    MatIcon,
   ],
   templateUrl: './trade-form.component.html',
   styleUrl: './trade-form.component.scss',
@@ -83,6 +101,27 @@ export class TradeFormComponent implements OnInit {
   readonly accountOptions = signal<{ id: string; label: string }[]>([]);
   readonly rMultiplePreview = signal('—');
   readonly priceWarningKey = signal('');
+  readonly images = signal<TradeImage[]>([]);
+  readonly isLoadingImages = signal(false);
+  readonly uploadItems = signal<TradeImageUploadItem[]>([]);
+  readonly isDragOverImages = signal(false);
+  readonly isUploadingImages = computed(() => this.uploadItems().some(item => item.uploadStatus === 'UPLOADING'));
+  readonly hasFailedImageUploads = computed(() => this.uploadItems().some(item => item.uploadStatus === 'ERROR'));
+  readonly deletingImageId = signal<string | null>(null);
+  readonly imageErrors = signal<string[]>([]);
+  readonly saveStatus = signal<'CREATING' | 'UPLOADING' | null>(null);
+  readonly createUploadProgress = signal({ completed: 0, total: 0 });
+  readonly createdTradeId = signal<string | null>(null);
+  readonly imageFileInput = viewChild.required<ElementRef<HTMLInputElement>>('imageFileInput');
+
+  readonly lightboxIndex = signal<number | null>(null);
+  readonly isLightboxOpen = computed(() => this.lightboxIndex() !== null);
+  readonly lightboxImage = computed<TradeImage | null>(() => {
+    const index = this.lightboxIndex();
+    const list = this.images();
+    if (index === null || index < 0 || index >= list.length) return null;
+    return list[index];
+  });
 
   readonly directionOptions: AppSelectOption[] = TRADE_DIRECTIONS.map(d => ({
     label: this.translate.instant(`TRADES.DIRECTIONS.${d.toUpperCase()}`),
@@ -121,6 +160,22 @@ export class TradeFormComponent implements OnInit {
     this.form.valueChanges.pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(() => this.updateDerivedState());
+
+    effect(() => {
+      const index = this.lightboxIndex();
+      const total = this.images().length;
+      if (index === null) return;
+      if (total === 0) {
+        this.lightboxIndex.set(null);
+      } else if (index >= total) {
+        this.lightboxIndex.set(total - 1);
+      }
+    });
+
+    effect(() => {
+      if (typeof document === 'undefined') return;
+      document.body.style.overflow = this.isLightboxOpen() ? 'hidden' : '';
+    });
   }
 
   ngOnInit(): void {
@@ -149,6 +204,7 @@ export class TradeFormComponent implements OnInit {
   }
 
   onSave(): void {
+    if (this.createdTradeId()) return;
     this.submitted = true;
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -194,6 +250,157 @@ export class TradeFormComponent implements OnInit {
           riskAmount: response.riskAmount,
         });
       });
+  }
+
+  triggerImageFileInput(): void {
+    if (!this.isUploadingImages()) this.imageFileInput().nativeElement.click();
+  }
+
+  onImagesSelected(event: Event): void {
+    const files = Array.from((event.target as HTMLInputElement).files ?? []);
+    (event.target as HTMLInputElement).value = '';
+    this.queueImages(files);
+  }
+
+  onImagesDragOver(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!this.isUploadingImages()) this.isDragOverImages.set(true);
+  }
+
+  onImagesDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOverImages.set(false);
+  }
+
+  onImagesDrop(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.isDragOverImages.set(false);
+    this.queueImages(Array.from(event.dataTransfer?.files ?? []));
+  }
+
+  private queueImages(files: File[]): void {
+    if (files.length === 0 || this.isUploadingImages()) return;
+
+    const validFiles: File[] = [];
+    const errors: string[] = [];
+    for (const file of files) {
+      const validationError = this.validateImage(file);
+      if (validationError) errors.push(`${file.name}: ${validationError}`);
+      else validFiles.push(file);
+    }
+    this.imageErrors.update(current => [...current, ...errors]);
+    if (validFiles.length === 0) return;
+
+    const queue = validFiles.map(file => ({
+      file,
+      item: { id: crypto.randomUUID(), fileName: file.name, file, uploadStatus: 'PENDING' as const },
+    }));
+    this.uploadItems.update(current => [...current, ...queue.map(entry => entry.item)]);
+
+    if (this.tradeId) this.uploadQueuedImages(this.tradeId, queue.map(entry => entry.item));
+  }
+
+  onRetryFailedImages(): void {
+    const tradeId = this.createdTradeId();
+    const failedItems = this.uploadItems().filter(item => item.uploadStatus === 'ERROR');
+    if (!tradeId || failedItems.length === 0 || this.isUploadingImages()) return;
+
+    this.isSaving.set(true);
+    this.saveStatus.set('UPLOADING');
+    this.createUploadProgress.set({ completed: 0, total: failedItems.length });
+    this.uploadQueuedImages(tradeId, failedItems, () => this.finishCreatedTradeUploads());
+  }
+
+  private uploadQueuedImages(tradeId: string, items: TradeImageUploadItem[], onComplete?: () => void): void {
+    if (items.length === 0) {
+      onComplete?.();
+      return;
+    }
+
+    from(items).pipe(
+      concatMap(item => {
+        this.uploadItems.update(current => current.map(upload => upload.id === item.id
+          ? { ...upload, uploadStatus: 'UPLOADING', error: undefined }
+          : upload));
+        return this.tradeService.uploadImage(tradeId, item.file).pipe(
+          map(image => ({ image, uploadId: item.id, failed: false })),
+        catchError(() => {
+          this.uploadItems.update(current => current.map(upload => upload.id === item.id
+            ? { ...upload, uploadStatus: 'ERROR', error: this.translate.instant('TRADES.IMAGES.ERRORS.UPLOAD_FAILED') }
+            : upload));
+          return of({ image: null, uploadId: item.id, failed: true });
+        })
+      ); }),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: ({ image, uploadId, failed }) => {
+        if (image) {
+          this.images.update(current => [...current, image]);
+          this.uploadItems.update(current => current.filter(upload => upload.id !== uploadId));
+        }
+        if (this.saveStatus() === 'UPLOADING') {
+          this.createUploadProgress.update(progress => ({ ...progress, completed: progress.completed + 1 }));
+        }
+      },
+      complete: () => onComplete?.(),
+    });
+  }
+
+  onDeleteImage(image: TradeImage): void {
+    if (!this.tradeId || this.deletingImageId()) return;
+    this.deletingImageId.set(image.id);
+    this.tradeService.deleteImage(this.tradeId, image.id).pipe(
+      finalize(() => this.deletingImageId.set(null)),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: () => this.images.update(current => current.filter(item => item.id !== image.id)),
+      error: () => this.imageErrors.update(current => [...current, `${image.originalFileName}: ${this.translate.instant('TRADES.IMAGES.ERRORS.DELETE_FAILED')}`]),
+    });
+  }
+
+  openLightbox(index: number): void {
+    if (index < 0 || index >= this.images().length) return;
+    this.lightboxIndex.set(index);
+  }
+
+  closeLightbox(): void {
+    this.lightboxIndex.set(null);
+  }
+
+  nextLightboxImage(): void {
+    const total = this.images().length;
+    const index = this.lightboxIndex();
+    if (index === null || total < 2) return;
+    this.lightboxIndex.set((index + 1) % total);
+  }
+
+  prevLightboxImage(): void {
+    const total = this.images().length;
+    const index = this.lightboxIndex();
+    if (index === null || total < 2) return;
+    this.lightboxIndex.set((index - 1 + total) % total);
+  }
+
+  onLightboxBackdrop(event: MouseEvent): void {
+    if (event.target === event.currentTarget) this.closeLightbox();
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onLightboxKeydown(event: KeyboardEvent): void {
+    if (!this.isLightboxOpen()) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.closeLightbox();
+    } else if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      this.nextLightboxImage();
+    } else if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      this.prevLightboxImage();
+    }
   }
 
   fieldError(fieldName: string): string {
@@ -262,6 +469,7 @@ export class TradeFormComponent implements OnInit {
           pnl: trade.pnl,
           notes: trade.notes ?? null,
         });
+        this.loadImages();
       },
       error: () => this.router.navigate(['/trades']),
     });
@@ -287,12 +495,25 @@ export class TradeFormComponent implements OnInit {
       notes: value.notes?.trim() || null,
     };
 
-    this.tradeService.create(request).pipe(
-      finalize(() => this.isSaving.set(false))
-    ).subscribe({
+    this.saveStatus.set('CREATING');
+    this.tradeService.create(request).subscribe({
       next: (res) => {
         this.toastService.success('TRADES.CREATE_SUCCESS');
-        this.router.navigate(['/trades', res.id, 'edit']);
+        this.tradeId = res.id;
+        this.createdTradeId.set(res.id);
+        const pendingItems = this.uploadItems().filter(item => item.uploadStatus === 'PENDING');
+        if (pendingItems.length === 0) {
+          this.finishCreatedTradeUploads();
+          return;
+        }
+
+        this.saveStatus.set('UPLOADING');
+        this.createUploadProgress.set({ completed: 0, total: pendingItems.length });
+        this.uploadQueuedImages(res.id, pendingItems, () => this.finishCreatedTradeUploads());
+      },
+      error: () => {
+        this.isSaving.set(false);
+        this.saveStatus.set(null);
       },
     });
   }
@@ -318,7 +539,10 @@ export class TradeFormComponent implements OnInit {
     };
 
     this.tradeService.update(this.tradeId!, request).pipe(
-      finalize(() => this.isSaving.set(false))
+      finalize(() => {
+        this.isSaving.set(false);
+        this.saveStatus.set(null);
+      })
     ).subscribe({
       next: () => this.toastService.success('TRADES.UPDATE_SUCCESS'),
     });
@@ -343,6 +567,31 @@ export class TradeFormComponent implements OnInit {
         if (selectedId) this.form.get('tradingInstrumentId')!.setValue(selectedId);
       },
     });
+  }
+
+  private loadImages(): void {
+    if (!this.tradeId) return;
+    this.isLoadingImages.set(true);
+    this.tradeService.getImages(this.tradeId).pipe(
+      finalize(() => this.isLoadingImages.set(false)),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({ next: images => this.images.set(images) });
+  }
+
+  private finishCreatedTradeUploads(): void {
+    this.isSaving.set(false);
+    this.saveStatus.set(null);
+    const failedCount = this.uploadItems().filter(item => item.uploadStatus === 'ERROR').length;
+    if (failedCount > 0) return;
+    this.router.navigate(['/trades', this.createdTradeId(), 'edit']);
+  }
+
+  private validateImage(file: File): string | null {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) return this.translate.instant('TRADES.IMAGES.ERRORS.INVALID_TYPE');
+    if (file.size === 0) return this.translate.instant('TRADES.IMAGES.ERRORS.EMPTY_FILE');
+    if (file.size > 25 * 1024 * 1024) return this.translate.instant('TRADES.IMAGES.ERRORS.TOO_LARGE');
+    return null;
   }
 
   private toDateValue(value: string | null | undefined): string | null {

@@ -7,6 +7,7 @@ import { QueryBuilder } from '../../../core/utils/query-builder';
 import {
   CreateTradeRequest,
   TradeDetails,
+  TradeImage,
   TradeListItem,
   UpdateTradeRequest,
 } from '../models/trade.model';
@@ -30,6 +31,20 @@ export class TradeService {
 
   update(id: string, request: UpdateTradeRequest): Observable<object> {
     return this.api.put<object>(`${this.base}/${id}`, request);
+  }
+
+  getImages(id: string): Observable<TradeImage[]> {
+    return this.api.get<TradeImage[]>(`${this.base}/${id}/images`);
+  }
+
+  uploadImage(id: string, file: File): Observable<TradeImage> {
+    const data = new FormData();
+    data.append('file', file, file.name);
+    return this.api.post<TradeImage>(`${this.base}/${id}/images`, data);
+  }
+
+  deleteImage(tradeId: string, imageId: string): Observable<object> {
+    return this.api.delete<object>(`${this.base}/${tradeId}/images/${imageId}`);
   }
 
   softDelete(id: string): Observable<object> {

@@ -294,6 +294,34 @@
       "SHORT_STOP_LOSS": "For a short trade, stop loss should be above the entry price.",
       "SHORT_TAKE_PROFIT": "For a short trade, take profit should be below the entry price."
     },
+    "IMAGES": {
+      "TITLE": "Images",
+      "UPLOAD": "Upload images",
+      "UPLOADING": "Uploading...",
+      "DROP_TITLE": "Drop images here or choose files",
+      "READY_TO_UPLOAD": "Ready to upload when the trade is saved.",
+      "CREATING_TRADE": "Creating trade...",
+      "UPLOAD_PROGRESS": "Uploading images ({{completed}}/{{total}})...",
+      "TRADE_SAVED_WITH_FAILURES": "Trade was saved, but one or more images failed to upload.",
+      "RETRY_FAILED": "Retry failed images",
+      "DELETE": "Delete",
+      "EMPTY": "No images have been uploaded for this trade.",
+      "SAVE_FIRST": "Save the trade before adding images.",
+      "LIMITS": "JPEG, PNG, GIF or WebP. Maximum 25 MiB per image.",
+      "ERRORS": {
+        "INVALID_TYPE": "Only JPEG, PNG, GIF and WebP images are allowed.",
+        "EMPTY_FILE": "The file is empty.",
+        "TOO_LARGE": "The image exceeds the 25 MiB limit.",
+        "UPLOAD_FAILED": "Upload failed. Please try again.",
+        "DELETE_FAILED": "Could not delete the image. Please try again."
+      },
+      "LIGHTBOX": {
+        "TITLE": "Image preview",
+        "CLOSE": "Close preview",
+        "PREVIOUS": "Previous image",
+        "NEXT": "Next image"
+      }
+    },
     "CONFIRM_DELETE": {
       "TITLE": "Deactivate trade",
       "MESSAGE": "This will deactivate the trade. You can restore it later.",

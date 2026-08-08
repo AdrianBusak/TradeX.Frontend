@@ -2,7 +2,7 @@
   [title]="(isEditMode ? 'TRADES.EDIT_TITLE' : 'TRADES.CREATE_TITLE') | translate"
   [loading]="isLoading()"
   [isSaving]="isSaving()"
-  [saveDisabled]="isSaving()"
+  [saveDisabled]="isSaving() || createdTradeId() !== null"
   (back)="onBack()"
   (save)="onSave()">
 
@@ -123,5 +123,154 @@
         [maxLength]="4000"
         [error]="fieldError('notes')" />
     </div>
+
+    <div class="form-section images-section">
+      <span class="section-label">{{ 'TRADES.IMAGES.TITLE' | translate }}</span>
+        <div
+          class="image-dropzone"
+          [class.image-dropzone--active]="isDragOverImages()"
+          [class.image-dropzone--disabled]="isUploadingImages()"
+          (dragover)="onImagesDragOver($event)"
+          (dragleave)="onImagesDragLeave($event)"
+          (drop)="onImagesDrop($event)">
+          <mat-icon class="dropzone-icon" aria-hidden="true">cloud_upload</mat-icon>
+          <strong>{{ 'TRADES.IMAGES.DROP_TITLE' | translate }}</strong>
+          <span class="images-hint">{{ 'TRADES.IMAGES.LIMITS' | translate }}</span>
+          <input
+            #imageFileInput
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/webp"
+            multiple
+            hidden
+            [disabled]="isUploadingImages()"
+            (change)="onImagesSelected($event)" />
+          <app-button variant="secondary" size="sm" icon="folder_open" [disabled]="isUploadingImages()" (pressed)="triggerImageFileInput()">
+            {{ isUploadingImages() ? ('TRADES.IMAGES.UPLOADING' | translate) : ('TRADES.IMAGES.UPLOAD' | translate) }}
+          </app-button>
+        </div>
+
+        @if (saveStatus() === 'CREATING') {
+          <span class="images-hint">{{ 'TRADES.IMAGES.CREATING_TRADE' | translate }}</span>
+        } @else if (saveStatus() === 'UPLOADING') {
+          <span class="images-hint">{{ 'TRADES.IMAGES.UPLOAD_PROGRESS' | translate:createUploadProgress() }}</span>
+        }
+
+        @if (imageErrors().length) {
+          <div class="images-errors" role="alert">
+            @for (error of imageErrors(); track error) { <span>{{ error }}</span> }
+          </div>
+        }
+
+        @if (uploadItems().length) {
+          <div class="upload-status-list" aria-live="polite">
+            @for (item of uploadItems(); track item.id) {
+              <div class="upload-status-item" [class.upload-status-item--error]="item.uploadStatus === 'ERROR'">
+                <span>{{ item.fileName }}</span>
+                @if (item.uploadStatus === 'UPLOADING') {
+                  <span>{{ 'TRADES.IMAGES.UPLOADING' | translate }}</span>
+                } @else if (item.uploadStatus === 'PENDING') {
+                  <span>{{ 'TRADES.IMAGES.READY_TO_UPLOAD' | translate }}</span>
+                } @else {
+                  <span>{{ item.error }}</span>
+                }
+              </div>
+            }
+          </div>
+        }
+
+        @if (createdTradeId() && hasFailedImageUploads()) {
+          <div class="image-retry">
+            <span>{{ 'TRADES.IMAGES.TRADE_SAVED_WITH_FAILURES' | translate }}</span>
+            <app-button variant="warning" size="sm" icon="refresh" [disabled]="isUploadingImages()" (pressed)="onRetryFailedImages()">
+              {{ 'TRADES.IMAGES.RETRY_FAILED' | translate }}
+            </app-button>
+          </div>
+        }
+
+        @if (isLoadingImages()) {
+          <span class="images-hint">{{ 'COMMON.LOADING' | translate }}</span>
+        } @else if (images().length) {
+          <div class="image-grid">
+            @for (image of images(); track image.id; let idx = $index) {
+              <article class="image-card">
+                <button
+                  type="button"
+                  class="image-thumb"
+                  [attr.aria-label]="image.originalFileName"
+                  (click)="openLightbox(idx)">
+                  <img [src]="image.url" [alt]="image.originalFileName" />
+                </button>
+                <div class="image-meta">
+                  <span [title]="image.originalFileName">{{ image.originalFileName }}</span>
+                  <app-button
+                    variant="ghost"
+                    size="sm"
+                    icon="delete"
+                    [ariaLabel]="'TRADES.IMAGES.DELETE' | translate"
+                    [disabled]="deletingImageId() !== null"
+                    (pressed)="onDeleteImage(image)">
+                    {{ 'TRADES.IMAGES.DELETE' | translate }}
+                  </app-button>
+                </div>
+              </article>
+            }
+          </div>
+        } @else {
+          <span class="images-hint">{{ 'TRADES.IMAGES.EMPTY' | translate }}</span>
+        }
+    </div>
   </form>
 </app-add-edit-page-layout>
+
+@if (isLightboxOpen()) {
+  <div
+    class="image-lightbox"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'TRADES.IMAGES.LIGHTBOX.TITLE' | translate"
+    (click)="onLightboxBackdrop($event)">
+    <button
+      type="button"
+      class="image-lightbox__close"
+      [attr.aria-label]="'TRADES.IMAGES.LIGHTBOX.CLOSE' | translate"
+      (click)="closeLightbox()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    @if (images().length > 1) {
+      <button
+        type="button"
+        class="image-lightbox__nav image-lightbox__nav--prev"
+        [attr.aria-label]="'TRADES.IMAGES.LIGHTBOX.PREVIOUS' | translate"
+        (click)="prevLightboxImage()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <button
+        type="button"
+        class="image-lightbox__nav image-lightbox__nav--next"
+        [attr.aria-label]="'TRADES.IMAGES.LIGHTBOX.NEXT' | translate"
+        (click)="nextLightboxImage()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    }
+
+    <div class="image-lightbox__viewport">
+      <div
+        class="image-lightbox__track"
+        [style.transform]="'translateX(' + (-(lightboxIndex() ?? 0) * 100) + '%)'">
+        @for (image of images(); track image.id) {
+          <div class="image-lightbox__slide">
+            <img [src]="image.url" [alt]="image.originalFileName" draggable="false" />
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="image-lightbox__footer">
+      <span class="image-lightbox__name">{{ lightboxImage()?.originalFileName }}</span>
+      @if (images().length > 1) {
+        <span class="image-lightbox__counter">{{ (lightboxIndex() ?? 0) + 1 }} / {{ images().length }}</span>
+      }
+    </div>
+  </div>
+}

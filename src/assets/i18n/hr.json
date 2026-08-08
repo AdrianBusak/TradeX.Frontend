@@ -294,6 +294,34 @@
       "SHORT_STOP_LOSS": "Za short trade stop loss treba biti iznad cijene ulaza.",
       "SHORT_TAKE_PROFIT": "Za short trade take profit treba biti ispod cijene ulaza."
     },
+    "IMAGES": {
+      "TITLE": "Slike",
+      "UPLOAD": "Dodaj slike",
+      "UPLOADING": "Ucitavanje...",
+      "DROP_TITLE": "Ispustite slike ovdje ili odaberite datoteke",
+      "READY_TO_UPLOAD": "Spremno za upload nakon spremanja tradea.",
+      "CREATING_TRADE": "Kreiranje tradea...",
+      "UPLOAD_PROGRESS": "Upload slika ({{completed}}/{{total}})...",
+      "TRADE_SAVED_WITH_FAILURES": "Trade je spremljen, ali upload jedne ili vise slika nije uspio.",
+      "RETRY_FAILED": "Ponovi neuspjele slike",
+      "DELETE": "Obrisi",
+      "EMPTY": "Za ovaj trade jos nema dodanih slika.",
+      "SAVE_FIRST": "Spremite trade prije dodavanja slika.",
+      "LIMITS": "JPEG, PNG, GIF ili WebP. Maksimalno 25 MiB po slici.",
+      "ERRORS": {
+        "INVALID_TYPE": "Dopustene su samo JPEG, PNG, GIF i WebP slike.",
+        "EMPTY_FILE": "Datoteka je prazna.",
+        "TOO_LARGE": "Slika prelazi ogranicenje od 25 MiB.",
+        "UPLOAD_FAILED": "Upload nije uspio. Pokusajte ponovno.",
+        "DELETE_FAILED": "Brisanje slike nije uspjelo. Pokusajte ponovno."
+      },
+      "LIGHTBOX": {
+        "TITLE": "Pregled slike",
+        "CLOSE": "Zatvori pregled",
+        "PREVIOUS": "Prethodna slika",
+        "NEXT": "Sljedeca slika"
+      }
+    },
     "CONFIRM_DELETE": {
       "TITLE": "Deaktiviraj trade",
       "MESSAGE": "Ovo ce deaktivirati trade. Mozete ga obnoviti kasnije.",

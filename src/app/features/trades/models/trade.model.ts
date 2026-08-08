@@ -15,6 +15,16 @@ export interface TradeAccountSummary {
   name: string;
 }
 
+export interface TradeImage {
+  id: string;
+  originalFileName: string;
+  contentType: 'image/jpeg' | 'image/png' | 'image/gif' | 'image/webp';
+  sizeBytes: number;
+  uploadedAt: string;
+  /** Temporary SAS URL supplied by the API. Keep only in the current view state. */
+  url: string;
+}
+
 export interface TradeListItem {
   id: string;
   strategyId: string;
@@ -41,6 +51,7 @@ export interface TradeListItem {
 
 export interface TradeDetails extends TradeListItem {
   tradingAccountIds: string[];
+  images?: TradeImage[];
 }
 
 export interface CreateTradeRequest {
