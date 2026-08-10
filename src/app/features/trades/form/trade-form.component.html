@@ -219,6 +219,83 @@
           <span class="images-hint">{{ 'TRADES.IMAGES.EMPTY' | translate }}</span>
         }
     </div>
+
+    @if (isEditMode) {
+      <div class="form-section rule-compliance-section">
+        <span class="section-label">{{ 'TRADES.RULE_COMPLIANCE.TITLE' | translate }}</span>
+
+        @if (!hasTradeStrategy()) {
+          <p class="rule-compliance-empty">{{ 'TRADES.RULE_COMPLIANCE.NO_STRATEGY' | translate }}</p>
+        } @else if (isLoadingRuleChecks()) {
+          <p class="rule-compliance-empty">{{ 'COMMON.LOADING' | translate }}</p>
+        } @else if (ruleChecksLoadFailed()) {
+          <div class="rule-compliance-error" role="alert">
+            <span>{{ 'TRADES.RULE_COMPLIANCE.LOAD_ERROR' | translate }}</span>
+            <app-button variant="secondary" size="sm" icon="refresh" (pressed)="loadRuleChecks()">
+              {{ 'TRADES.RULE_COMPLIANCE.RETRY' | translate }}
+            </app-button>
+          </div>
+        } @else if (ruleChecks(); as checks) {
+          @if (checks.totalRules === 0) {
+            <p class="rule-compliance-empty">{{ 'TRADES.RULE_COMPLIANCE.EMPTY' | translate }}</p>
+          } @else {
+            <div class="compliance-summary">
+              <div class="compliance-score">
+                <span>{{ 'TRADES.RULE_COMPLIANCE.COMPLIANCE_SCORE' | translate }}</span>
+                <strong>{{ checks.complianceScore == null ? '—' : (checks.complianceScore + '%') }}</strong>
+              </div>
+              <div class="compliance-stat"><span>{{ 'TRADES.RULE_COMPLIANCE.TOTAL' | translate }}</span><strong>{{ checks.totalRules }}</strong></div>
+              <div class="compliance-stat"><span>{{ 'TRADES.RULE_COMPLIANCE.CHECKED' | translate }}</span><strong>{{ checks.checkedRules }}</strong></div>
+              <div class="compliance-stat compliance-stat--success"><span>{{ 'TRADES.RULE_COMPLIANCE.FOLLOWED' | translate }}</span><strong>{{ checks.followedRules }}</strong></div>
+              <div class="compliance-stat compliance-stat--danger"><span>{{ 'TRADES.RULE_COMPLIANCE.BROKEN' | translate }}</span><strong>{{ checks.brokenRules }}</strong></div>
+            </div>
+
+            <div class="rule-check-list">
+              @for (rule of checks.rules; track rule.strategyRuleId) {
+                <article class="rule-check-card" [class.rule-check-card--followed]="rule.isFollowed === true" [class.rule-check-card--broken]="rule.isFollowed === false">
+                  <div class="rule-check-header">
+                    <div>
+                      <div class="rule-check-title-row">
+                        <h3>{{ rule.title }}</h3>
+                        @if (rule.isRequired) { <span class="required-badge">{{ 'TRADES.RULE_COMPLIANCE.REQUIRED' | translate }}</span> }
+                      </div>
+                      @if (rule.description) { <p>{{ rule.description }}</p> }
+                    </div>
+                    <span class="rule-status" [class.rule-status--followed]="rule.isFollowed === true" [class.rule-status--broken]="rule.isFollowed === false">
+                      {{ ('TRADES.RULE_COMPLIANCE.STATUS.' + ruleStatus(rule)) | translate }}
+                    </span>
+                  </div>
+
+                  <div class="rule-controls" role="group" [attr.aria-label]="rule.title">
+                    <app-button size="sm" [variant]="rule.isFollowed === true ? 'success' : 'secondary'" (pressed)="setRuleFollowed(rule.strategyRuleId, true)">
+                      {{ 'TRADES.RULE_COMPLIANCE.FOLLOWED' | translate }}
+                    </app-button>
+                    <app-button size="sm" [variant]="rule.isFollowed === false ? 'danger' : 'secondary'" (pressed)="setRuleFollowed(rule.strategyRuleId, false)">
+                      {{ 'TRADES.RULE_COMPLIANCE.BROKEN' | translate }}
+                    </app-button>
+                    <app-button size="sm" variant="ghost" [disabled]="rule.isFollowed == null" (pressed)="setRuleFollowed(rule.strategyRuleId, null)">
+                      {{ 'TRADES.RULE_COMPLIANCE.CLEAR' | translate }}
+                    </app-button>
+                  </div>
+
+                  <label class="rule-note">
+                    <span>{{ 'TRADES.RULE_COMPLIANCE.NOTE' | translate }}</span>
+                    <textarea [value]="rule.note ?? ''" maxlength="1000" [disabled]="isSavingRuleChecks()" (input)="setRuleNote(rule.strategyRuleId, $event)"></textarea>
+                    <small>{{ (rule.note?.length ?? 0) }} / 1000</small>
+                  </label>
+                </article>
+              }
+            </div>
+
+            <div class="rule-compliance-actions">
+              <app-button icon="save" [loading]="isSavingRuleChecks()" [disabled]="isSavingRuleChecks()" (pressed)="saveRuleChecks()">
+                {{ 'TRADES.RULE_COMPLIANCE.SAVE' | translate }}
+              </app-button>
+            </div>
+          }
+        }
+      </div>
+    }
   </form>
 </app-add-edit-page-layout>
 

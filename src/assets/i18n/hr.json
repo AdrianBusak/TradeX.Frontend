@@ -251,6 +251,28 @@
       "DETAILS": "Detalji tradea",
       "RESULT": "Rezultat"
     },
+    "RULE_COMPLIANCE": {
+      "TITLE": "Usklađenost s pravilima",
+      "COMPLIANCE_SCORE": "Ocjena usklađenosti",
+      "TOTAL": "Ukupno pravila",
+      "CHECKED": "Provjereno",
+      "FOLLOWED": "Ispoštovano",
+      "BROKEN": "Prekršeno",
+      "REQUIRED": "Obavezno",
+      "NOTE": "Bilješka (nije obavezno)",
+      "CLEAR": "Očisti",
+      "SAVE": "Spremi provjere",
+      "SAVE_SUCCESS": "Provjere pravila su spremljene.",
+      "EMPTY": "Ova strategija još nema pravila.",
+      "NO_STRATEGY": "Za ovaj trade nije odabrana strategija.",
+      "LOAD_ERROR": "Nije moguće učitati provjere pravila.",
+      "RETRY": "Pokušaj ponovno",
+      "STATUS": {
+        "NOT_CHECKED": "Nije provjereno",
+        "FOLLOWED": "Ispoštovano",
+        "BROKEN": "Prekršeno"
+      }
+    },
     "FIELDS": {
       "TRADING_INSTRUMENT": "Instrument",
       "TRADING_ACCOUNTS": "Trading racuni",

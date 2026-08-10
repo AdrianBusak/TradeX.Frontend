@@ -251,6 +251,28 @@
       "DETAILS": "Trade details",
       "RESULT": "Result"
     },
+    "RULE_COMPLIANCE": {
+      "TITLE": "Rule Compliance",
+      "COMPLIANCE_SCORE": "Compliance score",
+      "TOTAL": "Total rules",
+      "CHECKED": "Checked",
+      "FOLLOWED": "Followed",
+      "BROKEN": "Broken",
+      "REQUIRED": "Required",
+      "NOTE": "Note (optional)",
+      "CLEAR": "Clear",
+      "SAVE": "Save checks",
+      "SAVE_SUCCESS": "Rule checks saved.",
+      "EMPTY": "This strategy has no rules yet.",
+      "NO_STRATEGY": "No strategy selected for this trade.",
+      "LOAD_ERROR": "Could not load rule checks.",
+      "RETRY": "Retry",
+      "STATUS": {
+        "NOT_CHECKED": "Not checked",
+        "FOLLOWED": "Followed",
+        "BROKEN": "Broken"
+      }
+    },
     "FIELDS": {
       "TRADING_INSTRUMENT": "Instrument",
       "TRADING_ACCOUNTS": "Trading accounts",

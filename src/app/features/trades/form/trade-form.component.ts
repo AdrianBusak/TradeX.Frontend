@@ -48,6 +48,8 @@ import {
 } from '../instrument-dialog/trading-instrument-dialog.component';
 import { LotCalculatorDialogComponent, LotCalculatorDialogData } from '../lot-calculator-dialog/lot-calculator-dialog.component';
 import { CalculateLotResponse } from '../models/lot-calculator.model';
+import { TradeRuleCheckItem, TradeRuleChecksResponse, UpdateTradeRuleChecksRequest } from '../models/trade-rule-check.model';
+import { TradeRuleCheckService } from '../services/trade-rule-check.service';
 
 type TradeImageUploadStatus = 'PENDING' | 'UPLOADING' | 'ERROR';
 
@@ -83,6 +85,7 @@ export class TradeFormComponent implements OnInit {
   private readonly instrumentService = inject(TradingInstrumentService);
   private readonly strategyService = inject(StrategyService);
   private readonly accountService = inject(TradingAccountService);
+  private readonly tradeRuleCheckService = inject(TradeRuleCheckService);
   private readonly toastService = inject(ToastService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
@@ -109,6 +112,11 @@ export class TradeFormComponent implements OnInit {
   readonly hasFailedImageUploads = computed(() => this.uploadItems().some(item => item.uploadStatus === 'ERROR'));
   readonly deletingImageId = signal<string | null>(null);
   readonly imageErrors = signal<string[]>([]);
+  readonly ruleChecks = signal<TradeRuleChecksResponse | null>(null);
+  readonly isLoadingRuleChecks = signal(false);
+  readonly isSavingRuleChecks = signal(false);
+  readonly ruleChecksLoadFailed = signal(false);
+  readonly hasTradeStrategy = signal(false);
   readonly saveStatus = signal<'CREATING' | 'UPLOADING' | null>(null);
   readonly createUploadProgress = signal({ completed: 0, total: 0 });
   readonly createdTradeId = signal<string | null>(null);
@@ -250,6 +258,67 @@ export class TradeFormComponent implements OnInit {
           riskAmount: response.riskAmount,
         });
       });
+  }
+
+  loadRuleChecks(): void {
+    if (!this.tradeId || !this.hasTradeStrategy()) return;
+
+    this.isLoadingRuleChecks.set(true);
+    this.ruleChecksLoadFailed.set(false);
+    this.tradeRuleCheckService.getByTradeId(this.tradeId).pipe(
+      finalize(() => this.isLoadingRuleChecks.set(false)),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: response => this.ruleChecks.set(response),
+      error: () => this.ruleChecksLoadFailed.set(true),
+    });
+  }
+
+  setRuleFollowed(strategyRuleId: string, isFollowed: boolean | null): void {
+    this.ruleChecks.update(response => response ? {
+      ...response,
+      rules: response.rules.map(rule => rule.strategyRuleId === strategyRuleId ? { ...rule, isFollowed } : rule),
+    } : response);
+  }
+
+  setRuleNote(strategyRuleId: string, event: Event): void {
+    const note = (event.target as HTMLTextAreaElement).value;
+    this.ruleChecks.update(response => response ? {
+      ...response,
+      rules: response.rules.map(rule => rule.strategyRuleId === strategyRuleId ? { ...rule, note } : rule),
+    } : response);
+  }
+
+  ruleStatus(rule: TradeRuleCheckItem): 'FOLLOWED' | 'BROKEN' | 'NOT_CHECKED' {
+    if (rule.isFollowed === true) return 'FOLLOWED';
+    if (rule.isFollowed === false) return 'BROKEN';
+    return 'NOT_CHECKED';
+  }
+
+  saveRuleChecks(): void {
+    const response = this.ruleChecks();
+    if (!this.tradeId || !response || this.isSavingRuleChecks()) return;
+
+    const request: UpdateTradeRuleChecksRequest = {
+      rules: response.rules
+        .filter(rule => rule.isFollowed !== null && rule.isFollowed !== undefined)
+        .map(rule => ({
+          strategyRuleId: rule.strategyRuleId,
+          isFollowed: rule.isFollowed!,
+          note: rule.note?.trim() || null,
+        })),
+    };
+
+    this.isSavingRuleChecks.set(true);
+    this.tradeRuleCheckService.update(this.tradeId, request).pipe(
+      finalize(() => this.isSavingRuleChecks.set(false)),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe({
+      next: updated => {
+        this.ruleChecks.set(updated);
+        this.toastService.success('TRADES.RULE_COMPLIANCE.SAVE_SUCCESS');
+      },
+    });
   }
 
   triggerImageFileInput(): void {
@@ -452,6 +521,7 @@ export class TradeFormComponent implements OnInit {
       finalize(() => this.isLoading.set(false))
     ).subscribe({
       next: (trade: TradeDetails) => {
+        this.hasTradeStrategy.set(!!trade.strategyId);
         this.form.patchValue({
           tradingInstrumentId: trade.tradingInstrumentId,
           strategyId: trade.strategyId,
@@ -470,6 +540,7 @@ export class TradeFormComponent implements OnInit {
           notes: trade.notes ?? null,
         });
         this.loadImages();
+        this.loadRuleChecks();
       },
       error: () => this.router.navigate(['/trades']),
     });
