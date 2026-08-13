@@ -29,6 +29,7 @@ export class SidebarComponent {
     { labelKey: 'NAV.TRADES', route: '/trades', icon: 'candlestick_chart' },
     { labelKey: 'NAV.JOURNAL', route: '/journal', icon: 'edit_note' },
     { labelKey: 'NAV.STRATEGIES', route: '/strategies', icon: 'schema' },
+    { labelKey: 'NAV.MISTAKES', route: '/mistakes', icon: 'warning_amber' },
     { labelKey: 'NAV.RISK', route: '/risk', icon: 'shield' },
     { labelKey: 'NAV.ANALYTICS', route: '/analytics', icon: 'monitoring' },
     { labelKey: 'NAV.ML_PREDICTION', route: '/ml-prediction', icon: 'model_training' },

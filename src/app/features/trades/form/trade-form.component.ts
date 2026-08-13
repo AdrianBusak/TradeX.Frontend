@@ -50,6 +50,7 @@ import { LotCalculatorDialogComponent, LotCalculatorDialogData } from '../lot-ca
 import { CalculateLotResponse } from '../models/lot-calculator.model';
 import { TradeRuleCheckItem, TradeRuleChecksResponse, UpdateTradeRuleChecksRequest } from '../models/trade-rule-check.model';
 import { TradeRuleCheckService } from '../services/trade-rule-check.service';
+import { TradeMistakesSectionComponent } from '../mistakes/trade-mistakes-section.component';
 
 type TradeImageUploadStatus = 'PENDING' | 'UPLOADING' | 'ERROR';
 
@@ -75,6 +76,7 @@ interface TradeImageUploadItem {
     AppButtonComponent,
     DateFieldComponent,
     MatIcon,
+    TradeMistakesSectionComponent,
   ],
   templateUrl: './trade-form.component.html',
   styleUrl: './trade-form.component.scss',

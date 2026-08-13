@@ -1,0 +1,57 @@
+.mistakes-list {
+  display: grid;
+  gap: 12px;
+}
+
+.mistake-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--tx-border);
+  border-radius: var(--tx-radius-md);
+  background: var(--tx-bg-surface-2);
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  p {
+    margin: 6px 0 0;
+    opacity: .7;
+    white-space: pre-wrap;
+  }
+}
+
+.mistake-actions {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mistakes-empty,
+.mistakes-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 16px;
+  text-align: center;
+  opacity: .8;
+}
+
+.mistakes-message {
+  color: var(--tx-danger);
+}
+
+@media (max-width: 600px) {
+  .mistake-card {
+    flex-direction: column;
+  }
+
+  .mistake-actions {
+    align-items: stretch;
+  }
+}

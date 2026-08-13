@@ -1,0 +1,53 @@
+<section class="mistakes-section">
+  <div class="section-header">
+    <div>
+      <span class="section-label">{{ 'TRADES.MISTAKES.TITLE' | translate }}</span>
+      @if (!isLoading() && !loadFailed() && mistakeCatalog().length > 0) {
+        <p>{{ 'TRADES.MISTAKES.SELECTED' | translate:{ count: selectedCount() } }}</p>
+      }
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <p class="mistakes-empty">{{ 'COMMON.LOADING' | translate }}</p>
+  } @else if (loadFailed()) {
+    <div class="mistakes-error" role="alert">
+      <span>{{ 'TRADES.MISTAKES.LOAD_ERROR' | translate }}</span>
+      <app-button size="sm" variant="secondary" icon="refresh" (pressed)="load()">
+        {{ 'TRADES.MISTAKES.RETRY' | translate }}
+      </app-button>
+    </div>
+  } @else if (mistakeCatalog().length === 0) {
+    <p class="mistakes-empty">{{ 'TRADES.MISTAKES.EMPTY_CATALOG' | translate }}</p>
+  } @else {
+    @if (selectedCount() === 0) {
+      <p class="mistakes-empty">{{ 'TRADES.MISTAKES.NONE_SELECTED' | translate }}</p>
+    }
+
+    <div class="mistake-check-list">
+      @for (mistake of mistakeCatalog(); track mistake.id) {
+        <article class="mistake-check-card" [class.mistake-check-card--selected]="isSelected(mistake.id)">
+          <label>
+            <input type="checkbox" [checked]="isSelected(mistake.id)" [disabled]="isSaving()" (change)="toggle(mistake.id, $event)" />
+            <span>
+              <strong>{{ mistake.name }}</strong>
+              @if (mistake.description) { <small>{{ mistake.description }}</small> }
+            </span>
+          </label>
+          @if (isSelected(mistake.id)) {
+            <label class="mistake-note">
+              <span>{{ 'TRADES.MISTAKES.NOTE' | translate }}</span>
+              <textarea maxlength="1000" [value]="note(mistake.id)" [disabled]="isSaving()" (input)="setNote(mistake.id, $event)"></textarea>
+            </label>
+          }
+        </article>
+      }
+    </div>
+
+    <div class="mistakes-actions">
+      <app-button icon="save" [loading]="isSaving()" [disabled]="isSaving()" (pressed)="save()">
+        {{ 'TRADES.MISTAKES.SAVE' | translate }}
+      </app-button>
+    </div>
+  }
+</section>

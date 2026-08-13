@@ -1,0 +1,46 @@
+<app-page-layout [title]="'MISTAKES.TITLE' | translate" icon="warning_amber">
+  <div actions>
+    <app-button icon="add" (pressed)="create()">
+      {{ 'MISTAKES.ADD' | translate }}
+    </app-button>
+  </div>
+
+  @if (loading()) {
+    <app-loading-state />
+  } @else if (loadFailed()) {
+    <div class="mistakes-message" role="alert">
+      <span>{{ 'MISTAKES.LOAD_ERROR' | translate }}</span>
+      <app-button size="sm" variant="secondary" (pressed)="retry()">
+        {{ 'MISTAKES.RETRY' | translate }}
+      </app-button>
+    </div>
+  } @else if (mistakes().length === 0) {
+    <div class="mistakes-empty">
+      <p>{{ 'MISTAKES.EMPTY' | translate }}</p>
+      <app-button icon="add" (pressed)="create()">
+        {{ 'MISTAKES.ADD' | translate }}
+      </app-button>
+    </div>
+  } @else {
+    <div class="mistakes-list">
+      @for (mistake of mistakes(); track mistake.id) {
+        <article class="mistake-card">
+          <div>
+            <h3>{{ mistake.name }}</h3>
+            @if (mistake.description) {
+              <p>{{ mistake.description }}</p>
+            }
+          </div>
+          <div class="mistake-actions">
+            <app-button size="sm" variant="secondary" icon="edit" (pressed)="edit(mistake.id)">
+              {{ 'MISTAKES.EDIT' | translate }}
+            </app-button>
+            <app-button size="sm" variant="danger" icon="delete" (pressed)="remove(mistake)">
+              {{ 'MISTAKES.DELETE' | translate }}
+            </app-button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</app-page-layout>

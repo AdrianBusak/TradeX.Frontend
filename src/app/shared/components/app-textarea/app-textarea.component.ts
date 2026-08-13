@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, inject, input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -16,6 +16,8 @@ import { TranslatePipe } from '@ngx-translate/core';
   }]
 })
 export class AppTextareaComponent implements ControlValueAccessor {
+  private readonly cdr = inject(ChangeDetectorRef);
+
   readonly label = input('');
   readonly placeholder = input('');
   readonly hint = input('');
@@ -36,6 +38,7 @@ export class AppTextareaComponent implements ControlValueAccessor {
 
   writeValue(value: string | null): void {
     this.value = value ?? '';
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: (value: string) => void): void {

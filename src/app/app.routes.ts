@@ -97,6 +97,21 @@ export const routes: Routes = [
             .then(m => m.StrategyFormComponent)
       },
       {
+        path: 'mistakes',
+        data: { titleKey: 'NAV.MISTAKES', icon: 'warning_amber' },
+        loadComponent: () => import('./features/mistakes/list/mistakes-list.component').then(m => m.MistakesListComponent)
+      },
+      {
+        path: 'mistakes/create',
+        data: { titleKey: 'MISTAKES.ADD' },
+        loadComponent: () => import('./features/mistakes/form/mistake-form.component').then(m => m.MistakeFormComponent)
+      },
+      {
+        path: 'mistakes/:id/edit',
+        data: { titleKey: 'MISTAKES.EDIT' },
+        loadComponent: () => import('./features/mistakes/form/mistake-form.component').then(m => m.MistakeFormComponent)
+      },
+      {
         path: 'risk',
         data: { titleKey: 'NAV.RISK', title: 'Risk', subtitle: 'Monitor exposure, drawdown and rule compliance.', icon: 'shield' },
         loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)

@@ -75,6 +75,7 @@
     "TRADES": "Trades",
     "JOURNAL": "Journal",
     "STRATEGIES": "Strategies",
+    "MISTAKES": "Mistakes",
     "RISK": "Risk",
     "ANALYTICS": "Analytics",
     "ML_PREDICTION": "ML Prediction",
@@ -353,6 +354,17 @@
       "TITLE": "Permanently delete trade",
       "MESSAGE": "This action cannot be undone.",
       "CONFIRM": "Delete permanently"
+    },
+    "MISTAKES": {
+      "TITLE": "Mistakes",
+      "NOTE": "Note",
+      "SAVE": "Save mistakes",
+      "SAVE_SUCCESS": "Trade mistakes saved.",
+      "SELECTED": "Selected mistakes: {{count}}",
+      "NONE_SELECTED": "No mistakes recorded for this trade.",
+      "EMPTY_CATALOG": "No mistakes added yet. Create your first mistake.",
+      "LOAD_ERROR": "Mistakes could not be loaded.",
+      "RETRY": "Retry"
     }
   },
   "LOT_CALCULATOR": {
@@ -402,6 +414,20 @@
       "SYMBOL": "Symbol",
       "MARKET_TYPE": "Market type"
     }
+  },
+  "MISTAKES": {
+    "TITLE": "Mistakes",
+    "ADD": "Add mistake",
+    "EDIT": "Edit mistake",
+    "DELETE": "Delete mistake",
+    "EMPTY": "No mistakes added yet.",
+    "LOAD_ERROR": "Mistakes could not be loaded.",
+    "RETRY": "Retry",
+    "CREATE_SUCCESS": "Mistake created.",
+    "UPDATE_SUCCESS": "Mistake updated.",
+    "DELETE_SUCCESS": "Mistake deleted.",
+    "FIELDS": { "NAME": "Name", "DESCRIPTION": "Description" },
+    "CONFIRM_DELETE": { "TITLE": "Delete mistake", "MESSAGE": "Are you sure you want to delete {{name}}?" }
   },
   "TRADING_ACCOUNTS": {
     "TITLE": "Trading Accounts",

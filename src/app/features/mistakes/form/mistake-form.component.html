@@ -1,0 +1,21 @@
+<app-add-edit-page-layout
+  [title]="(editing ? 'MISTAKES.EDIT' : 'MISTAKES.ADD') | translate"
+  [loading]="loading()"
+  [isSaving]="saving()"
+  [saveDisabled]="saving()"
+  (back)="back()"
+  (save)="save()">
+  <form [formGroup]="form">
+    <app-input
+      formControlName="name"
+      [label]="'MISTAKES.FIELDS.NAME' | translate"
+      [required]="true"
+      [error]="error('name')" />
+
+    <app-textarea
+      formControlName="description"
+      [label]="'MISTAKES.FIELDS.DESCRIPTION' | translate"
+      [rows]="5"
+      [error]="error('description')" />
+  </form>
+</app-add-edit-page-layout>

@@ -221,6 +221,8 @@
     </div>
 
     @if (isEditMode) {
+      <app-trade-mistakes-section [tradeId]="tradeId!" />
+
       <div class="form-section rule-compliance-section">
         <span class="section-label">{{ 'TRADES.RULE_COMPLIANCE.TITLE' | translate }}</span>
 
