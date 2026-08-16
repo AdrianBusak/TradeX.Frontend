@@ -1,0 +1,73 @@
+<div class="economic-calendar tx-page">
+  <app-page-header
+    title="Economic Calendar"
+    subtitle="Follow scheduled market-moving economic releases."
+    icon="calendar_month">
+    <div page-actions class="header-actions">
+      @if (formatLastUpdated(); as updated) {
+        <span class="last-updated">{{ updated }}</span>
+      }
+      <app-button variant="secondary" icon="today" (pressed)="today()">Today</app-button>
+      <div class="day-nav" aria-label="Calendar navigation">
+        <button type="button" aria-label="Previous day" (click)="previousDay()"><mat-icon>chevron_left</mat-icon></button>
+        <button type="button" aria-label="Next day" (click)="nextDay()"><mat-icon>chevron_right</mat-icon></button>
+      </div>
+    </div>
+  </app-page-header>
+
+  @if (loading() && !loadedWeek()) {
+    <section class="calendar-skeleton" aria-label="Loading economic calendar">
+      @for (item of [1, 2, 3, 4, 5, 6, 7]; track item) { <i></i> }
+    </section>
+  } @else {
+    <section class="day-slider" aria-label="Days in selected week">
+      @for (day of weekDays(); track day.date.getTime()) {
+        <button
+          type="button"
+          class="day-item"
+          [class.day-item--selected]="isSelected(day.date)"
+          [attr.aria-pressed]="isSelected(day.date)"
+          (click)="selectDay(day.date)">
+          <span>{{ formatDay(day.date) }}</span>
+          <strong>{{ day.date.getDate() }}</strong>
+          <small>{{ formatMonth(day.date) }}</small>
+          @if (day.hasHighImpact) { <b aria-label="High impact event"></b> }
+        </button>
+      }
+    </section>
+  }
+
+  @if (error(); as errorMessage) {
+    <div class="refresh-error"><span>{{ errorMessage }}</span><app-button size="sm" variant="ghost" (pressed)="retry()">Try again</app-button></div>
+  }
+
+  <section class="filters" aria-label="Economic event filters">
+    <label>Impact<select [value]="filters().impact ?? ''" (change)="setImpact($any($event.target).value)"><option value="">All impacts</option>@for (impact of ['High', 'Medium', 'Low', 'Holiday', 'Unknown']; track impact) { <option [value]="impact">{{ impact }}</option> }</select></label>
+    <label>Currency<select [value]="filters().currency ?? ''" (change)="setCurrency($any($event.target).value)"><option value="">All currencies</option>@for (currency of currencyOptions(); track currency) { <option [value]="currency">{{ currency }}</option> }</select></label>
+    <app-button size="sm" variant="ghost" (pressed)="clearFilters()">Clear filters</app-button>
+  </section>
+
+  @if (loading() && loadedWeek()) {
+    <section class="event-skeleton">@for (item of [1, 2, 3]; track item) { <i></i> }</section>
+  }
+  @if (noStoredEvents()) {
+    <app-card padding="lg"><app-empty-state icon="event_busy" title="No economic events stored yet" description="The backend has not saved any economic events for this week yet." /></app-card>
+  } @else if (!loading() && !error() && !selectedDayEvents().length) {
+    <app-card padding="lg"><app-empty-state icon="event_available" title="No events for this day" description="Try another day or clear the active filters." /></app-card>
+  } @else if (selectedDayEvents().length) {
+    <section class="event-list" aria-label="Economic events">
+      @for (event of selectedDayEvents(); track event.id) {
+        <app-card padding="md" class="event-card">
+          <article class="event-row">
+            <time>{{ formatTime(event.scheduledAt) }}</time>
+            <app-badge size="sm" variant="brand">{{ event.currency || '—' }}</app-badge>
+            <div class="event-title"><strong>{{ event.title }}</strong></div>
+            <app-badge size="sm" [variant]="impactVariant(event.impact)">{{ event.impact }}</app-badge>
+            <div class="event-value"><span>Forecast</span><strong>{{ valueOrDash(event.forecast) }}</strong></div>
+            <div class="event-value"><span>Previous</span><strong>{{ valueOrDash(event.previous) }}</strong></div>
+          </article>
+        </app-card>
+      }
+    </section>
+  }
+</div>

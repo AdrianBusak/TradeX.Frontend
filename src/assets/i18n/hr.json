@@ -71,6 +71,7 @@
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
+    "ECONOMIC_CALENDAR": "Ekonomski kalendar",
     "TRADING_ACCOUNTS": "Racuni",
     "TRADES": "Trades",
     "JOURNAL": "Journal",
@@ -365,6 +366,32 @@
       "EMPTY_CATALOG": "Nema dodanih grešaka. Dodajte svoju prvu grešku.",
       "LOAD_ERROR": "Greške nije moguće učitati.",
       "RETRY": "Pokušaj ponovno"
+    },
+    "PRE_TRADE_SCORE": {
+      "TITLE": "AI Trade Score (eksperimentalno)",
+      "SUBTITLE": "Procjena vjerojatnosti pozitivnog R rezultata na temelju tvojih ranijih tradova.",
+      "READINESS_LOAD_ERROR": "Nije moguće ucitati stanje AI modela.",
+      "RETRY": "Pokušaj ponovno",
+      "NOT_ENOUGH_DATA": "Još nemaš dovoljno zatvorenih tradova za treniranje modela.",
+      "PROGRESS_LABEL": "Napredak do spremnosti AI modela",
+      "CLOSED_PROGRESS": "Zatvoreni tradovi: {{current}} / {{required}}",
+      "POSITIVE_PROGRESS": "Pozitivni: {{current}} / {{required}}",
+      "NON_POSITIVE_PROGRESS": "Nepozitivni: {{current}} / {{required}}",
+      "READY_NO_MODEL": "Imaš dovoljno podataka. Treniraj model da bi vidio procjene.",
+      "TRAIN_BTN": "Treniraj moj model",
+      "RETRAIN_BTN": "Osvježi model",
+      "TRAIN_FAILED": "Treniranje modela nije uspjelo. Pokušaj ponovno.",
+      "SCORE_FAILED": "Izračun procjene nije uspio. Pokušaj ponovno.",
+      "CALCULATING": "Izračun procjene...",
+      "FILL_REQUIRED": "Odaberi strategiju, instrument, smjer i datum tradea za procjenu.",
+      "PROBABILITY_LABEL": "Procijenjena vjerojatnost pozitivnog ishoda",
+      "CONFIDENCE": "Pouzdanost",
+      "CONFIDENCE_LEVEL": {
+        "LOW": "Niska",
+        "MEDIUM": "Srednja",
+        "HIGH": "Visoka"
+      },
+      "BASED_ON": "Na temelju {{count}} tvojih ranije zatvorenih tradova."
     }
   },
   "LOT_CALCULATOR": {

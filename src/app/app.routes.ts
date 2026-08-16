@@ -97,6 +97,11 @@ export const routes: Routes = [
             .then(m => m.StrategyFormComponent)
       },
       {
+        path: 'economic-calendar',
+        data: { title: 'Economic Calendar', icon: 'calendar_month' },
+        loadComponent: () => import('./features/economic-calendar/economic-calendar.component').then(m => m.EconomicCalendarComponent)
+      },
+      {
         path: 'mistakes',
         data: { titleKey: 'NAV.MISTAKES', icon: 'warning_amber' },
         loadComponent: () => import('./features/mistakes/list/mistakes-list.component').then(m => m.MistakesListComponent)

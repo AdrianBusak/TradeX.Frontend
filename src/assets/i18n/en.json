@@ -71,6 +71,7 @@
   },
   "NAV": {
     "DASHBOARD": "Dashboard",
+    "ECONOMIC_CALENDAR": "Economic Calendar",
     "TRADING_ACCOUNTS": "Accounts",
     "TRADES": "Trades",
     "JOURNAL": "Journal",
@@ -365,6 +366,32 @@
       "EMPTY_CATALOG": "No mistakes added yet. Create your first mistake.",
       "LOAD_ERROR": "Mistakes could not be loaded.",
       "RETRY": "Retry"
+    },
+    "PRE_TRADE_SCORE": {
+      "TITLE": "AI Trade Score (Experimental)",
+      "SUBTITLE": "Estimated probability of a positive R outcome from your past trades.",
+      "READINESS_LOAD_ERROR": "Could not load AI readiness.",
+      "RETRY": "Retry",
+      "NOT_ENOUGH_DATA": "You do not have enough closed trades to train the model yet.",
+      "PROGRESS_LABEL": "Progress towards AI readiness",
+      "CLOSED_PROGRESS": "Closed trades: {{current}} / {{required}}",
+      "POSITIVE_PROGRESS": "Positive: {{current}} / {{required}}",
+      "NON_POSITIVE_PROGRESS": "Non-positive: {{current}} / {{required}}",
+      "READY_NO_MODEL": "You have enough data. Train a model to start seeing estimated scores.",
+      "TRAIN_BTN": "Train my model",
+      "RETRAIN_BTN": "Update prediction model",
+      "TRAIN_FAILED": "Could not train the model. Please try again.",
+      "SCORE_FAILED": "Could not calculate the score. Please try again.",
+      "CALCULATING": "Calculating estimate...",
+      "FILL_REQUIRED": "Choose strategy, instrument, direction and trade date to see an estimate.",
+      "PROBABILITY_LABEL": "Estimated positive outcome probability",
+      "CONFIDENCE": "Confidence",
+      "CONFIDENCE_LEVEL": {
+        "LOW": "Low",
+        "MEDIUM": "Medium",
+        "HIGH": "High"
+      },
+      "BASED_ON": "Based on {{count}} of your previous completed trades."
     }
   },
   "LOT_CALCULATOR": {
