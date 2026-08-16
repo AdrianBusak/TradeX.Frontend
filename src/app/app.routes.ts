@@ -62,20 +62,6 @@ export const routes: Routes = [
             .then(m => m.TradeFormComponent)
       },
       {
-        path: 'journal',
-        data: {
-          titleKey: 'NAV.JOURNAL',
-          title: 'Journal',
-          subtitle: 'Capture trade notes, emotions, screenshots and review routines.',
-          icon: 'edit_note',
-          emptyTitle: 'Start your first journal entry',
-          emptyDescription: 'The journal area is ready for rich form fields and reusable cards.'
-        },
-        loadComponent: () =>
-          import('./features/placeholder/placeholder-page.component')
-            .then(m => m.PlaceholderPageComponent)
-      },
-      {
         path: 'strategies',
         data: { titleKey: 'NAV.STRATEGIES', icon: 'schema' },
         loadComponent: () =>
@@ -117,24 +103,14 @@ export const routes: Routes = [
         loadComponent: () => import('./features/mistakes/form/mistake-form.component').then(m => m.MistakeFormComponent)
       },
       {
-        path: 'risk',
-        data: { titleKey: 'NAV.RISK', title: 'Risk', subtitle: 'Monitor exposure, drawdown and rule compliance.', icon: 'shield' },
-        loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)
-      },
-      {
-        path: 'analytics',
-        data: { titleKey: 'NAV.ANALYTICS', title: 'Analytics', subtitle: 'Find performance patterns across markets and sessions.', icon: 'monitoring' },
-        loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)
-      },
-      {
         path: 'ml-prediction',
         data: { titleKey: 'NAV.ML_PREDICTION', title: 'ML Prediction', subtitle: 'Prepare model-driven trade insights and signal review.', icon: 'model_training' },
         loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)
       },
       {
-        path: 'settings',
-        data: { titleKey: 'NAV.SETTINGS', title: 'Settings', subtitle: 'Manage account preferences and workspace defaults.', icon: 'settings' },
-        loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)
+        path: 'lot-calculator',
+        data: { titleKey: 'NAV.LOT_CALCULATOR', icon: 'calculate' },
+        loadComponent: () => import('./features/lot-calculator/lot-calculator-page.component').then(m => m.LotCalculatorPageComponent)
       }
     ]
   },

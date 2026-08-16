@@ -28,12 +28,9 @@ export class SidebarComponent {
     { labelKey: 'NAV.ECONOMIC_CALENDAR', route: '/economic-calendar', icon: 'calendar_month' },
     { labelKey: 'NAV.TRADING_ACCOUNTS', route: '/trading-accounts', icon: 'account_balance' },
     { labelKey: 'NAV.TRADES', route: '/trades', icon: 'candlestick_chart' },
-    { labelKey: 'NAV.JOURNAL', route: '/journal', icon: 'edit_note' },
     { labelKey: 'NAV.STRATEGIES', route: '/strategies', icon: 'schema' },
     { labelKey: 'NAV.MISTAKES', route: '/mistakes', icon: 'warning_amber' },
-    { labelKey: 'NAV.RISK', route: '/risk', icon: 'shield' },
-    { labelKey: 'NAV.ANALYTICS', route: '/analytics', icon: 'monitoring' },
     { labelKey: 'NAV.ML_PREDICTION', route: '/ml-prediction', icon: 'model_training' },
-    { labelKey: 'NAV.SETTINGS', route: '/settings', icon: 'settings' }
+    { labelKey: 'NAV.LOT_CALCULATOR', route: '/lot-calculator', icon: 'calculate' }
   ];
 }
