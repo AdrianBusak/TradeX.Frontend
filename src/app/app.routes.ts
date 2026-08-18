@@ -105,7 +105,7 @@ export const routes: Routes = [
       {
         path: 'ml-prediction',
         data: { titleKey: 'NAV.ML_PREDICTION', title: 'ML Prediction', subtitle: 'Prepare model-driven trade insights and signal review.', icon: 'model_training' },
-        loadComponent: () => import('./features/placeholder/placeholder-page.component').then(m => m.PlaceholderPageComponent)
+        loadComponent: () => import('./features/ml-prediction/ml-prediction.component').then(m => m.MlPredictionComponent)
       },
       {
         path: 'lot-calculator',

@@ -20,6 +20,7 @@ import { ToastService } from '../../../core/services/toast.service';
 import { PageLayoutComponent } from '../../../shared/components/layout/page-layout/page-layout.component';
 import { AppButtonComponent } from '../../../shared/components/app-button/app-button.component';
 import { DataGridComponent, ColumnConfig, RowActionEvent } from '../../../shared/components/data-grid/data-grid.component';
+import { loadGridState, patchGridState } from '../../../shared/components/data-grid/grid-state.util';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { TradeService } from '../services/trade.service';
 import { TradeListItem } from '../models/trade.model';
@@ -60,10 +61,13 @@ export class TradesListComponent {
   private readonly translate = inject(TranslateService);
   private readonly destroyRef = inject(DestroyRef);
 
+  private static readonly GRID_ID = 'trades';
+  private readonly savedState = loadGridState(TradesListComponent.GRID_ID);
+
   readonly trades = signal<TradeListItem[]>([]);
   readonly totalRecords = signal(0);
-  readonly pageIndex = signal(0);
-  readonly pageSize = signal(20);
+  readonly pageIndex = signal(this.savedState?.pageIndex ?? 0);
+  readonly pageSize = signal(this.savedState?.pageSize ?? 20);
   readonly isLoading = signal(false);
   readonly sortField = signal('');
   readonly sortDirection = signal<'Asc' | 'Desc'>('Desc');
@@ -135,6 +139,10 @@ export class TradesListComponent {
   onPageChange(event: PageEvent): void {
     this.pageIndex.set(event.pageIndex);
     this.pageSize.set(event.pageSize);
+    patchGridState(TradesListComponent.GRID_ID, {
+      pageIndex: event.pageIndex,
+      pageSize: event.pageSize,
+    });
     this.load();
   }
 
@@ -142,6 +150,7 @@ export class TradesListComponent {
     this.sortField.set(sort.direction ? sort.active : '');
     this.sortDirection.set(sort.direction === 'asc' ? 'Asc' : 'Desc');
     this.pageIndex.set(0);
+    patchGridState(TradesListComponent.GRID_ID, { pageIndex: 0 });
     this.load();
   }
 

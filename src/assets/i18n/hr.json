@@ -4,27 +4,27 @@
       "ACTIONS": "Akcije"
     },
     "CLOSE": "Zatvori",
-    "CLEAR": "Ocisti",
-    "LOADING": "Ucitavanje...",
+    "CLEAR": "Očisti",
+    "LOADING": "Učitavanje...",
     "SEARCH": "Pretraga",
-    "START_DATE": "Pocetni datum",
-    "END_DATE": "Zavrsni datum",
+    "START_DATE": "Početni datum",
+    "END_DATE": "Završni datum",
     "NO_DATA": "Nema podataka",
     "NO_RESULTS": "Nema rezultata",
     "ACTIONS": {
       "SAVE": "Spremi",
       "CANCEL": "Odustani",
-      "DELETE": "Obrisi",
+      "DELETE": "Obriši",
       "EDIT": "Uredi",
       "VIEW": "Pregled",
-      "LOAD_MORE": "Ucitaj vise",
+      "LOAD_MORE": "Učitaj više",
       "RESTORE": "Obnovi",
       "DEACTIVATE": "Deaktiviraj",
       "HARD_DELETE": "Trajno obriši"
     },
     "PAGINATOR": {
       "ITEMS_PER_PAGE": "Stavki po stranici",
-      "NEXT_PAGE": "Sljedeca stranica",
+      "NEXT_PAGE": "Sljedeća stranica",
       "PREVIOUS_PAGE": "Prethodna stranica",
       "FIRST_PAGE": "Prva stranica",
       "LAST_PAGE": "Zadnja stranica",
@@ -32,35 +32,35 @@
     }
   },
   "ERRORS": {
-    "APP_ERROR": "Doslo je do greske. Pokusajte ponovno.",
+    "APP_ERROR": "Došlo je do greške. Pokušajte ponovno.",
     "BAD_REQUEST": "Zahtjev nije ispravan.",
-    "CONFLICT": "Zahtjev je u sukobu s postojecim podacima.",
+    "CONFLICT": "Zahtjev je u sukobu s postojećim podacima.",
     "FORBIDDEN": "Nemate ovlast za ovu radnju.",
     "HTTP_401": "Sesija je istekla. Prijavite se ponovno.",
     "HTTP_403": "Nemate ovlast za ovu radnju.",
-    "HTTP_404": "Trazeni resurs nije pronaden.",
-    "HTTP_500": "Posluzitelj nije mogao obraditi zahtjev.",
-    "NO_CONNECTION": "Nije moguce spojiti se na posluzitelj.",
-    "NOT_FOUND": "Trazeni resurs nije pronaden.",
+    "HTTP_404": "Traženi resurs nije pronađen.",
+    "HTTP_500": "Poslužitelj nije mogao obraditi zahtjev.",
+    "NO_CONNECTION": "Nije moguće spojiti se na poslužitelj.",
+    "NOT_FOUND": "Traženi resurs nije pronađen.",
     "UNAUTHORIZED": "Morate biti prijavljeni za nastavak.",
-    "UNKNOWN": "Doslo je do neocekivane greske.",
+    "UNKNOWN": "Došlo je do neočekivane greške.",
     "REQUIRED": "Ovo polje je obavezno.",
     "MAX_LENGTH": "Maksimalno {{max}} znakova.",
-    "MIN_VALUE": "Vrijednost mora biti 0 ili vise."
+    "MIN_VALUE": "Vrijednost mora biti 0 ili više."
   },
   "ERROR_CODES": {
-    "ALREADY_OWNER": "Odabrani korisnik je vec vlasnik.",
-    "DUPLICATE_NAME": "Zapis s ovim imenom vec postoji.",
+    "ALREADY_OWNER": "Odabrani korisnik je već vlasnik.",
+    "DUPLICATE_NAME": "Zapis s ovim imenom već postoji.",
     "FOLDER_DEPTH_LIMIT_EXCEEDED": "Dosegnut je maksimalni broj razina mapa.",
     "INVALID_OIB": "OIB nije ispravan.",
-    "INVALID_PARENT_FOLDER": "Odabrana nadredena mapa nije ispravna.",
-    "LOCKED_BY_OTHER": "Ovaj element je trenutno zakljucan od drugog korisnika.",
-    "MISSING_REQUIRED_CUSTOM_FIELD_VALUES": "Nedostaju obavezne vrijednosti prilagodenih polja.",
+    "INVALID_PARENT_FOLDER": "Odabrana nadređena mapa nije ispravna.",
+    "LOCKED_BY_OTHER": "Ovaj element je trenutno zaključan od drugog korisnika.",
+    "MISSING_REQUIRED_CUSTOM_FIELD_VALUES": "Nedostaju obavezne vrijednosti prilagođenih polja.",
     "NOT_ALLOWED": "Ova radnja nije dozvoljena.",
     "OIB_CHANGE_NOT_ALLOWED": "Promjena OIB-a nije dozvoljena."
   },
   "AUTH": {
-    "LOADING": "Ucitavanje TradeX-a...",
+    "LOADING": "Učitavanje TradeX-a...",
     "LOGIN_SUBTITLE": "Prijavite se za pristup trading radnom prostoru.",
     "LOGIN_BTN": "Prijava"
   },
@@ -72,7 +72,7 @@
   "NAV": {
     "DASHBOARD": "Dashboard",
     "ECONOMIC_CALENDAR": "Ekonomski kalendar",
-    "TRADING_ACCOUNTS": "Racuni",
+    "TRADING_ACCOUNTS": "Računi",
     "TRADES": "Trades",
     "STRATEGIES": "Strategije",
     "MISTAKES": "Greške",
@@ -81,41 +81,105 @@
     "LOGOUT": "Odjava",
     "WORKSPACE": "Live workspace",
     "COLLAPSE": "Sakrij navigaciju",
-    "EXPAND": "Prikazi navigaciju",
+    "EXPAND": "Prikaži navigaciju",
     "ARIA_MAIN": "Glavna navigacija",
-    "ARIA_ACCOUNT": "Navigacija racuna",
-    "ARIA_HOME": "TradeX pocetna"
+    "ARIA_ACCOUNT": "Navigacija računa",
+    "ARIA_HOME": "TradeX početna"
   },
   "TOPBAR": {
     "WORKSPACE": "TradeX",
-    "SEARCH_PLACEHOLDER": "Pretrazi tradeove, tickere, tagove...",
-    "SEARCH_LABEL": "Pretrazi TradeX",
+    "SEARCH_PLACEHOLDER": "Pretraži tradeove, tickere, tagove...",
+    "SEARCH_LABEL": "Pretraži TradeX",
     "MESSAGES": "Poruke",
     "NOTIFICATIONS": "Obavijesti",
     "LOT_CALCULATOR": "Lot kalkulator",
     "OPEN_MENU": "Otvori navigaciju",
-    "USER_MENU": "Korisnicki meni"
+    "USER_MENU": "Korisnički meni"
   },
   "DASHBOARD": {
     "EYEBROW": "Trading journal",
     "TITLE": "Dashboard",
     "SUBTITLE": "Prati performanse, rizik i kvalitetu tradeova iz jednog fokusa.",
     "LOG_TRADE": "Dodaj trade",
-    "PERIODS": { "THISMONTH": "Ovaj mjesec", "LASTMONTH": "Prosli mjesec", "ALLTIME": "Sve vrijeme" },
+    "PERIODS": { "THISMONTH": "Ovaj mjesec", "LASTMONTH": "Prošli mjesec", "ALLTIME": "Sve vrijeme" },
     "STATS": {
-      "NET_PNL": "Net P/L", "WIN_RATE": "Stopa uspjesnosti", "AVG_R": "Prosjecni R", "TOTAL_R": "Ukupni R",
+      "NET_PNL": "Net P/L", "WIN_RATE": "Stopa uspješnosti", "AVG_R": "Prosječni R", "TOTAL_R": "Ukupni R",
       "PERIOD_TOTAL": "Odabrano razdoblje", "AVG_R_HELPER": "Po tradeu s R rezultatom", "TOTAL_R_HELPER": "Odabrano razdoblje"
     },
     "R_CURVE": { "EYEBROW": "R krivulja", "TITLE": "Momentum performansi", "EMPTY": "Nema R rezultata za odabrano razdoblje." },
-    "METRICS": { "AVG_WIN": "Prosjecni dobitak", "AVG_LOSS": "Prosjecni gubitak", "BEST_SESSION": "Najbolja sesija" },
+    "METRICS": { "AVG_WIN": "Prosječni dobitak", "AVG_LOSS": "Prosječni gubitak", "BEST_SESSION": "Najbolja sesija" },
     "PERFORMANCE": {
       "EYEBROW": "Performanse", "TITLE": "Pregled razdoblja", "PROFITABLE": "Profitabilno", "UNPROFITABLE": "Neprofitabilno",
-      "WIN_RATE": "Stopa uspjesnosti", "BEST_STRATEGY": "Najbolja strategija", "BEST_SESSION": "Najbolja sesija"
+      "WIN_RATE": "Stopa uspješnosti", "BEST_STRATEGY": "Najbolja strategija", "BEST_SESSION": "Najbolja sesija"
     },
-    "RECENT": { "EYEBROW": "Zadnji tradeovi", "TITLE": "Pregled izvrsenja", "OPEN_TRADES": "Otvori tradeove", "EMPTY": "Nema tradeova u ovom razdoblju" },
-    "STRATEGIES": { "EYEBROW": "Prednost strategije", "TITLE": "Najbolji playbookovi", "TRADES": "tradeova", "WIN_RATE": "stopa uspjesnosti", "EMPTY": "Nema podataka o strategijama za odabrano razdoblje." },
+    "RECENT": { "EYEBROW": "Zadnji tradeovi", "TITLE": "Pregled izvršenja", "OPEN_TRADES": "Otvori tradeove", "EMPTY": "Nema tradeova u ovom razdoblju" },
+    "STRATEGIES": { "EYEBROW": "Prednost strategije", "TITLE": "Najbolji playbookovi", "TRADES": "tradeova", "WIN_RATE": "stopa uspješnosti", "EMPTY": "Nema podataka o strategijama za odabrano razdoblje." },
     "INSIGHTS": { "EYEBROW": "Uvid iz journala", "TITLE": "Fokus pregleda", "EMPTY": "Nema uvida za odabrano razdoblje." }
-    ,"EMPTY": { "TITLE": "Tvoja trading prica pocinje ovdje", "DESCRIPTION": "Unesi prvi zavrseni trade kako bi otkljucao metrike performansi, R krivulju, uvide o strategijama i preglede izvrsenja.", "CTA": "Unesi prvi trade", "PREVIEW_TITLE": "Tvoje performanse na prvi pogled", "PREVIEW_CHART": "R krivulja", "PREVIEW_TABLE": "Zadnji tradeovi", "METRICS": { "1": "Stopa uspjesnosti", "2": "Prosjecni R", "3": "Net P/L" } }
+    ,"EMPTY": { "TITLE": "Tvoja trading priča počinje ovdje", "DESCRIPTION": "Unesi prvi završeni trade kako bi otključao metrike performansi, R krivulju, uvide o strategijama i preglede izvršenja.", "CTA": "Unesi prvi trade", "PREVIEW_TITLE": "Tvoje performanse na prvi pogled", "PREVIEW_CHART": "R krivulja", "PREVIEW_TABLE": "Zadnji tradeovi", "METRICS": { "1": "Stopa uspješnosti", "2": "Prosječni R", "3": "Net P/L" } }
+  },
+  "ML_PREDICTION": {
+    "EYEBROW": "Strojno učenje",
+    "TITLE": "ML Predikcija",
+    "SUBTITLE": "Eksperimentalna procjena vjerojatnosti na temelju povijesti zatvorenih tradeova.",
+    "READINESS": {
+      "EYEBROW": "Status modela",
+      "TITLE": "Spremnost",
+      "READY": "Spreman",
+      "NOT_READY": "Nije spreman",
+      "CLOSED_TRADES": "Zatvoreni tradeovi",
+      "REFRESH": "Osvježi",
+      "LOAD_FAILED": "Ne mogu učitati status modela."
+    },
+    "TRAIN": {
+      "CTA": "Treniraj model",
+      "MODEL_VERSION": "Verzija modela",
+      "SAMPLE_COUNT": "Uzoraka",
+      "POSITIVE": "Pozitivnih ishoda",
+      "NON_POSITIVE": "Nepozitivnih ishoda",
+      "TRAINED_AT": "Treniran"
+    },
+    "SCORE": {
+      "EYEBROW": "Procjena setupa",
+      "TITLE": "Score trenutnog setupa",
+      "CTA": "Dohvati predikciju",
+      "NOT_READY_WARNING": "Model još nije spreman. Score je onemogućen dok se model ne istrenira na dovoljno zatvorenih tradeova."
+    },
+    "FIELDS": {
+      "STOP_LOSS": "Stop loss (veličina rizika)",
+      "TAKE_PROFIT": "Take profit",
+      "PLANNED_RR": "Planirani R:R"
+    },
+    "HINTS": {
+      "STOP_LOSS": "Koristi se kao veličina rizika za model.",
+      "TAKE_PROFIT": "Koristi se za izračun planiranog R:R-a."
+    },
+    "RULES": {
+      "TITLE": "Checklist pravila",
+      "SELECT_STRATEGY": "Odaberi strategiju da bi se učitala checklist pravila.",
+      "EMPTY": "Ova strategija nema aktivnih pravila.",
+      "FOLLOWED": "Ispoštovano",
+      "NOT_FOLLOWED": "Prekršeno"
+    },
+    "RESULT": {
+      "EYEBROW": "Predikcija",
+      "TITLE": "Procjena ishoda",
+      "PROBABILITY": "vjerojatnost pozitivnog Effective R",
+      "CONFIDENCE": "Pouzdanost",
+      "SAMPLE_COUNT": "Uzoraka iz povijesti",
+      "DEFAULT_DISCLAIMER": "Eksperimentalna procjena na temelju tvoje povijesti. Nije buy/sell signal."
+    },
+    "CONFIDENCE": {
+      "LOW": "Niska",
+      "MEDIUM": "Srednja",
+      "HIGH": "Visoka"
+    },
+    "TOAST": {
+      "TRAIN_SUCCESS": "Model uspješno treniran."
+    },
+    "ERRORS": {
+      "TRAIN_FAILED": "Treniranje modela nije uspjelo.",
+      "SCORE_FAILED": "Ne mogu procijeniti ovaj setup."
+    }
   },
   "LANG": {
     "EN": "Engleski",
@@ -129,21 +193,21 @@
     "EDIT_TITLE": "Uredi strategiju",
     "CREATE_BTN": "Nova strategija",
     "CREATE_SUCCESS": "Strategija je kreirana.",
-    "UPDATE_SUCCESS": "Strategija je azurirana.",
+    "UPDATE_SUCCESS": "Strategija je ažurirana.",
     "DELETE_SUCCESS": "Strategija je deaktivirana.",
     "RESTORE_SUCCESS": "Strategija je obnovljena.",
     "HARD_DELETE_SUCCESS": "Strategija je trajno obrisana.",
     "EMPTY": "Nema strategija",
     "COLUMNS": {
       "NAME": "Naziv",
-      "MARKET_TYPE": "Trziste",
+      "MARKET_TYPE": "Tržište",
       "COLOR": "Boja",
       "STATUS": "Aktivna"
     },
     "FIELDS": {
       "NAME": "Naziv strategije",
       "DESCRIPTION": "Opis",
-      "MARKET_TYPE": "Tip trzista",
+      "MARKET_TYPE": "Tip tržišta",
       "COLOR": "Boja",
       "COLOR_HINT": "Opcionalna hex boja, npr. #22C55E"
     },
@@ -160,13 +224,13 @@
     },
     "CONFIRM_DELETE": {
       "TITLE": "Deaktiviraj strategiju",
-      "MESSAGE": "Ovo ce deaktivirati strategiju. Mozete je obnoviti kasnije.",
+      "MESSAGE": "Ovo će deaktivirati strategiju. Možete je obnoviti kasnije.",
       "CONFIRM": "Deaktiviraj"
     },
     "CONFIRM_HARD_DELETE": {
-      "TITLE": "Trajno obrisi strategiju",
-      "MESSAGE": "Ova radnja se ne moze ponistiti. Strategija i sva njezina pravila bit ce trajno obrisana.",
-      "CONFIRM": "Trajno obrisi"
+      "TITLE": "Trajno obriši strategiju",
+      "MESSAGE": "Ova radnja se ne može poništiti. Strategija i sva njezina pravila bit će trajno obrisana.",
+      "CONFIRM": "Trajno obriši"
     },
     "RULES": {
       "TITLE": "Pravila",
@@ -175,13 +239,13 @@
       "DIALOG_CREATE_TITLE": "Dodaj pravilo",
       "DIALOG_EDIT_TITLE": "Uredi pravilo",
       "CREATE_SUCCESS": "Pravilo je kreirano.",
-      "UPDATE_SUCCESS": "Pravilo je azurirano.",
+      "UPDATE_SUCCESS": "Pravilo je ažurirano.",
       "DELETE_SUCCESS": "Pravilo je deaktivirano.",
       "HARD_DELETE_SUCCESS": "Pravilo je trajno obrisano.",
       "COLUMNS": {
         "TITLE": "Naziv",
         "CATEGORY": "Kategorija",
-        "IMPORTANCE": "Vaznost",
+        "IMPORTANCE": "Važnost",
         "REQUIRED": "Obavezno"
       },
       "FIELDS": {
@@ -189,12 +253,12 @@
         "DESCRIPTION": "Opis",
         "ORDER": "Redoslijed",
         "CATEGORY": "Kategorija",
-        "IMPORTANCE": "Vaznost",
+        "IMPORTANCE": "Važnost",
         "IS_REQUIRED": "Obavezno pravilo"
       },
       "CATEGORIES": {
-        "GENERAL": "Opce",
-        "MARKET_STRUCTURE": "Struktura trzista",
+        "GENERAL": "Opće",
+        "MARKET_STRUCTURE": "Struktura tržišta",
         "ENTRY": "Ulaz",
         "RISK_MANAGEMENT": "Upravljanje rizikom",
         "EXIT": "Izlaz",
@@ -205,41 +269,41 @@
         "LOW": "Niska",
         "MEDIUM": "Srednja",
         "HIGH": "Visoka",
-        "CRITICAL": "Kriticna"
+        "CRITICAL": "Kritična"
       },
       "CONFIRM_DELETE": {
         "TITLE": "Deaktiviraj pravilo",
-        "MESSAGE": "Ovo ce deaktivirati pravilo. Mozete ga obnoviti kasnije.",
+        "MESSAGE": "Ovo će deaktivirati pravilo. Možete ga obnoviti kasnije.",
         "CONFIRM": "Deaktiviraj"
       },
       "CONFIRM_HARD_DELETE": {
-        "TITLE": "Trajno obrisi pravilo",
-        "MESSAGE": "Ova radnja se ne moze ponistiti.",
-        "CONFIRM": "Trajno obrisi"
+        "TITLE": "Trajno obriši pravilo",
+        "MESSAGE": "Ova radnja se ne može poništiti.",
+        "CONFIRM": "Trajno obriši"
       }
     }
   },
   "TRADES": {
     "TITLE": "Tradovi",
-    "SUBTITLE": "Pratite i pregledajte svoje trade setupe i izvrsenja.",
+    "SUBTITLE": "Pratite i pregledajte svoje trade setupe i izvršenja.",
     "CREATE_TITLE": "Novi trade",
     "EDIT_TITLE": "Uredi trade",
     "CREATE_BTN": "Novi trade",
     "CREATE_SUCCESS": "Trade je kreiran.",
-    "UPDATE_SUCCESS": "Trade je azuriran.",
+    "UPDATE_SUCCESS": "Trade je ažuriran.",
     "DELETE_SUCCESS": "Trade je deaktiviran.",
     "RESTORE_SUCCESS": "Trade je obnovljen.",
     "HARD_DELETE_SUCCESS": "Trade je trajno obrisan.",
     "EMPTY": "Nema tradova",
-    "ACCOUNTS_EMPTY": "Nema dostupnih trading racuna.",
+    "ACCOUNTS_EMPTY": "Nema dostupnih trading računa.",
     "COLUMNS": {
       "SYMBOL": "Symbol",
       "DIRECTION": "Smjer",
       "SESSION": "Sesija",
       "STATUS": "Status",
       "STRATEGY": "Strategija",
-      "MARKET_TYPE": "Tip trzista",
-      "ACCOUNTS": "Racuni",
+      "MARKET_TYPE": "Tip tržišta",
+      "ACCOUNTS": "Računi",
       "TRADE_DATE": "Datum tradea",
       "PNL": "P&L",
       "R_MULTIPLE": "R rezultat",
@@ -274,7 +338,7 @@
     },
     "FIELDS": {
       "TRADING_INSTRUMENT": "Instrument",
-      "TRADING_ACCOUNTS": "Trading racuni",
+      "TRADING_ACCOUNTS": "Trading računi",
       "STRATEGY": "Strategija",
       "DIRECTION": "Smjer",
       "SESSION": "Sesija",
@@ -284,11 +348,11 @@
       "EXIT_PRICE": "Cijena izlaza",
       "STOP_LOSS": "Stop loss",
       "TAKE_PROFIT": "Take profit",
-      "LOT_SIZE": "Velicina lota",
+      "LOT_SIZE": "Veličina lota",
       "RISK_AMOUNT": "Iznos rizika",
       "PNL": "P&L",
       "R_MULTIPLE": "R rezultat",
-      "NOTES": "Biljeske"
+      "NOTES": "Bilješke"
     },
     "DIRECTIONS": {
       "LONG": "Long",
@@ -309,7 +373,7 @@
       "OTHER": "Ostalo"
     },
     "VALIDATION": {
-      "POSITIVE_VALUE": "Vrijednost mora biti veca od 0.",
+      "POSITIVE_VALUE": "Vrijednost mora biti veća od 0.",
       "LONG_STOP_LOSS": "Za long trade stop loss treba biti ispod cijene ulaza.",
       "LONG_TAKE_PROFIT": "Za long trade take profit treba biti iznad cijene ulaza.",
       "SHORT_STOP_LOSS": "Za short trade stop loss treba biti iznad cijene ulaza.",
@@ -318,40 +382,40 @@
     "IMAGES": {
       "TITLE": "Slike",
       "UPLOAD": "Dodaj slike",
-      "UPLOADING": "Ucitavanje...",
+      "UPLOADING": "Učitavanje...",
       "DROP_TITLE": "Ispustite slike ovdje ili odaberite datoteke",
       "READY_TO_UPLOAD": "Spremno za upload nakon spremanja tradea.",
       "CREATING_TRADE": "Kreiranje tradea...",
       "UPLOAD_PROGRESS": "Upload slika ({{completed}}/{{total}})...",
-      "TRADE_SAVED_WITH_FAILURES": "Trade je spremljen, ali upload jedne ili vise slika nije uspio.",
+      "TRADE_SAVED_WITH_FAILURES": "Trade je spremljen, ali upload jedne ili više slika nije uspio.",
       "RETRY_FAILED": "Ponovi neuspjele slike",
-      "DELETE": "Obrisi",
-      "EMPTY": "Za ovaj trade jos nema dodanih slika.",
+      "DELETE": "Obriši",
+      "EMPTY": "Za ovaj trade još nema dodanih slika.",
       "SAVE_FIRST": "Spremite trade prije dodavanja slika.",
       "LIMITS": "JPEG, PNG, GIF ili WebP. Maksimalno 25 MiB po slici.",
       "ERRORS": {
         "INVALID_TYPE": "Dopustene su samo JPEG, PNG, GIF i WebP slike.",
         "EMPTY_FILE": "Datoteka je prazna.",
-        "TOO_LARGE": "Slika prelazi ogranicenje od 25 MiB.",
-        "UPLOAD_FAILED": "Upload nije uspio. Pokusajte ponovno.",
-        "DELETE_FAILED": "Brisanje slike nije uspjelo. Pokusajte ponovno."
+        "TOO_LARGE": "Slika prelazi ograničenje od 25 MiB.",
+        "UPLOAD_FAILED": "Upload nije uspio. Pokušajte ponovno.",
+        "DELETE_FAILED": "Brisanje slike nije uspjelo. Pokušajte ponovno."
       },
       "LIGHTBOX": {
         "TITLE": "Pregled slike",
         "CLOSE": "Zatvori pregled",
         "PREVIOUS": "Prethodna slika",
-        "NEXT": "Sljedeca slika"
+        "NEXT": "Sljedeća slika"
       }
     },
     "CONFIRM_DELETE": {
       "TITLE": "Deaktiviraj trade",
-      "MESSAGE": "Ovo ce deaktivirati trade. Mozete ga obnoviti kasnije.",
+      "MESSAGE": "Ovo će deaktivirati trade. Možete ga obnoviti kasnije.",
       "CONFIRM": "Deaktiviraj"
     },
     "CONFIRM_HARD_DELETE": {
-      "TITLE": "Trajno obrisi trade",
-      "MESSAGE": "Ova radnja se ne moze ponistiti.",
-      "CONFIRM": "Trajno obrisi"
+      "TITLE": "Trajno obriši trade",
+      "MESSAGE": "Ova radnja se ne može poništiti.",
+      "CONFIRM": "Trajno obriši"
     },
     "MISTAKES": {
       "TITLE": "Greške",
@@ -367,7 +431,7 @@
     "PRE_TRADE_SCORE": {
       "TITLE": "AI Trade Score (eksperimentalno)",
       "SUBTITLE": "Procjena vjerojatnosti pozitivnog R rezultata na temelju tvojih ranijih tradova.",
-      "READINESS_LOAD_ERROR": "Nije moguće ucitati stanje AI modela.",
+      "READINESS_LOAD_ERROR": "Nije moguće učitati stanje AI modela.",
       "RETRY": "Pokušaj ponovno",
       "NOT_ENOUGH_DATA": "Još nemaš dovoljno zatvorenih tradova za treniranje modela.",
       "PROGRESS_LABEL": "Napredak do spremnosti AI modela",
@@ -393,33 +457,33 @@
   },
   "LOT_CALCULATOR": {
     "TITLE": "Lot kalkulator",
-    "PAGE_SUBTITLE": "Izracunajte velicinu pozicije prema riziku racuna i stop lossu.",
-    "CALCULATE_LOT": "Izracunaj lot",
-    "CALCULATE": "Izracunaj",
+    "PAGE_SUBTITLE": "Izračunajte veličinu pozicije prema riziku računa i stop lossu.",
+    "CALCULATE_LOT": "Izračunaj lot",
+    "CALCULATE": "Izračunaj",
     "USE_LOT": "Primijeni lot",
     "COPIED": "Lot size {{lot}} kopiran u clipboard",
     "SECTIONS": {
-      "ACCOUNT": "Racun",
+      "ACCOUNT": "Račun",
       "INSTRUMENT": "Instrument",
       "RISK": "Rizik",
       "STOP_LOSS": "Stop loss",
       "RESULT": "Rezultat"
     },
     "FIELDS": {
-      "TRADING_ACCOUNT": "Trading racun",
-      "ACCOUNT_CURRENCY": "Valuta racuna",
-      "ACCOUNT_BALANCE": "Stanje racuna",
+      "TRADING_ACCOUNT": "Trading račun",
+      "ACCOUNT_CURRENCY": "Valuta računa",
+      "ACCOUNT_BALANCE": "Stanje računa",
       "INSTRUMENT": "Instrument",
       "SYMBOL": "Symbol",
-      "MARKET_TYPE": "Tip trzista",
+      "MARKET_TYPE": "Tip tržišta",
       "RISK_PERCENT": "Rizik %",
       "ENTRY_PRICE": "Cijena ulaza",
       "STOP_LOSS_PRICE": "Stop loss cijena",
       "STOP_LOSS_PIPS": "Stop loss pips"
     },
     "RESULTS": {
-      "SUGGESTED_LOT": "Predlozeni lot",
-      "ROUNDED_LOT": "Zaokruzeni lot",
+      "SUGGESTED_LOT": "Predloženi lot",
+      "ROUNDED_LOT": "Zaokruženi lot",
       "RISK_AMOUNT": "Iznos rizika",
       "ESTIMATED_LOSS": "Procijenjeni gubitak",
       "PIP_VALUE": "Pip vrijednost po lotu",
@@ -427,8 +491,8 @@
     },
     "STOP_LOSS_HINT": "Unesite stop loss pips ili obje cijene: ulaznu i stop loss.",
     "ERRORS": {
-      "CURRENCY_LENGTH": "Kod valute mora imati tocno 3 znaka.",
-      "COMPLETE_INPUTS": "Unesite racun, instrument, rizik i stop loss podatke prije izracuna."
+      "CURRENCY_LENGTH": "Kod valute mora imati točno 3 znaka.",
+      "COMPLETE_INPUTS": "Unesite račun, instrument, rizik i stop loss podatke prije izračuna."
     }
   },
   "TRADING_INSTRUMENTS": {
@@ -437,7 +501,7 @@
     "CREATE_SUCCESS": "Instrument je kreiran.",
     "FIELDS": {
       "SYMBOL": "Symbol",
-      "MARKET_TYPE": "Tip trzista"
+      "MARKET_TYPE": "Tip tržišta"
     }
   },
   "MISTAKES": {
@@ -455,16 +519,16 @@
     "CONFIRM_DELETE": { "TITLE": "Obriši grešku", "MESSAGE": "Želite li obrisati grešku {{name}}?" }
   },
   "TRADING_ACCOUNTS": {
-    "TITLE": "Trading racuni",
-    "SUBTITLE": "Upravljajte trading racunima i pratite performanse.",
-    "CREATE_TITLE": "Novi racun",
-    "EDIT_TITLE": "Uredi racun",
-    "CREATE_BTN": "Novi racun",
-    "CREATE_SUCCESS": "Trading racun je kreiran.",
-    "UPDATE_SUCCESS": "Trading racun je azuriran.",
-    "DELETE_SUCCESS": "Racun je deaktiviran.",
-    "RESTORE_SUCCESS": "Racun je obnovljen.",
-    "EMPTY": "Nema trading racuna",
+    "TITLE": "Trading računi",
+    "SUBTITLE": "Upravljajte trading računima i pratite performanse.",
+    "CREATE_TITLE": "Novi račun",
+    "EDIT_TITLE": "Uredi račun",
+    "CREATE_BTN": "Novi račun",
+    "CREATE_SUCCESS": "Trading račun je kreiran.",
+    "UPDATE_SUCCESS": "Trading račun je ažuriran.",
+    "DELETE_SUCCESS": "Račun je deaktiviran.",
+    "RESTORE_SUCCESS": "Račun je obnovljen.",
+    "EMPTY": "Nema trading računa",
     "COLUMNS": {
       "NAME": "Naziv",
       "ACCOUNT_TYPE": "Tip",
@@ -474,15 +538,15 @@
       "STATUS": "Aktivan"
     },
     "FIELDS": {
-      "NAME": "Naziv racuna",
-      "ACCOUNT_TYPE": "Tip racuna",
+      "NAME": "Naziv računa",
+      "ACCOUNT_TYPE": "Tip računa",
       "BROKER": "Broker",
       "CURRENCY": "Valuta (3-slovni kod)",
       "CURRENCY_HINT": "npr. USD, EUR, GBP",
-      "INITIAL_BALANCE": "Pocetni saldo",
+      "INITIAL_BALANCE": "Početni saldo",
       "CURRENT_BALANCE": "Trenutni saldo",
-      "SET_CURRENT_BALANCE": "Postavi drugaciji trenutni saldo",
-      "CURRENT_BALANCE_HINT": "Ako nije postavljeno, trenutni saldo jednak je pocetnom saldu."
+      "SET_CURRENT_BALANCE": "Postavi drugačiji trenutni saldo",
+      "CURRENT_BALANCE_HINT": "Ako nije postavljeno, trenutni saldo jednak je početnom saldu."
     },
     "ACCOUNT_TYPES": {
       "PERSONAL": "Osobni",
@@ -492,18 +556,18 @@
       "BROKER_LIVE": "Broker Live"
     },
     "ERRORS": {
-      "CURRENCY_LENGTH": "Kod valute mora imati tocno 3 znaka."
+      "CURRENCY_LENGTH": "Kod valute mora imati točno 3 znaka."
     },
-    "HARD_DELETE_SUCCESS": "Trading racun je trajno obrisan.",
+    "HARD_DELETE_SUCCESS": "Trading račun je trajno obrisan.",
     "CONFIRM_DELETE": {
-      "TITLE": "Deaktiviraj racun",
-      "MESSAGE": "Ovo ce deaktivirati trading racun. Mozete ga obnoviti kasnije.",
+      "TITLE": "Deaktiviraj račun",
+      "MESSAGE": "Ovo će deaktivirati trading račun. Možete ga obnoviti kasnije.",
       "CONFIRM": "Deaktiviraj",
       "CANCEL": "Odustani"
     },
     "CONFIRM_HARD_DELETE": {
-      "TITLE": "Trajno obriši racun",
-      "MESSAGE": "Ova radnja se ne moze ponistiti. Svi podaci vezani za ovaj racun bit ce trajno obrisani.",
+      "TITLE": "Trajno obriši račun",
+      "MESSAGE": "Ova radnja se ne može poništiti. Svi podaci vezani za ovaj račun bit će trajno obrisani.",
       "CONFIRM": "Trajno obriši",
       "CANCEL": "Odustani"
     }

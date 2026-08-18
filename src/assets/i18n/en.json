@@ -117,6 +117,70 @@
     "INSIGHTS": { "EYEBROW": "Journal insight", "TITLE": "Review focus", "EMPTY": "No insights are available for this period." }
     ,"EMPTY": { "TITLE": "Your trading story starts here", "DESCRIPTION": "Log your first completed trade to unlock performance metrics, R curve, strategy insights and execution reviews.", "CTA": "Log your first trade", "PREVIEW_TITLE": "Your performance, at a glance", "PREVIEW_CHART": "R curve", "PREVIEW_TABLE": "Recent trades", "METRICS": { "1": "Win rate", "2": "Average R", "3": "Net P/L" } }
   },
+  "ML_PREDICTION": {
+    "EYEBROW": "Machine learning",
+    "TITLE": "ML Prediction",
+    "SUBTITLE": "Experimental pre-trade probability based on your closed trade history.",
+    "READINESS": {
+      "EYEBROW": "Model status",
+      "TITLE": "Readiness",
+      "READY": "Ready",
+      "NOT_READY": "Not ready",
+      "CLOSED_TRADES": "Closed trades",
+      "REFRESH": "Refresh",
+      "LOAD_FAILED": "Could not load model status."
+    },
+    "TRAIN": {
+      "CTA": "Train model",
+      "MODEL_VERSION": "Model version",
+      "SAMPLE_COUNT": "Samples",
+      "POSITIVE": "Positive outcomes",
+      "NON_POSITIVE": "Non-positive outcomes",
+      "TRAINED_AT": "Trained at"
+    },
+    "SCORE": {
+      "EYEBROW": "Setup evaluation",
+      "TITLE": "Score current setup",
+      "CTA": "Get prediction",
+      "NOT_READY_WARNING": "Model is not ready yet. Score is disabled until the model is trained on enough closed trades."
+    },
+    "FIELDS": {
+      "STOP_LOSS": "Stop loss (risk size)",
+      "TAKE_PROFIT": "Take profit",
+      "PLANNED_RR": "Planned R:R"
+    },
+    "HINTS": {
+      "STOP_LOSS": "Used as risk size for the model.",
+      "TAKE_PROFIT": "Used to derive planned R:R."
+    },
+    "RULES": {
+      "TITLE": "Rule checklist",
+      "SELECT_STRATEGY": "Select a strategy to load its rule checklist.",
+      "EMPTY": "This strategy has no active rules.",
+      "FOLLOWED": "Followed",
+      "NOT_FOLLOWED": "Broken"
+    },
+    "RESULT": {
+      "EYEBROW": "Prediction",
+      "TITLE": "Estimated outcome",
+      "PROBABILITY": "probability of positive Effective R",
+      "CONFIDENCE": "Confidence",
+      "SAMPLE_COUNT": "Historical samples",
+      "DEFAULT_DISCLAIMER": "Experimental estimate based on your history. Not a buy or sell signal."
+    },
+    "CONFIDENCE": {
+      "LOW": "Low",
+      "MEDIUM": "Medium",
+      "HIGH": "High"
+    },
+    "TOAST": {
+      "TRAIN_SUCCESS": "Model trained successfully."
+    },
+    "ERRORS": {
+      "TRAIN_FAILED": "Model training failed.",
+      "SCORE_FAILED": "Could not evaluate this setup."
+    }
+  },
   "LANG": {
     "EN": "English",
     "HR": "Croatian",

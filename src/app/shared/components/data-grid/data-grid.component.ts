@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { GridRowActionsComponent } from '../grid-row-actions/grid-row-actions.component';
+import { loadGridState, patchGridState } from './grid-state.util';
 import { Subject } from 'rxjs';
 import { takeUntil, map } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -47,13 +48,6 @@ export interface RowActionEvent<T> {
   action: string;
   row: T;
   value?: unknown;
-}
-
-interface GridState {
-  pageIndex: number;
-  pageSize: number;
-  sort: Sort | null;
-  lastEditedId?: string | number;
 }
 
 @Component({
@@ -165,53 +159,15 @@ export class DataGridComponent<T extends { id?: number | string }>
   }
 
   saveLastEditedId(id: string | number): void {
-    const key = this.getStorageKey();
-    const savedState = localStorage.getItem(key);
-    let state: GridState;
-    
-    if (savedState) {
-      state = JSON.parse(savedState);
-    } else {
-      state = {
-        pageIndex: 0,
-        pageSize: 20,
-        sort: null
-      };
-    }
-    
-    state.lastEditedId = id;
-    localStorage.setItem(key, JSON.stringify(state));
+    patchGridState(this.id(), { lastEditedId: id });
   }
 
   private getLastEditedId(): string | number | null {
-    const key = this.getStorageKey();
-    const savedState = localStorage.getItem(key);
-    
-    if (savedState) {
-      try {
-        const state: GridState = JSON.parse(savedState);
-        return state.lastEditedId || null;
-      } catch {
-        return null;
-      }
-    }
-    
-    return null;
+    return loadGridState(this.id())?.lastEditedId ?? null;
   }
 
   private clearLastEditedId(): void {
-    const key = this.getStorageKey();
-    const savedState = localStorage.getItem(key);
-    
-    if (savedState) {
-      try {
-        const state: GridState = JSON.parse(savedState);
-        delete state.lastEditedId;
-        localStorage.setItem(key, JSON.stringify(state));
-      } catch (error) {
-        console.error('Error clearing last edited id:', error);
-      }
-    }
+    patchGridState(this.id(), { lastEditedId: undefined });
   }
 
   isRowHighlighted(row: T): boolean {
