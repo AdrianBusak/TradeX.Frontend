@@ -1,6 +1,6 @@
 # TradeXFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 21.2.12
 
 ## Development server
 
